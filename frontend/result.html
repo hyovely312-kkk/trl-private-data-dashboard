@@ -2,50 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TRL Result</title><link rel="stylesheet" href="assets/css/style.css"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>KoTRL-X Result Hub</title><link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>explainable TRL result</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
-    <main class="main" id="resultRoot">
-      <header class="topbar"><div><h1>Final TRL Result</h1><p>Fusion output with evidence, risk factors, and recommended actions.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+    <aside class="sidebar">
+      <div class="brand"><strong>KoTRL-X</strong><span>result drilldown hub</span></div>
+      <nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div><h1>Result Hub</h1><p>최종 결과, Description별 비교, Reasoning, raw Excel batch rows를 하위 화면으로 분리했습니다.</p></div>
+        <div class="api-pill"><span class="muted">API</span><input data-api-base></div>
+      </header>
+
       <section class="grid three-col">
-        <div class="kpi"><span>Final TRL Class</span><strong data-final-class>-</strong></div>
-        <div class="kpi"><span>Predicted range</span><strong data-range>-</strong></div>
-        <div class="kpi"><span>Confidence</span><strong data-confidence>-</strong></div>
+        <div class="kpi"><span>Sample Final TRL Class</span><strong data-final-class>-</strong></div>
+        <div class="kpi"><span>Predicted Range</span><strong data-range>-</strong></div>
+        <div class="kpi"><span>Sample Confidence</span><strong data-confidence>-</strong></div>
       </section>
-      <section class="grid two-col" style="margin-top:16px">
-        <div class="panel"><div class="section-title"><h2>Fusion Probabilities</h2><a id="agentLink" class="button" href="agents.html">Agent Logs</a></div><canvas id="probChart"></canvas></div>
-        <div class="panel"><div class="section-title"><h2>Explanation</h2></div><p data-reason></p><h3>Key Evidence</h3><ul id="evidenceList"></ul><h3>Missing Evidence / Risk</h3><ul id="riskList"></ul><h3>Recommended Next Action</h3><ul id="actionList"></ul></div>
-      </section>
+
       <section class="notice" style="margin-top:16px">
-        <strong>Result 화면의 Target / Description 표시 기준</strong>
-        <p><code>Description</code>은 실제 TRL reasoning과 text feature가 읽은 primary input입니다. <code>Target</code>은 모델 입력이 아니라 <code>End TRL</code>에서 변환한 정답 라벨로, test split 평가와 오분류 분석을 위해서만 표시됩니다. 신규 과제 추론 화면에서는 Target이 존재하지 않습니다.</p>
+        <strong>Description 중심 판정 기준</strong>
+        <p><code>Description</code>은 TRL reasoning, evidence extraction, retrieval, text classification이 읽은 primary input입니다. <code>Project ID</code>는 로그 조회용 키이고, <code>Target</code>은 <code>End TRL</code>에서 변환한 평가용 정답 라벨입니다. <code>Start TRL</code>은 Alg1 upper-bound에서만 사용되며 Alg2/Alg3/Alg4 deployment-safe 모델에는 들어가지 않습니다.</p>
       </section>
+
       <section class="panel" style="margin-top:16px">
-        <div class="section-title"><div><h2>알고리즘별 상세 분석</h2><p class="muted">각 알고리즘이 어떤 데이터를 사용했고 왜 해당 결과가 나왔는지 하위 페이지에서 확인합니다.</p></div></div>
+        <div class="section-title">
+          <div><h2>Result 하위 화면</h2><p class="muted">원하는 분석 단위를 클릭해서 별도 페이지로 열어봅니다.</p></div>
+        </div>
+        <div class="lineup-grid" id="resultSubpageCards"></div>
+      </section>
+
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title">
+          <div><h2>Algorithm Drilldown</h2><p class="muted">각 알고리즘별 전체 test rows와 설정, 성능, 판단 사유를 별도 하위 페이지에서 확인합니다.</p></div>
+        </div>
         <div class="lineup-grid" id="resultAlgorithmLinks"></div>
       </section>
-      <section class="panel" style="margin-top:16px">
-        <div class="section-title"><div><h2>Description별 알고리즘 결과 탭</h2><p class="muted">동일한 Description primary input에 대해 Alg1~Alg4가 각각 어떤 결과를 냈는지 비교합니다.</p></div><button type="button" class="secondary" id="loadMoreDescriptionResults">Load more</button></div>
-        <div class="tab-row" id="descriptionResultTabs"></div>
-        <div class="table-wrap" style="margin-top:12px"><table class="wide-table compact-table"><thead><tr><th>Project</th><th>Description<br><span class="muted">primary input</span></th><th>Target<br><span class="muted">evaluation only</span></th><th>Prediction</th><th>Confidence</th><th>왜 그렇게 나왔나</th></tr></thead><tbody id="descriptionResultRows"></tbody></table></div>
-      </section>
-      <section class="panel" style="margin-top:16px">
-        <div class="section-title"><div><h2>최종 TRL 판정 Reasoning</h2><p class="muted">KoTRL-X Report Agent가 생성한 한글 설명입니다.</p></div></div>
-        <div id="koreanReasoningBlock" class="reasoning-block"></div>
-      </section>
+
       <section class="grid two-col" style="margin-top:16px">
-        <div class="panel"><div class="section-title"><h2>근거 문장</h2></div><div id="evidenceSentences"></div></div>
-        <div class="panel"><div class="section-title"><h2>판정 충돌 분석</h2></div><div id="judgeAnalysis"></div></div>
-      </section>
-      <section class="panel" style="margin-top:16px"><div class="section-title"><h2>Raw Event JSON</h2></div><pre id="rawResult" class="json-view"></pre></section>
-      <section class="panel" style="margin-top:16px">
-        <div class="section-title"><div><h2>Raw Excel Batch Prediction Rows</h2><p class="muted">Alg1~Alg4 predictions joined to raw Excel fields. Target is End TRL label for evaluation only.</p></div></div>
-        <div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>Project</th><th>Target<br><span class="muted">End TRL 정답 라벨</span></th><th>Alg1<br><span class="muted">upper-bound</span></th><th>Alg2<br><span class="muted">no-start</span></th><th>Alg3<br><span class="muted">explainable</span></th><th>Alg4<br><span class="muted">safe accuracy</span></th><th>Description<br><span class="muted">primary input</span></th></tr></thead><tbody id="batchPredictionRows"></tbody></table></div>
+        <div class="panel">
+          <div class="section-title"><h2>Sample Reasoning Preview</h2><a class="button" href="result/reasoning.html">Open Reasoning</a></div>
+          <p data-reason class="muted">Loading reasoning trace...</p>
+        </div>
+        <div class="panel">
+          <div class="section-title"><h2>Batch Data Coverage</h2><a class="button" href="result/batch-rows.html">Open Rows</a></div>
+          <div id="batchCoverage"></div>
+        </div>
       </section>
     </main>
   </div>
-  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/result.js"></script>
+  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/result_hub.js"></script>
 </body>
 </html>

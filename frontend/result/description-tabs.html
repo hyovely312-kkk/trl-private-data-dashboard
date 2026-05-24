@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Description Results</title><link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-result-page="description-tabs">
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>description result tabs</span></div><nav class="nav"><a href="../index.html">Dashboard</a><a href="../input.html">Project Input</a><a href="../result.html">Result</a><a href="../agents.html">Agent Logs</a><a href="../events.html">Events</a><a href="../architecture.html">Architecture</a><a href="../rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>Description별 알고리즘 결과 탭</h1><p>동일한 Description primary input에 대해 Alg1~Alg4 결과를 비교합니다.</p></div><a class="button" href="../result.html">Back to Result Hub</a></header>
+      <section class="notice"><strong>Target / Description 기준</strong><p>Description은 primary input입니다. Target은 End TRL 기반 정답 라벨이며 평가용으로만 표시됩니다.</p></section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>Algorithm Tabs</h2><p class="muted">탭을 바꾸면 같은 Description rows에 대한 알고리즘별 prediction/reason을 볼 수 있습니다.</p></div><button type="button" class="secondary" id="loadMoreDescriptionResults">Load more</button></div>
+        <div class="tab-row" id="descriptionResultTabs"></div>
+        <div class="table-wrap" style="margin-top:12px"><table class="wide-table compact-table"><thead><tr><th>Project</th><th>Description<br><span class="muted">primary input</span></th><th>Target<br><span class="muted">evaluation only</span></th><th>Prediction</th><th>Confidence</th><th>왜 그렇게 나왔나</th></tr></thead><tbody id="descriptionResultRows"></tbody></table></div>
+      </section>
+    </main>
+  </div>
+  <script src="../assets/js/config.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/result_pages.js"></script>
+</body>
+</html>

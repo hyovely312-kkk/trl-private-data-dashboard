@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Batch Prediction Rows</title><link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-result-page="batch-rows">
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>batch prediction rows</span></div><nav class="nav"><a href="../index.html">Dashboard</a><a href="../input.html">Project Input</a><a href="../result.html">Result</a><a href="../agents.html">Agent Logs</a><a href="../events.html">Events</a><a href="../architecture.html">Architecture</a><a href="../rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>Raw Excel Batch Prediction Rows</h1><p>Alg1~Alg4 predictions joined to raw Excel fields.</p></div><a class="button" href="../result.html">Back to Result Hub</a></header>
+      <section class="notice"><strong>Evaluation-only target</strong><p>Target은 End TRL에서 변환한 정답 라벨로 오직 평가/오분류 분석용입니다. Description은 text model이 읽은 primary input입니다.</p></section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>Batch Rows</h2><p class="muted">전체 2,114개 test rows가 연결되어 있고, 화면은 500개씩 추가 표시합니다.</p></div><button type="button" class="secondary" id="loadMoreBatchRows">Load more</button></div>
+        <div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>Project</th><th>Target<br><span class="muted">End TRL 정답 라벨</span></th><th>Alg1<br><span class="muted">upper-bound</span></th><th>Alg2<br><span class="muted">no-start</span></th><th>Alg3<br><span class="muted">explainable</span></th><th>Alg4<br><span class="muted">safe accuracy</span></th><th>Description<br><span class="muted">primary input</span></th></tr></thead><tbody id="batchPredictionRows"></tbody></table></div>
+      </section>
+    </main>
+  </div>
+  <script src="../assets/js/config.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/result_pages.js"></script>
+</body>
+</html>

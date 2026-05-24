@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TRL Reasoning</title><link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-result-page="reasoning">
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>reasoning detail</span></div><nav class="nav"><a href="../index.html">Dashboard</a><a href="../input.html">Project Input</a><a href="../result.html">Result</a><a href="../agents.html">Agent Logs</a><a href="../events.html">Events</a><a href="../architecture.html">Architecture</a><a href="../rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>최종 TRL 판정 Reasoning</h1><p>Report Agent, evidence sentence, Judge Agent 충돌 분석을 분리해서 봅니다.</p></div><a class="button" href="../result.html">Back to Result Hub</a></header>
+      <section class="panel">
+        <div class="section-title"><div><h2>KoTRL-X Report Agent Explanation</h2><p class="muted">최종 판정 근거와 추가 필요 단계를 한글로 표시합니다.</p></div></div>
+        <div id="koreanReasoningBlock" class="reasoning-block"></div>
+      </section>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel"><div class="section-title"><h2>근거 문장</h2></div><div id="evidenceSentences"></div></div>
+        <div class="panel"><div class="section-title"><h2>판정 충돌 분석</h2></div><div id="judgeAnalysis"></div></div>
+      </section>
+    </main>
+  </div>
+  <script src="../assets/js/config.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/result_pages.js"></script>
+</body>
+</html>
