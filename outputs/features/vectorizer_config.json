@@ -1,0 +1,41 @@
+{
+  "word_tfidf": {
+    "analyzer": "word",
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_features": 20000,
+    "actual_features": 20000
+  },
+  "char_tfidf": {
+    "analyzer": "char_wb",
+    "ngram_range": [
+      3,
+      5
+    ],
+    "min_df": 2,
+    "max_features": 12000,
+    "actual_features": 12000
+  },
+  "retrieval_tfidf": {
+    "analyzer": "word",
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_features": 20000,
+    "actual_features": 20000
+  },
+  "scibert": {
+    "enabled": false,
+    "status": "TODO: optional SciBERT embedding can be added when transformer runtime/model cache is available."
+  },
+  "text_field_policy": {
+    "classifier_text": "Description-centered: Description is duplicated to dominate TF-IDF; Project Title and Benefits are auxiliary context only.",
+    "retrieval_text": "Separate Description-centered TF-IDF vectorizer; Project Title and Benefits are auxiliary context only.",
+    "start_trl": "excluded from deployment-safe text features"
+  }
+}

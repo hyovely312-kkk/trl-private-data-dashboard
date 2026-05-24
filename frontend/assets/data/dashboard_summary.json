@@ -1,0 +1,238 @@
+{
+  "dataset": {
+    "source_file_count": 1,
+    "source_files": [
+      "TRL_NASA_cleaned_dataset.xlsx"
+    ],
+    "n_total": 14090,
+    "n_train": 9863,
+    "n_valid": 2113,
+    "n_test": 2114,
+    "label_distribution": {
+      "Low": 4183,
+      "Mid": 8832,
+      "High": 1075
+    },
+    "input_path": "TRL_NASA_cleaned_dataset.xlsx",
+    "sheet": "Main_Data",
+    "primary_text_field": "Description",
+    "auxiliary_fields": [
+      "Project Title",
+      "Benefits",
+      "Program",
+      "Primary TX"
+    ]
+  },
+  "models": {
+    "alg1_full_fusion": {
+      "uses_start_trl": true,
+      "validation": {
+        "accuracy": 0.7496450544249882,
+        "macro_f1": 0.6840911002967913,
+        "weighted_f1": 0.7548321632932121,
+        "precision_low": 0.6842818428184282,
+        "recall_low": 0.8054226475279107,
+        "f1_low": 0.73992673992674,
+        "precision_mid": 0.8490893321769297,
+        "recall_mid": 0.7388679245283019,
+        "f1_mid": 0.7901533494753834,
+        "precision_high": 0.45045045045045046,
+        "recall_high": 0.6211180124223602,
+        "f1_high": 0.5221932114882507,
+        "mae": 0.2546142924751538,
+        "log_loss": 0.5779850673442373,
+        "brier_score": 0.11909956459515825,
+        "calibration_summary": {
+          "mean_confidence": 0.6682001504304391,
+          "mean_predicted_low": 0.3399321985963088,
+          "mean_predicted_mid": 0.492388816970309,
+          "mean_predicted_high": 0.1676789844333822
+        }
+      },
+      "test": {
+        "accuracy": 0.7568590350047304,
+        "macro_f1": 0.6764852106679492,
+        "weighted_f1": 0.7624248535038054,
+        "precision_low": 0.7048748353096179,
+        "recall_low": 0.8519108280254777,
+        "f1_low": 0.7714491708723864,
+        "precision_mid": 0.8621908127208481,
+        "recall_mid": 0.7366037735849057,
+        "f1_mid": 0.7944647944647945,
+        "precision_high": 0.3991031390134529,
+        "recall_high": 0.5527950310559007,
+        "f1_high": 0.4635416666666667,
+        "mae": 0.24739829706717123,
+        "log_loss": 0.5783865910341225,
+        "brier_score": 0.11776764728597573,
+        "calibration_summary": {
+          "mean_confidence": 0.6709266597529678,
+          "mean_predicted_low": 0.3332237770231023,
+          "mean_predicted_mid": 0.4936408470052366,
+          "mean_predicted_high": 0.17313537597166107
+        }
+      },
+      "selected_model": "logistic_regression_C0.5"
+    },
+    "alg2_no_start_pseudo_start": {
+      "uses_start_trl": false,
+      "validation": {
+        "accuracy": 0.6422148603880738,
+        "macro_f1": 0.548847279975739,
+        "weighted_f1": 0.6499844943536758,
+        "precision_low": 0.5658682634730539,
+        "recall_low": 0.6028708133971292,
+        "f1_low": 0.5837837837837838,
+        "precision_mid": 0.7522708505367465,
+        "recall_mid": 0.6875471698113208,
+        "f1_mid": 0.7184542586750788,
+        "precision_high": 0.2905982905982906,
+        "recall_high": 0.422360248447205,
+        "f1_high": 0.34430379746835443,
+        "mae": 0.37766209181258875,
+        "log_loss": 0.7918509519805995,
+        "brier_score": 0.15874301449442843,
+        "calibration_summary": {
+          "mean_confidence": 0.584763092123532,
+          "mean_predicted_low": 0.36006050214747454,
+          "mean_predicted_mid": 0.4346117986076383,
+          "mean_predicted_high": 0.20532769924488717
+        }
+      },
+      "test": {
+        "accuracy": 0.6579943235572374,
+        "macro_f1": 0.5547328990274214,
+        "weighted_f1": 0.6668407763533619,
+        "precision_low": 0.6008902077151336,
+        "recall_low": 0.6449044585987261,
+        "f1_low": 0.6221198156682027,
+        "precision_mid": 0.7687188019966722,
+        "recall_mid": 0.6973584905660377,
+        "f1_mid": 0.7313019390581718,
+        "precision_high": 0.2605042016806723,
+        "recall_high": 0.38509316770186336,
+        "f1_high": 0.3107769423558897,
+        "mae": 0.36281929990539263,
+        "log_loss": 0.7821645217174589,
+        "brier_score": 0.15635942289394472,
+        "calibration_summary": {
+          "mean_confidence": 0.5841898201566386,
+          "mean_predicted_low": 0.3567394054344982,
+          "mean_predicted_mid": 0.4349299885845372,
+          "mean_predicted_high": 0.2083306059809646
+        }
+      },
+      "selected_model": "logistic_regression_C0.5"
+    },
+    "alg3_rubric_explainable": {
+      "uses_start_trl": false,
+      "validation": {
+        "accuracy": 0.6109796497870327,
+        "macro_f1": 0.5133633548074198,
+        "weighted_f1": 0.6166132876231073,
+        "precision_low": 0.4986413043478261,
+        "recall_low": 0.5853269537480064,
+        "f1_low": 0.5385179750550256,
+        "precision_mid": 0.7276524644945698,
+        "recall_mid": 0.6573584905660378,
+        "f1_mid": 0.6907216494845361,
+        "precision_high": 0.29444444444444445,
+        "recall_high": 0.32919254658385094,
+        "f1_high": 0.31085043988269795,
+        "mae": 0.4088973024136299,
+        "log_loss": 0.9855855925918422,
+        "brier_score": 0.18335585442690136,
+        "calibration_summary": {
+          "mean_confidence": 0.7828675623804762,
+          "mean_predicted_low": 0.35347660607951903,
+          "mean_predicted_mid": 0.5419870068070203,
+          "mean_predicted_high": 0.10453638711346058
+        }
+      },
+      "test": {
+        "accuracy": 0.6466414380321666,
+        "macro_f1": 0.5379283080570348,
+        "weighted_f1": 0.6500542254083098,
+        "precision_low": 0.5499276410998553,
+        "recall_low": 0.6050955414012739,
+        "f1_low": 0.576194086429113,
+        "precision_mid": 0.748,
+        "recall_mid": 0.7056603773584905,
+        "f1_mid": 0.7262135922330097,
+        "precision_high": 0.30057803468208094,
+        "recall_high": 0.32298136645962733,
+        "f1_high": 0.31137724550898205,
+        "mae": 0.37322611163670766,
+        "log_loss": 0.9225436045557178,
+        "brier_score": 0.16975697956055694,
+        "calibration_summary": {
+          "mean_confidence": 0.7907053545141429,
+          "mean_predicted_low": 0.34047730310360946,
+          "mean_predicted_mid": 0.5608311350568935,
+          "mean_predicted_high": 0.09869156183949697
+        }
+      },
+      "selected_model": "logistic_regression_C0.5"
+    },
+    "alg4_gridsearched_svc_retrieval": {
+      "uses_start_trl": false,
+      "validation": {
+        "accuracy": 0.7155702792238523,
+        "macro_f1": 0.4863656975323562,
+        "weighted_f1": 0.6782685337427613,
+        "precision_low": 0.7121951219512195,
+        "recall_low": 0.46570972886762363,
+        "f1_low": 0.5631629701060752,
+        "precision_mid": 0.7171597633136094,
+        "recall_mid": 0.9147169811320754,
+        "f1_mid": 0.8039800995024876,
+        "precision_high": 0.6153846153846154,
+        "recall_high": 0.049689440993788817,
+        "f1_high": 0.09195402298850575,
+        "mae": 0.28916232844297207,
+        "log_loss": 0.6920507399752461,
+        "brier_score": 0.13715205872251987,
+        "calibration_summary": {
+          "mean_confidence": 0.6992545560426525,
+          "mean_predicted_low": 0.2962283990348374,
+          "mean_predicted_mid": 0.6254132641867083,
+          "mean_predicted_high": 0.07835833677845432
+        }
+      },
+      "test": {
+        "accuracy": 0.7086092715231788,
+        "macro_f1": 0.4834375816452458,
+        "weighted_f1": 0.6710550798236834,
+        "precision_low": 0.7022332506203474,
+        "recall_low": 0.45063694267515925,
+        "f1_low": 0.5489815712900097,
+        "precision_mid": 0.7102473498233216,
+        "recall_mid": 0.910188679245283,
+        "f1_mid": 0.7978828977836586,
+        "precision_high": 0.6923076923076923,
+        "recall_high": 0.055900621118012424,
+        "f1_high": 0.10344827586206896,
+        "mae": 0.29375591296121095,
+        "log_loss": 0.6781469998720595,
+        "brier_score": 0.13472462469994104,
+        "calibration_summary": {
+          "mean_confidence": 0.6942505556686298,
+          "mean_predicted_low": 0.2940940921247292,
+          "mean_predicted_mid": 0.624236085605983,
+          "mean_predicted_high": 0.08166982226928786
+        }
+      },
+      "selected_model": "char__text_meta_retrieval_rubric__calibrated_linear_svc_C0.5"
+    }
+  },
+  "best_model_by_macro_f1": "alg1_full_fusion",
+  "best_deployment_safe_model": "alg2_no_start_pseudo_start",
+  "notes": [
+    "Algorithm 1 includes Start TRL and should be interpreted as upper-bound.",
+    "Algorithm 2, 3, and 4 exclude Start TRL and are deployment-safe.",
+    "Algorithm 4 performs validation grid search over TF-IDF text blocks, optional pseudo/rubric features, and linear classifiers.",
+    "Description is the primary TRL text field; title and benefits are auxiliary only."
+  ],
+  "best_model_by_accuracy": "alg1_full_fusion",
+  "best_deployment_safe_model_by_accuracy": "alg4_gridsearched_svc_retrieval"
+}

@@ -1,0 +1,196 @@
+2026-05-24 18:00:14,975 | INFO | Experiment run started at 2026-05-24T18:00:14
+2026-05-24 18:00:16,369 | INFO | Requested sheet 'Projects_Clean' not found. Using fallback sheet 'Main_Data'.
+2026-05-24 18:00:19,209 | INFO | Loaded data shape=(14090, 18) final_shape=(14090, 20) labels={'Low': 4183, 'Mid': 8832, 'High': 1075}
+2026-05-24 18:00:19,233 | INFO | Split distribution: {'train': {'n': 9863, 'label_distribution': {'Low': 2928, 'Mid': 6182, 'High': 753}}, 'valid': {'n': 2113, 'label_distribution': {'Low': 627, 'Mid': 1325, 'High': 161}}, 'test': {'n': 2114, 'label_distribution': {'Low': 628, 'Mid': 1325, 'High': 161}}}
+2026-05-24 18:00:59,379 | INFO | Feature shapes: {'word': {'train': [9863, 20000], 'valid': [2113, 20000], 'test': [2114, 20000]}, 'char': {'train': [9863, 12000], 'valid': [2113, 12000], 'test': [2114, 12000]}, 'combined': {'train': [9863, 32000], 'valid': [2113, 32000], 'test': [2114, 32000]}}
+2026-05-24 18:01:10,763 | INFO | Retrieval features generated split=train shape=(9863, 10)
+2026-05-24 18:01:13,364 | INFO | Retrieval features generated split=valid shape=(2113, 10)
+2026-05-24 18:01:15,951 | INFO | Retrieval features generated split=test shape=(2114, 10)
+2026-05-24 18:01:16,752 | INFO | Pseudo-start features generated split=train shape=(9863, 7)
+2026-05-24 18:01:16,934 | INFO | Pseudo-start features generated split=valid shape=(2113, 7)
+2026-05-24 18:01:17,109 | INFO | Pseudo-start features generated split=test shape=(2114, 7)
+2026-05-24 18:01:19,946 | INFO | Rubric features generated split=train shape=(9863, 11)
+2026-05-24 18:01:20,577 | INFO | Rubric features generated split=valid shape=(2113, 11)
+2026-05-24 18:01:21,195 | INFO | Rubric features generated split=test shape=(2114, 11)
+2026-05-24 18:01:21,197 | INFO | Running alg1_full_fusion
+2026-05-24 18:04:29,991 | INFO | Experiment run started at 2026-05-24T18:04:29
+2026-05-24 18:04:30,797 | INFO | Requested sheet 'Projects_Clean' not found. Using fallback sheet 'Main_Data'.
+2026-05-24 18:04:33,604 | INFO | Loaded data shape=(14090, 18) final_shape=(14090, 20) labels={'Low': 4183, 'Mid': 8832, 'High': 1075}
+2026-05-24 18:04:33,627 | INFO | Split distribution: {'train': {'n': 9863, 'label_distribution': {'Low': 2928, 'Mid': 6182, 'High': 753}}, 'valid': {'n': 2113, 'label_distribution': {'Low': 627, 'Mid': 1325, 'High': 161}}, 'test': {'n': 2114, 'label_distribution': {'Low': 628, 'Mid': 1325, 'High': 161}}}
+2026-05-24 18:05:14,099 | INFO | Feature shapes: {'word': {'train': [9863, 20000], 'valid': [2113, 20000], 'test': [2114, 20000]}, 'char': {'train': [9863, 12000], 'valid': [2113, 12000], 'test': [2114, 12000]}, 'combined': {'train': [9863, 32000], 'valid': [2113, 32000], 'test': [2114, 32000]}}
+2026-05-24 18:05:25,307 | INFO | Retrieval features generated split=train shape=(9863, 10)
+2026-05-24 18:05:27,976 | INFO | Retrieval features generated split=valid shape=(2113, 10)
+2026-05-24 18:05:30,673 | INFO | Retrieval features generated split=test shape=(2114, 10)
+2026-05-24 18:05:31,472 | INFO | Pseudo-start features generated split=train shape=(9863, 7)
+2026-05-24 18:05:31,652 | INFO | Pseudo-start features generated split=valid shape=(2113, 7)
+2026-05-24 18:05:31,830 | INFO | Pseudo-start features generated split=test shape=(2114, 7)
+2026-05-24 18:05:34,660 | INFO | Rubric features generated split=train shape=(9863, 11)
+2026-05-24 18:05:35,293 | INFO | Rubric features generated split=valid shape=(2113, 11)
+2026-05-24 18:05:35,919 | INFO | Rubric features generated split=test shape=(2114, 11)
+2026-05-24 18:05:35,921 | INFO | Running alg1_full_fusion
+2026-05-24 18:06:10,460 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.6906 accuracy=0.7733
+2026-05-24 18:06:38,343 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.6950 accuracy=0.7776
+2026-05-24 18:06:38,548 | INFO | Saved experiment alg1_full_retrieval_metadata_fusion metrics valid_macro_f1=0.6950 test_macro_f1=0.6874
+2026-05-24 18:06:38,571 | INFO | Running alg2_no_start_pseudo_start
+2026-05-24 18:07:17,418 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.5573 accuracy=0.6829
+2026-05-24 18:07:48,441 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.5541 accuracy=0.6867
+2026-05-24 18:07:48,655 | INFO | Saved experiment alg2_no_start_pseudo_start_fusion metrics valid_macro_f1=0.5573 test_macro_f1=0.5713
+2026-05-24 18:07:48,672 | INFO | Running alg3_rubric_explainable
+2026-05-24 18:08:08,962 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.5154 accuracy=0.6327
+2026-05-24 18:08:09,065 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.5214 accuracy=0.6346
+2026-05-24 18:08:09,137 | INFO | Saved experiment alg3_rubric_guided_explainable_fusion metrics valid_macro_f1=0.5214 test_macro_f1=0.5456
+2026-05-24 18:08:09,341 | INFO | Dashboard export saved to /Users/kimhyojin/Documents/Codex/2026-05-24/ai-trl-agentic-reasoning-dashboard-v0/trl-agentic-dashboard/outputs/dashboard and copied to /Users/kimhyojin/Documents/Codex/2026-05-24/ai-trl-agentic-reasoning-dashboard-v0/trl-agentic-dashboard/frontend/assets/data
+2026-05-24 18:08:38,941 | INFO | Experiment run started at 2026-05-24T18:08:38
+2026-05-24 18:08:39,762 | INFO | Requested sheet 'Projects_Clean' not found. Using fallback sheet 'Main_Data'.
+2026-05-24 18:08:42,556 | INFO | Loaded data shape=(14090, 18) final_shape=(14090, 20) labels={'Low': 4183, 'Mid': 8832, 'High': 1075}
+2026-05-24 18:08:42,581 | INFO | Split distribution: {'train': {'n': 9863, 'label_distribution': {'Low': 2928, 'Mid': 6182, 'High': 753}}, 'valid': {'n': 2113, 'label_distribution': {'Low': 627, 'Mid': 1325, 'High': 161}}, 'test': {'n': 2114, 'label_distribution': {'Low': 628, 'Mid': 1325, 'High': 161}}}
+2026-05-24 18:09:23,961 | INFO | Feature shapes: {'word': {'train': [9863, 20000], 'valid': [2113, 20000], 'test': [2114, 20000]}, 'char': {'train': [9863, 12000], 'valid': [2113, 12000], 'test': [2114, 12000]}, 'combined': {'train': [9863, 32000], 'valid': [2113, 32000], 'test': [2114, 32000]}}
+2026-05-24 18:09:35,246 | INFO | Retrieval features generated split=train shape=(9863, 10)
+2026-05-24 18:09:38,312 | INFO | Retrieval features generated split=valid shape=(2113, 10)
+2026-05-24 18:09:40,912 | INFO | Retrieval features generated split=test shape=(2114, 10)
+2026-05-24 18:09:41,722 | INFO | Pseudo-start features generated split=train shape=(9863, 7)
+2026-05-24 18:09:41,913 | INFO | Pseudo-start features generated split=valid shape=(2113, 7)
+2026-05-24 18:09:42,089 | INFO | Pseudo-start features generated split=test shape=(2114, 7)
+2026-05-24 18:09:44,904 | INFO | Rubric features generated split=train shape=(9863, 11)
+2026-05-24 18:09:45,531 | INFO | Rubric features generated split=valid shape=(2113, 11)
+2026-05-24 18:09:46,144 | INFO | Rubric features generated split=test shape=(2114, 11)
+2026-05-24 18:09:46,146 | INFO | Running alg1_full_fusion
+2026-05-24 18:10:27,551 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.6765 accuracy=0.7473
+2026-05-24 18:11:02,261 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.6856 accuracy=0.7534
+2026-05-24 18:11:02,546 | INFO | Saved experiment alg1_full_retrieval_metadata_fusion metrics valid_macro_f1=0.6856 test_macro_f1=0.6848
+2026-05-24 18:11:02,573 | INFO | Running alg2_no_start_pseudo_start
+2026-05-24 18:11:59,780 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.5504 accuracy=0.6493
+2026-05-24 18:12:42,320 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.5495 accuracy=0.6436
+2026-05-24 18:12:42,557 | INFO | Saved experiment alg2_no_start_pseudo_start_fusion metrics valid_macro_f1=0.5504 test_macro_f1=0.5584
+2026-05-24 18:12:42,578 | INFO | Running alg3_rubric_explainable
+2026-05-24 18:13:06,193 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.5120 accuracy=0.6110
+2026-05-24 18:13:06,322 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.5144 accuracy=0.6124
+2026-05-24 18:13:06,402 | INFO | Saved experiment alg3_rubric_guided_explainable_fusion metrics valid_macro_f1=0.5144 test_macro_f1=0.5437
+2026-05-24 18:13:06,636 | INFO | Dashboard export saved to /Users/kimhyojin/Documents/Codex/2026-05-24/ai-trl-agentic-reasoning-dashboard-v0/trl-agentic-dashboard/outputs/dashboard and copied to /Users/kimhyojin/Documents/Codex/2026-05-24/ai-trl-agentic-reasoning-dashboard-v0/trl-agentic-dashboard/frontend/assets/data
+2026-05-24 18:19:05,330 | INFO | Experiment run started at 2026-05-24T18:19:05
+2026-05-24 18:19:06,437 | INFO | Requested sheet 'Projects_Clean' not found. Using fallback sheet 'Main_Data'.
+2026-05-24 18:19:09,667 | INFO | Loaded data shape=(14090, 18) final_shape=(14090, 20) labels={'Low': 4183, 'Mid': 8832, 'High': 1075}
+2026-05-24 18:19:09,692 | INFO | Split distribution: {'train': {'n': 9863, 'label_distribution': {'Low': 2928, 'Mid': 6182, 'High': 753}}, 'valid': {'n': 2113, 'label_distribution': {'Low': 627, 'Mid': 1325, 'High': 161}}, 'test': {'n': 2114, 'label_distribution': {'Low': 628, 'Mid': 1325, 'High': 161}}}
+2026-05-24 18:19:54,853 | INFO | Feature shapes: {'word': {'train': [9863, 20000], 'valid': [2113, 20000], 'test': [2114, 20000]}, 'char': {'train': [9863, 12000], 'valid': [2113, 12000], 'test': [2114, 12000]}, 'combined': {'train': [9863, 32000], 'valid': [2113, 32000], 'test': [2114, 32000]}}
+2026-05-24 18:20:08,955 | INFO | Retrieval features generated split=train shape=(9863, 10)
+2026-05-24 18:20:11,762 | INFO | Retrieval features generated split=valid shape=(2113, 10)
+2026-05-24 18:20:14,334 | INFO | Retrieval features generated split=test shape=(2114, 10)
+2026-05-24 18:20:15,144 | INFO | Pseudo-start features generated split=train shape=(9863, 7)
+2026-05-24 18:20:15,326 | INFO | Pseudo-start features generated split=valid shape=(2113, 7)
+2026-05-24 18:20:15,503 | INFO | Pseudo-start features generated split=test shape=(2114, 7)
+2026-05-24 18:20:18,429 | INFO | Rubric features generated split=train shape=(9863, 11)
+2026-05-24 18:20:19,061 | INFO | Rubric features generated split=valid shape=(2113, 11)
+2026-05-24 18:20:19,694 | INFO | Rubric features generated split=test shape=(2114, 11)
+2026-05-24 18:20:19,697 | INFO | Running alg1_full_fusion
+2026-05-24 18:21:08,302 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.6765 accuracy=0.7473
+2026-05-24 18:21:56,628 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.6856 accuracy=0.7534
+2026-05-24 18:21:56,919 | INFO | Saved experiment alg1_full_retrieval_metadata_fusion metrics valid_macro_f1=0.6856 test_macro_f1=0.6848
+2026-05-24 18:21:56,951 | INFO | Running alg2_no_start_pseudo_start
+2026-05-24 18:22:44,356 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.5504 accuracy=0.6493
+2026-05-24 18:23:37,978 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.5495 accuracy=0.6436
+2026-05-24 18:23:38,335 | INFO | Saved experiment alg2_no_start_pseudo_start_fusion metrics valid_macro_f1=0.5504 test_macro_f1=0.5584
+2026-05-24 18:23:38,367 | INFO | Running alg3_rubric_explainable
+2026-05-24 18:24:13,986 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.5120 accuracy=0.6110
+2026-05-24 18:24:14,193 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.5144 accuracy=0.6124
+2026-05-24 18:24:14,291 | INFO | Saved experiment alg3_rubric_guided_explainable_fusion metrics valid_macro_f1=0.5144 test_macro_f1=0.5437
+2026-05-24 18:24:14,561 | INFO | Running alg4_gridsearched_svc_retrieval
+2026-05-24 18:24:16,607 | INFO | Alg4 candidate word__text_meta_retrieval__linear_svc_C0.5 validation accuracy=0.6938 macro_f1=0.5559
+2026-05-24 18:24:19,806 | INFO | Alg4 candidate word__text_meta_retrieval__linear_svc_C1 validation accuracy=0.6810 macro_f1=0.5458
+2026-05-24 18:24:26,786 | INFO | Alg4 candidate word__text_meta_retrieval__logistic_regression_C1 validation accuracy=0.6370 macro_f1=0.5499
+2026-05-24 18:24:30,061 | INFO | Alg4 candidate word__text_meta_retrieval__calibrated_linear_svc_C0.5 validation accuracy=0.7104 macro_f1=0.4868
+2026-05-24 18:24:32,372 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo__linear_svc_C0.5 validation accuracy=0.6943 macro_f1=0.5089
+2026-05-24 18:24:35,897 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo__linear_svc_C1 validation accuracy=0.6952 macro_f1=0.5197
+2026-05-24 18:24:40,159 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo__logistic_regression_C1 validation accuracy=0.6266 macro_f1=0.5282
+2026-05-24 18:24:44,777 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo__calibrated_linear_svc_C0.5 validation accuracy=0.6985 macro_f1=0.4398
+2026-05-24 18:24:46,169 | INFO | Alg4 candidate word__text_meta_retrieval_rubric__linear_svc_C0.5 validation accuracy=0.6924 macro_f1=0.5555
+2026-05-24 18:24:48,464 | INFO | Alg4 candidate word__text_meta_retrieval_rubric__linear_svc_C1 validation accuracy=0.6834 macro_f1=0.5501
+2026-05-24 18:24:53,936 | INFO | Alg4 candidate word__text_meta_retrieval_rubric__logistic_regression_C1 validation accuracy=0.6351 macro_f1=0.5499
+2026-05-24 18:24:57,382 | INFO | Alg4 candidate word__text_meta_retrieval_rubric__calibrated_linear_svc_C0.5 validation accuracy=0.7127 macro_f1=0.4887
+2026-05-24 18:24:59,421 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo_rubric__linear_svc_C0.5 validation accuracy=0.6947 macro_f1=0.5105
+2026-05-24 18:25:02,926 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo_rubric__linear_svc_C1 validation accuracy=0.6981 macro_f1=0.5273
+2026-05-24 18:25:06,040 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo_rubric__logistic_regression_C1 validation accuracy=0.6280 macro_f1=0.5324
+2026-05-24 18:25:10,256 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo_rubric__calibrated_linear_svc_C0.5 validation accuracy=0.6995 macro_f1=0.4428
+2026-05-24 18:25:18,086 | INFO | Alg4 candidate char__text_meta_retrieval__linear_svc_C0.5 validation accuracy=0.6820 macro_f1=0.5466
+2026-05-24 18:25:30,116 | INFO | Alg4 candidate char__text_meta_retrieval__linear_svc_C1 validation accuracy=0.6621 macro_f1=0.5294
+2026-05-24 18:26:00,121 | INFO | Alg4 candidate char__text_meta_retrieval__logistic_regression_C1 validation accuracy=0.6233 macro_f1=0.5395
+2026-05-24 18:26:22,491 | INFO | Alg4 candidate char__text_meta_retrieval__calibrated_linear_svc_C0.5 validation accuracy=0.7099 macro_f1=0.4801
+2026-05-24 18:26:32,497 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo__linear_svc_C0.5 validation accuracy=0.6943 macro_f1=0.5251
+2026-05-24 18:26:47,181 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo__linear_svc_C1 validation accuracy=0.6924 macro_f1=0.5304
+2026-05-24 18:27:04,412 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo__logistic_regression_C1 validation accuracy=0.6238 macro_f1=0.5298
+2026-05-24 18:28:57,666 | INFO | Experiment run started at 2026-05-24T18:28:57
+2026-05-24 18:28:58,692 | INFO | Requested sheet 'Projects_Clean' not found. Using fallback sheet 'Main_Data'.
+2026-05-24 18:29:07,211 | INFO | Loaded data shape=(14090, 18) final_shape=(14090, 26) labels={'Low': 4183, 'Mid': 8832, 'High': 1075}
+2026-05-24 18:29:07,247 | INFO | Split distribution: {'train': {'n': 9863, 'label_distribution': {'Low': 2928, 'Mid': 6182, 'High': 753}}, 'valid': {'n': 2113, 'label_distribution': {'Low': 627, 'Mid': 1325, 'High': 161}}, 'test': {'n': 2114, 'label_distribution': {'Low': 628, 'Mid': 1325, 'High': 161}}}
+2026-05-24 18:30:38,155 | INFO | Feature shapes: {'word': {'train': [9863, 20000], 'valid': [2113, 20000], 'test': [2114, 20000]}, 'char': {'train': [9863, 12000], 'valid': [2113, 12000], 'test': [2114, 12000]}, 'retrieval_word': {'train': [9863, 20000], 'valid': [2113, 20000], 'test': [2114, 20000]}, 'combined': {'train': [9863, 32000], 'valid': [2113, 32000], 'test': [2114, 32000]}}
+2026-05-24 18:30:52,602 | INFO | Retrieval features generated split=train shape=(9863, 11)
+2026-05-24 18:30:55,967 | INFO | Retrieval features generated split=valid shape=(2113, 11)
+2026-05-24 18:30:59,237 | INFO | Retrieval features generated split=test shape=(2114, 11)
+2026-05-24 18:30:59,920 | INFO | Pseudo-start features generated split=train shape=(9863, 7)
+2026-05-24 18:31:00,094 | INFO | Pseudo-start features generated split=valid shape=(2113, 7)
+2026-05-24 18:31:00,283 | INFO | Pseudo-start features generated split=test shape=(2114, 7)
+2026-05-24 18:31:05,140 | INFO | Rubric features generated split=train shape=(9863, 11)
+2026-05-24 18:31:06,185 | INFO | Rubric features generated split=valid shape=(2113, 11)
+2026-05-24 18:31:07,239 | INFO | Rubric features generated split=test shape=(2114, 11)
+2026-05-24 18:31:07,243 | INFO | Running alg1_full_fusion
+2026-05-24 18:31:53,790 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.6836 accuracy=0.7534
+2026-05-24 18:32:30,742 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.6841 accuracy=0.7496
+2026-05-24 18:32:30,972 | INFO | Saved experiment alg1_full_retrieval_metadata_fusion metrics valid_macro_f1=0.6841 test_macro_f1=0.6765
+2026-05-24 18:32:30,982 | INFO | Running alg2_no_start_pseudo_start
+2026-05-24 18:33:23,888 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.5422 accuracy=0.6394
+2026-05-24 18:34:03,812 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.5488 accuracy=0.6422
+2026-05-24 18:34:04,037 | INFO | Saved experiment alg2_no_start_pseudo_start_fusion metrics valid_macro_f1=0.5488 test_macro_f1=0.5547
+2026-05-24 18:34:04,054 | INFO | Running alg3_rubric_explainable
+2026-05-24 18:34:25,581 | INFO | Candidate logistic_regression_C1 validation macro_f1=0.5111 accuracy=0.6096
+2026-05-24 18:34:25,699 | INFO | Candidate logistic_regression_C0.5 validation macro_f1=0.5134 accuracy=0.6110
+2026-05-24 18:34:25,774 | INFO | Saved experiment alg3_rubric_guided_explainable_fusion metrics valid_macro_f1=0.5134 test_macro_f1=0.5379
+2026-05-24 18:34:26,022 | INFO | Running alg4_gridsearched_svc_retrieval
+2026-05-24 18:34:27,787 | INFO | Alg4 candidate word__text_meta_retrieval__linear_svc_C0.5 validation accuracy=0.6919 macro_f1=0.5516
+2026-05-24 18:34:30,415 | INFO | Alg4 candidate word__text_meta_retrieval__linear_svc_C1 validation accuracy=0.6791 macro_f1=0.5392
+2026-05-24 18:34:36,827 | INFO | Alg4 candidate word__text_meta_retrieval__logistic_regression_C1 validation accuracy=0.6380 macro_f1=0.5450
+2026-05-24 18:34:40,156 | INFO | Alg4 candidate word__text_meta_retrieval__calibrated_linear_svc_C0.5 validation accuracy=0.7118 macro_f1=0.4886
+2026-05-24 18:34:42,243 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo__linear_svc_C0.5 validation accuracy=0.6895 macro_f1=0.5169
+2026-05-24 18:34:45,647 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo__linear_svc_C1 validation accuracy=0.6924 macro_f1=0.5344
+2026-05-24 18:34:50,041 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo__logistic_regression_C1 validation accuracy=0.5906 macro_f1=0.5149
+2026-05-24 18:34:54,306 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo__calibrated_linear_svc_C0.5 validation accuracy=0.6943 macro_f1=0.4360
+2026-05-24 18:34:55,936 | INFO | Alg4 candidate word__text_meta_retrieval_rubric__linear_svc_C0.5 validation accuracy=0.6933 macro_f1=0.5554
+2026-05-24 18:34:58,966 | INFO | Alg4 candidate word__text_meta_retrieval_rubric__linear_svc_C1 validation accuracy=0.6791 macro_f1=0.5454
+2026-05-24 18:35:04,908 | INFO | Alg4 candidate word__text_meta_retrieval_rubric__logistic_regression_C1 validation accuracy=0.6394 macro_f1=0.5509
+2026-05-24 18:35:08,623 | INFO | Alg4 candidate word__text_meta_retrieval_rubric__calibrated_linear_svc_C0.5 validation accuracy=0.7094 macro_f1=0.4834
+2026-05-24 18:35:10,966 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo_rubric__linear_svc_C0.5 validation accuracy=0.6905 macro_f1=0.5255
+2026-05-24 18:35:14,913 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo_rubric__linear_svc_C1 validation accuracy=0.6881 macro_f1=0.5316
+2026-05-24 18:35:19,696 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo_rubric__logistic_regression_C1 validation accuracy=0.5944 macro_f1=0.5193
+2026-05-24 18:35:24,441 | INFO | Alg4 candidate word__text_meta_retrieval_pseudo_rubric__calibrated_linear_svc_C0.5 validation accuracy=0.6976 macro_f1=0.4400
+2026-05-24 18:35:34,223 | INFO | Alg4 candidate char__text_meta_retrieval__linear_svc_C0.5 validation accuracy=0.6692 macro_f1=0.5415
+2026-05-24 18:35:47,966 | INFO | Alg4 candidate char__text_meta_retrieval__linear_svc_C1 validation accuracy=0.6621 macro_f1=0.5404
+2026-05-24 18:36:12,898 | INFO | Alg4 candidate char__text_meta_retrieval__logistic_regression_C1 validation accuracy=0.6318 macro_f1=0.5450
+2026-05-24 18:36:27,292 | INFO | Alg4 candidate char__text_meta_retrieval__calibrated_linear_svc_C0.5 validation accuracy=0.7127 macro_f1=0.4838
+2026-05-24 18:36:36,260 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo__linear_svc_C0.5 validation accuracy=0.6862 macro_f1=0.5231
+2026-05-24 18:36:50,606 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo__linear_svc_C1 validation accuracy=0.6843 macro_f1=0.5306
+2026-05-24 18:37:08,458 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo__logistic_regression_C1 validation accuracy=0.5939 macro_f1=0.5202
+2026-05-24 18:37:26,596 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo__calibrated_linear_svc_C0.5 validation accuracy=0.6943 macro_f1=0.4327
+2026-05-24 18:37:34,638 | INFO | Alg4 candidate char__text_meta_retrieval_rubric__linear_svc_C0.5 validation accuracy=0.6720 macro_f1=0.5496
+2026-05-24 18:37:46,871 | INFO | Alg4 candidate char__text_meta_retrieval_rubric__linear_svc_C1 validation accuracy=0.6616 macro_f1=0.5388
+2026-05-24 18:38:07,526 | INFO | Alg4 candidate char__text_meta_retrieval_rubric__logistic_regression_C1 validation accuracy=0.6337 macro_f1=0.5515
+2026-05-24 18:38:22,455 | INFO | Alg4 candidate char__text_meta_retrieval_rubric__calibrated_linear_svc_C0.5 validation accuracy=0.7156 macro_f1=0.4864
+2026-05-24 18:38:31,336 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo_rubric__linear_svc_C0.5 validation accuracy=0.6886 macro_f1=0.5278
+2026-05-24 18:38:45,893 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo_rubric__linear_svc_C1 validation accuracy=0.6824 macro_f1=0.5329
+2026-05-24 18:39:03,910 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo_rubric__logistic_regression_C1 validation accuracy=0.6020 macro_f1=0.5273
+2026-05-24 18:39:21,424 | INFO | Alg4 candidate char__text_meta_retrieval_pseudo_rubric__calibrated_linear_svc_C0.5 validation accuracy=0.6952 macro_f1=0.4333
+2026-05-24 18:39:29,593 | INFO | Alg4 candidate word_char__text_meta_retrieval__linear_svc_C0.5 validation accuracy=0.6829 macro_f1=0.5499
+2026-05-24 18:39:41,832 | INFO | Alg4 candidate word_char__text_meta_retrieval__linear_svc_C1 validation accuracy=0.6654 macro_f1=0.5310
+2026-05-24 18:40:06,214 | INFO | Alg4 candidate word_char__text_meta_retrieval__logistic_regression_C1 validation accuracy=0.6465 macro_f1=0.5603
+2026-05-24 18:40:21,851 | INFO | Alg4 candidate word_char__text_meta_retrieval__calibrated_linear_svc_C0.5 validation accuracy=0.7146 macro_f1=0.4917
+2026-05-24 18:40:31,822 | INFO | Alg4 candidate word_char__text_meta_retrieval_pseudo__linear_svc_C0.5 validation accuracy=0.6938 macro_f1=0.5333
+2026-05-24 18:40:47,850 | INFO | Alg4 candidate word_char__text_meta_retrieval_pseudo__linear_svc_C1 validation accuracy=0.6933 macro_f1=0.5438
+2026-05-24 18:41:09,391 | INFO | Alg4 candidate word_char__text_meta_retrieval_pseudo__logistic_regression_C1 validation accuracy=0.6001 macro_f1=0.5246
+2026-05-24 18:41:29,641 | INFO | Alg4 candidate word_char__text_meta_retrieval_pseudo__calibrated_linear_svc_C0.5 validation accuracy=0.6990 macro_f1=0.4422
+2026-05-24 18:41:37,902 | INFO | Alg4 candidate word_char__text_meta_retrieval_rubric__linear_svc_C0.5 validation accuracy=0.6824 macro_f1=0.5491
+2026-05-24 18:41:49,939 | INFO | Alg4 candidate word_char__text_meta_retrieval_rubric__linear_svc_C1 validation accuracy=0.6678 macro_f1=0.5361
+2026-05-24 18:42:11,285 | INFO | Alg4 candidate word_char__text_meta_retrieval_rubric__logistic_regression_C1 validation accuracy=0.6474 macro_f1=0.5606
+2026-05-24 18:42:26,956 | INFO | Alg4 candidate word_char__text_meta_retrieval_rubric__calibrated_linear_svc_C0.5 validation accuracy=0.7132 macro_f1=0.4866
+2026-05-24 18:42:37,112 | INFO | Alg4 candidate word_char__text_meta_retrieval_pseudo_rubric__linear_svc_C0.5 validation accuracy=0.6933 macro_f1=0.5389
+2026-05-24 18:42:53,211 | INFO | Alg4 candidate word_char__text_meta_retrieval_pseudo_rubric__linear_svc_C1 validation accuracy=0.6881 macro_f1=0.5376
+2026-05-24 18:43:14,682 | INFO | Alg4 candidate word_char__text_meta_retrieval_pseudo_rubric__logistic_regression_C1 validation accuracy=0.6020 macro_f1=0.5256
+2026-05-24 18:43:36,932 | INFO | Alg4 candidate word_char__text_meta_retrieval_pseudo_rubric__calibrated_linear_svc_C0.5 validation accuracy=0.6957 macro_f1=0.4396
+2026-05-24 18:43:37,532 | INFO | Saved experiment alg4_gridsearched_tfidf_svc_retrieval_fusion metrics valid_macro_f1=0.4864 test_macro_f1=0.4834
+2026-05-24 18:43:37,580 | INFO | Dashboard export saved to /Users/kimhyojin/Documents/Codex/2026-05-24/ai-trl-agentic-reasoning-dashboard-v0/trl-agentic-dashboard/outputs/dashboard and copied to /Users/kimhyojin/Documents/Codex/2026-05-24/ai-trl-agentic-reasoning-dashboard-v0/trl-agentic-dashboard/frontend/assets/data

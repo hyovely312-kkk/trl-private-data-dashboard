@@ -1,0 +1,8 @@
+category,keywords,purpose,mapped_trl_range
+principle_evidence,principle; theory; basic research; scientific basis,early TRL principle,TRL 1-2
+concept_evidence,concept; feasibility; proof of concept; analytical,concept maturity,TRL 2-3
+lab_validation_evidence,laboratory; lab; bench test; component validation,lab validation,TRL 3-4
+prototype_evidence,prototype; breadboard; engineering model; pilot module,prototype evidence,TRL 4-5
+relevant_environment_evidence,relevant environment; testbed; demonstration,relevant environment,TRL 5-6
+operational_environment_evidence,operational environment; field test; flight test; real-world; deployed,operational evidence,TRL 6-8
+commercialization_evidence,commercial; production; operational use; commercial use; market,commercial readiness,TRL 8-9

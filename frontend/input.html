@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Input</title><link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>raw R&D data entry</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>R&D Project Input</h1><p>Start TRL is optional and shown only as a reference signal.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <form id="projectForm" class="panel">
+        <div class="form-grid">
+          <label>Project title<input name="project_title" required></label>
+          <label>Program<input name="program"></label>
+          <label class="full">Description<textarea name="description" required></textarea></label>
+          <label class="full">Objective<textarea name="objective"></textarea></label>
+          <label>Core technology<input name="core_technology"></label>
+          <label>Application area<input name="application_area"></label>
+          <label class="full">Validation text<textarea name="validation_text"></textarea></label>
+          <label class="full">Commercialization plan<textarea name="commercialization_plan"></textarea></label>
+          <label>Primary taxonomy<input name="primary_taxonomy"></label>
+          <label>Start TRL optional<input name="start_trl_optional" type="number" min="1" max="9" placeholder="reference only"></label>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:16px;align-items:center"><button type="submit">Run TRL Analysis</button><button type="button" class="secondary" id="sampleBtn">Load Sample</button><span id="runStatus" class="muted"></span></div>
+      </form>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>Raw Excel Project Rows</h2><p class="muted">Description-centered TRL analysis input samples from the test split.</p></div><input id="rawProjectSearch" placeholder="search project / program / description" style="max-width:320px"></div>
+        <table><thead><tr><th>Project ID</th><th>Title</th><th>Program</th><th>Primary TX</th><th>Description excerpt</th><th>End label</th></tr></thead><tbody id="rawProjectRows"></tbody></table>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/input.js"></script>
+</body>
+</html>

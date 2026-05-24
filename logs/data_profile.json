@@ -1,0 +1,72 @@
+{
+  "input_path": "/Users/kimhyojin/Downloads/TRL_NASA_정제데이터.xlsx",
+  "requested_sheet": "Projects_Clean",
+  "actual_sheet": "Main_Data",
+  "raw_shape": [
+    14090,
+    18
+  ],
+  "canonical_shape_before_filter": [
+    14090,
+    18
+  ],
+  "columns": [
+    "Project ID",
+    "Project Title",
+    "Program",
+    "Status",
+    "Description",
+    "Benefits",
+    "End TRL",
+    "Start TRL",
+    "TRL Delta",
+    "Start Date",
+    "End Date",
+    "Responsible Mission Directorate",
+    "Phase",
+    "View Count",
+    "Primary TX",
+    "Other TX",
+    "Target Destinations",
+    "Last Modified"
+  ],
+  "missing_by_column": {
+    "Project ID": 0,
+    "Project Title": 0,
+    "Program": 0,
+    "Status": 0,
+    "Description": 0,
+    "Benefits": 366,
+    "End TRL": 0,
+    "Start TRL": 0,
+    "TRL Delta": 0,
+    "Start Date": 0,
+    "End Date": 0,
+    "Responsible Mission Directorate": 0,
+    "Phase": 5838,
+    "View Count": 0,
+    "Primary TX": 671,
+    "Other TX": 12971,
+    "Target Destinations": 2702,
+    "Last Modified": 0
+  },
+  "n_dropped_invalid_label_or_text": 0,
+  "final_shape": [
+    14090,
+    26
+  ],
+  "label_distribution": {
+    "Low": 4183,
+    "Mid": 8832,
+    "High": 1075
+  },
+  "text_field_policy": {
+    "primary_trl_text": "Description",
+    "retrieval_text": "Description duplicated as primary signal + Project Title/Benefits as auxiliary context.",
+    "classifier_text": "Description duplicated as primary signal + Project Title/Benefits as auxiliary context.",
+    "pseudo_start_text": "Description only.",
+    "rubric_evidence_text": "Description duplicated + Benefits as commercialization/operational auxiliary evidence.",
+    "title_policy": "Project Title is auxiliary only and never used alone for TRL judgment.",
+    "benefits_policy": "Benefits is auxiliary for commercialization, operational use, deployment, and impact; it cannot determine TRL alone."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "alg1_full_fusion": {
+    "purpose": "Upper-bound performance check. Uses Start TRL, so it is not deployment-safe.",
+    "uses_start_trl": true,
+    "flow": [
+      "Raw Excel row",
+      "Description-centered TF-IDF word/char features",
+      "Program + Primary TX metadata one-hot",
+      "Start TRL numeric reference feature",
+      "Train-corpus retrieval distribution",
+      "LogisticRegression candidate selection by validation macro-F1",
+      "Final Low/Mid/High prediction"
+    ]
+  },
+  "alg2_no_start_pseudo_start": {
+    "purpose": "Main deployment-safe model. Excludes Start TRL and estimates pseudo-start from Description.",
+    "uses_start_trl": false,
+    "flow": [
+      "Raw Excel row",
+      "Description-centered TF-IDF word/char features",
+      "Program + Primary TX metadata one-hot",
+      "Retrieval distribution from Description-centered similarity",
+      "Pseudo-start TRL from Description rules",
+      "LogisticRegression candidate selection by validation macro-F1",
+      "Final Low/Mid/High prediction"
+    ]
+  },
+  "alg3_rubric_explainable": {
+    "purpose": "Explainable model with rubric evidence scores and final natural-language reason.",
+    "uses_start_trl": false,
+    "flow": [
+      "Raw Excel row",
+      "Text model probabilities",
+      "Description-centered rubric evidence scoring",
+      "Benefits auxiliary commercialization evidence",
+      "Retrieval + pseudo-start + metadata features",
+      "LogisticRegression fusion",
+      "Explanation JSONL generation"
+    ]
+  },
+  "alg4_gridsearched_svc_retrieval": {
+    "purpose": "Accuracy-focused deployment-safe model targeting 70%+ accuracy without Start TRL.",
+    "uses_start_trl": false,
+    "flow": [
+      "Raw Excel row",
+      "Grid over word TF-IDF, char_wb TF-IDF, and word+char",
+      "Grid over retrieval, pseudo-start, rubric optional features",
+      "Grid over LinearSVC, LogisticRegression, Calibrated LinearSVC",
+      "Validation accuracy primary selection with macro-F1 tie-breaker",
+      "Final one-time test evaluation"
+    ]
+  }
+}

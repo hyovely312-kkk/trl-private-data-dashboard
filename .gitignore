@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.venv/
+venv/
+node_modules/
+
+# Local experiment outputs from raw datasets. Keep these local unless publishing
+# has been separately reviewed for data-sharing risk.
+logs/
+outputs/
+frontend/assets/data/

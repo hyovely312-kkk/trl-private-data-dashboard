@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rules</title><link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>rubric configuration</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>TRL Rules / Rubric</h1><p>Editable UI mock for v0.2 persistence. Current v0.1 reads sample_rules.json.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <div class="notice">Rule edits are UI-only in v0.1. Backend persistence is reserved for SQLite/PostgreSQL in v0.2.</div>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel"><table><thead><tr><th>TRL evidence category</th><th>keywords</th><th>weight</th><th>mapped TRL range</th></tr></thead><tbody id="rulesBody"></tbody></table></div>
+        <div class="panel"><div class="section-title"><h2>Rules JSON</h2></div><pre id="rulesJson" class="json-view"></pre></div>
+      </section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>Raw Excel Evidence Rule Rows</h2><p class="muted">Rubric categories used to convert Description/Benefits text into evidence scores.</p></div></div>
+        <table><thead><tr><th>Category</th><th>Keywords</th><th>Purpose</th><th>Mapped TRL</th></tr></thead><tbody id="ruleAnalysisRows"></tbody></table>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/rules.js"></script>
+</body>
+</html>

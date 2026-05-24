@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Architecture</title><link rel="stylesheet" href="assets/css/style.css"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>system architecture</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>System Architecture</h1><p>Raw data to intermediate vectors, scores, distributions, Fusion decision, and event log.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <section class="notice">
+        <strong>GitHub Pages public view</strong>
+        <p>Raw Description/Title row-level CSV files are intentionally excluded from the public repository. Public pages show aggregate experiment metrics, algorithm architecture, and rule dictionaries. Local/private exports can still render raw Excel rows, event rows, and intermediate row logs.</p>
+      </section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>Experiment Data Flow Counts</h2><p class="muted">How the one Excel workbook moved through split, feature generation, and four algorithm runs.</p></div></div>
+        <div class="grid kpi-grid compact-kpi" id="architectureRunCards"></div>
+        <table style="margin-top:14px"><thead><tr><th>Stage</th><th>Rows / shape</th><th>What happened</th></tr></thead><tbody id="architectureFlowRows"></tbody></table>
+      </section>
+      <section class="panel">
+        <pre class="mermaid">
+flowchart TD
+  A["Raw R&D Project Data"] --> B["Preprocessing Layer"]
+  B --> C["Agent 1. Retrieval Similarity Agent<br/>TF-IDF vector + cosine similarity"]
+  B --> D["Agent 2. Pseudo-Start TRL Agent<br/>rule score + pseudo TRL"]
+  B --> E["Agent 3. Rubric Evidence Agent<br/>sentence evidence score"]
+  C --> F["Fusion Decision Agent<br/>weighted probability"]
+  D --> F
+  E --> F
+  F --> G["Explanation Agent<br/>reason, risk, next action"]
+  G --> H["Dashboard / Event Log"]
+  F --> H
+        </pre>
+      </section>
+      <section class="panel" style="margin-top:16px"><div class="section-title"><h2>Agent Definitions</h2></div><pre id="agentDefinitions" class="json-view"></pre></section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><h2>Algorithm Data Architectures</h2></div>
+        <div id="algorithmArchitectures" class="grid two-col"></div>
+      </section>
+    </main>
+  </div>
+  <script>mermaid.initialize({startOnLoad:true, theme:"dark"});</script><script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/architecture.js"></script>
+</body>
+</html>

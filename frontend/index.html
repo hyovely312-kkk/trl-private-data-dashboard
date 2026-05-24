@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TRL Agentic Reasoning Dashboard</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>v0.1 R&D maturity analysis</span></div>
+      <nav class="nav">
+        <a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div><h1>Operational Overview</h1><p>Raw data, Agent reasoning, and Fusion outcomes at a glance.</p></div>
+        <div class="api-pill"><span class="muted">API</span><input data-api-base></div>
+      </header>
+      <section class="grid kpi-grid">
+        <div class="kpi"><span>Total analyses</span><strong data-total>0</strong></div>
+        <div class="kpi"><span>Low</span><strong data-low>0</strong></div>
+        <div class="kpi"><span>Mid</span><strong data-mid>0</strong></div>
+        <div class="kpi"><span>High</span><strong data-high>0</strong></div>
+        <div class="kpi"><span>Avg confidence</span><strong data-confidence>0%</strong></div>
+        <div class="kpi"><span>Evidence gaps</span><strong data-missing>0</strong></div>
+      </section>
+      <section class="notice" style="margin-top:16px">
+        <strong>Public GitHub data policy</strong>
+        <p>Raw Description/Title row CSV files are not published in the public repository. This page shows public-safe aggregate results, model metrics, rules, and architecture. Row-level project text remains available only in the local/private dashboard export.</p>
+      </section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>14,090 Project Experiment Run Summary</h2><p class="muted">One Excel file was split once, then the same held-out test set was evaluated by all four algorithms.</p></div><span id="runSummaryStatus" class="muted">Loading summary</span></div>
+        <div class="grid kpi-grid compact-kpi" id="experimentRunCards"></div>
+        <table style="margin-top:14px"><thead><tr><th>Algorithm</th><th>Role</th><th>Start TRL</th><th>Samples evaluated</th><th>Accuracy</th><th>Macro-F1</th><th>Avg confidence</th><th>MAE</th></tr></thead><tbody id="algorithmRunRows"></tbody></table>
+      </section>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel"><div class="section-title"><h2>Monthly Analysis Count</h2></div><canvas id="monthlyChart"></canvas></div>
+        <div class="panel"><div class="section-title"><h2>TRL Class Distribution</h2></div><canvas id="classChart"></canvas></div>
+      </section>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel"><div class="section-title"><h2>Agent Average Confidence</h2></div><canvas id="agentChart"></canvas></div>
+        <div class="panel">
+          <div class="section-title"><h2>Recent Events</h2><a class="button" href="input.html">Run Analysis</a></div>
+          <table><thead><tr><th>Event</th><th>Project</th><th>Class</th><th>Confidence</th><th></th></tr></thead><tbody id="recentEvents"></tbody></table>
+        </div>
+      </section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>Model Leaderboard</h2><p class="muted">Batch experiment results exported from `trl_experiments`.</p></div><span id="experimentStatus" class="muted">Waiting for experiment export</span></div>
+        <table><thead><tr><th>Model</th><th>Start TRL</th><th>Accuracy</th><th>Macro-F1</th><th>Weighted-F1</th><th>MAE</th></tr></thead><tbody id="leaderboardRows"></tbody></table>
+      </section>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel"><div class="section-title"><h2>No-Start vs Full Fusion</h2></div><canvas id="modelCompareChart"></canvas></div>
+        <div class="panel"><div class="section-title"><h2>Class-wise F1</h2></div><canvas id="classwiseChart"></canvas></div>
+      </section>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel"><div class="section-title"><h2>Pseudo-Start Distribution</h2></div><canvas id="pseudoDistChart"></canvas></div>
+        <div class="panel"><div class="section-title"><h2>Sample Explanation</h2></div><div id="sampleExplanation" class="json-view"></div></div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "train": {
+    "n": 9863,
+    "label_distribution": {
+      "Low": 2928,
+      "Mid": 6182,
+      "High": 753
+    }
+  },
+  "valid": {
+    "n": 2113,
+    "label_distribution": {
+      "Low": 627,
+      "Mid": 1325,
+      "High": 161
+    }
+  },
+  "test": {
+    "n": 2114,
+    "label_distribution": {
+      "Low": 628,
+      "Mid": 1325,
+      "High": 161
+    }
+  }
+}

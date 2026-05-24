@@ -1,0 +1,69 @@
+{
+  "algorithm": "No-Start Retrieval / Pseudo-Start Fusion",
+  "uses_start_trl": false,
+  "interpretation": "deployment-safe main model",
+  "features": [
+    "TF-IDF word+char",
+    "Program one-hot",
+    "Primary TX one-hot",
+    "retrieval features",
+    "pseudo_start_trl",
+    "pseudo_start_confidence"
+  ],
+  "best_model_selection": "validation macro_f1",
+  "selected_model": "logistic_regression_C0.5",
+  "candidate_trials": [
+    {
+      "name": "logistic_regression_C1",
+      "validation_metrics": {
+        "accuracy": 0.6393752957879791,
+        "macro_f1": 0.5421524791685514,
+        "weighted_f1": 0.6457554829456802,
+        "precision_low": 0.5527488855869243,
+        "recall_low": 0.5933014354066986,
+        "f1_low": 0.5723076923076923,
+        "precision_mid": 0.7471451876019576,
+        "recall_mid": 0.6913207547169812,
+        "f1_mid": 0.7181497451979616,
+        "precision_high": 0.29439252336448596,
+        "recall_high": 0.391304347826087,
+        "f1_high": 0.336,
+        "mae": 0.3809749171793658,
+        "log_loss": 2.0108065659849275,
+        "brier_score": 0.3435238041417546,
+        "calibration_summary": {
+          "mean_confidence": 0.6203557603409611,
+          "mean_predicted_low": 0.17894249898402703,
+          "mean_predicted_mid": 0.36028211937411153,
+          "mean_predicted_high": 0.4607753816418615
+        }
+      }
+    },
+    {
+      "name": "logistic_regression_C0.5",
+      "validation_metrics": {
+        "accuracy": 0.6422148603880738,
+        "macro_f1": 0.548847279975739,
+        "weighted_f1": 0.6499844943536758,
+        "precision_low": 0.5658682634730539,
+        "recall_low": 0.6028708133971292,
+        "f1_low": 0.5837837837837838,
+        "precision_mid": 0.7522708505367465,
+        "recall_mid": 0.6875471698113208,
+        "f1_mid": 0.7184542586750788,
+        "precision_high": 0.2905982905982906,
+        "recall_high": 0.422360248447205,
+        "f1_high": 0.34430379746835443,
+        "mae": 0.37766209181258875,
+        "log_loss": 1.822302984805391,
+        "brier_score": 0.3273597132412228,
+        "calibration_summary": {
+          "mean_confidence": 0.584763092123532,
+          "mean_predicted_low": 0.20532769924488717,
+          "mean_predicted_mid": 0.36006050214747454,
+          "mean_predicted_high": 0.43461179860763827
+        }
+      }
+    }
+  ]
+}

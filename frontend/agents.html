@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Logs</title><link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>algorithm reasoning logs</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>Agent Calculation Logs</h1><p>Input fields, processing methods, intermediate values, and raw JSON per Agent.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <section class="split-layout">
+        <div class="list-panel" id="agentList"></div>
+        <div class="panel"><div class="section-title"><div><h2 id="agentTitle">Agent</h2><p id="agentSubtitle" class="muted"></p></div></div><div id="agentMetrics"></div><h3>JSON Raw Log</h3><pre id="agentJson" class="json-view"></pre></div>
+      </section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>Algorithm Sample Rows</h2><p class="muted">Retrieval, pseudo-start, rubric, and Alg4 grid-search intermediate rows.</p></div></div>
+        <table><thead id="agentSampleHead"></thead><tbody id="agentSampleRows"></tbody></table>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/agents.js"></script>
+</body>
+</html>

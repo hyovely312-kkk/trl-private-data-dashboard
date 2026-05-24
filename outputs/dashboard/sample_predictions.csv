@@ -1,0 +1,321 @@
+model,project_id,project_title,target_label,predicted_label,probability_low,probability_mid,probability_high,confidence
+alg1_full_fusion,112878,Three Band Thermal Infrared Detector for CubeSats and UAS,High,Mid,0.4053679126405604,0.4652822760120633,0.1293498113473764,0.4652822760120633
+alg1_full_fusion,12089,Exploration Technology Development including Surface Acoustic Wave RFID chips,Mid,Low,0.6964681852209615,0.24088525652316098,0.06264655825587755,0.6964681852209615
+alg1_full_fusion,158539,Improved Nucleation-Mode Aerosol Sizing Spectrometry through Pulse Height Analysis,Mid,High,0.2499782010067469,0.2678578488769589,0.4821639501162942,0.4821639501162942
+alg1_full_fusion,113165,Deep Space Navigation of Distributed Small Spacecraft using Variable Celestial Sources,Low,Low,0.6231425393955095,0.3439346317778085,0.03292282882668206,0.6231425393955095
+alg1_full_fusion,94858,Parts Selection and Testing for Risk Tolerant Missions,Mid,Mid,0.005632829944461824,0.6459869473447594,0.3483802227107789,0.6459869473447594
+alg1_full_fusion,33603,A Novel 3D Printer to Support Additive Manufacturing of Gradient Metal Alloy Structures,Mid,Mid,0.05521457578069276,0.7783089517385733,0.1664764724807339,0.7783089517385733
+alg1_full_fusion,91729,Evaluation of Carbon Composite Vessels Fabrication using Ionic Liquid Epoxies for Cryogenic Liquid Containment,Mid,Mid,0.22009149775304812,0.6936494913228911,0.08625901092406069,0.6936494913228911
+alg1_full_fusion,92581,The World is Not Enough (WINE): Harvesting Local Resources for Eternal Exploration of Space,Mid,Mid,0.14945074301922137,0.6340631304689562,0.21648612651182242,0.6340631304689562
+alg1_full_fusion,8982,Human Factors Analysis Support Tool (H-FAST),Mid,Mid,0.27022182649892884,0.43852352680776596,0.2912546466933052,0.43852352680776596
+alg1_full_fusion,95640,Myco-architecture off planet: growing surface structures at destination,Low,Low,0.9529553423428813,0.04610447474649981,0.0009401829106189396,0.9529553423428813
+alg1_full_fusion,9850,"Polymer-Reinforced, Nonbrittle, Lightweight Cryogenic Insulation for Reduced Life-Cycle Costs",Mid,Mid,0.1228244107439221,0.771629528802323,0.10554606045375493,0.771629528802323
+alg1_full_fusion,33412,3D Imaging Cubesat Lidar for Asteroid and Planetary Sciences,Mid,Mid,0.08152455970365567,0.8427557271067071,0.07571971318963724,0.8427557271067071
+alg1_full_fusion,125823,Weather Intelligence Support Environment,Mid,Mid,0.16438984324436537,0.45870761008466343,0.3769025466709713,0.45870761008466343
+alg1_full_fusion,158283,Quantification and Modulation of Trust in a Crew Health Integrated Medical Response Agent (CHIMERA),Low,Low,0.6865399080111241,0.28951769356661256,0.023942398422263266,0.6865399080111241
+alg1_full_fusion,16772,Incremental Evolution of a 10/250 NLV into a 20/450 NMSLV,High,Mid,0.004492168327774132,0.5778979992255735,0.41760983244665234,0.5778979992255735
+alg1_full_fusion,154498,Coordinated Autonomous Debris Avoidance,Mid,Mid,0.18458495910088885,0.5141822243838781,0.3012328165152331,0.5141822243838781
+alg1_full_fusion,125728,"Radiation Hardened High Power ""GBID"" Ga2O3 Based Isolated DC-DC Converter",Mid,Mid,0.45553623236669716,0.524793598605107,0.01967016902819595,0.524793598605107
+alg1_full_fusion,102444,A Compact and Automated Library Preparation Device for Nanopore Sequencing,Mid,Mid,0.26296379638051026,0.6852017033163322,0.0518345003031574,0.6852017033163322
+alg1_full_fusion,101947,High-Resolution Source Characterization and Modeling for Efficient Prediction of Propulsion-Airframe Aeroacoustics,Low,Mid,0.23908635447383275,0.7279913588160724,0.03292228671009491,0.7279913588160724
+alg1_full_fusion,106670,Propellant Mass Gauging in Gateway Architecture Vehicles,Mid,High,0.0010317416678782888,0.45559524082627034,0.5433730175058513,0.5433730175058513
+alg1_full_fusion,94565,Dynamically Leveraged Automated N-Multibody (DyLAN) Trajectory Optimization,Mid,Mid,0.05083900860255199,0.8346624412559822,0.11449855014146577,0.8346624412559822
+alg1_full_fusion,113183,Dust Tolerant Joint for In-Space Assembly,Mid,Mid,0.4294068811994359,0.5479807482910044,0.02261237050955983,0.5479807482910044
+alg1_full_fusion,125631,Magnetic Dust Filtration System,Mid,Mid,0.20123918455369613,0.7755685267247029,0.02319228872160092,0.7755685267247029
+alg1_full_fusion,112917,Autonomous Environmental Monitoring and Management Platform for Remote Habitats,High,Mid,0.07080175763793918,0.6993762657386536,0.22982197662340725,0.6993762657386536
+alg1_full_fusion,15886,Using the Hottest Particles in the Universe to Probe Icy Solar System Worlds,Low,Low,0.9384877072657735,0.057445830909865554,0.004066461824360973,0.9384877072657735
+alg1_full_fusion,93556,Injector-Integrated Fuel-Air Heat Exchanger Module,Mid,Mid,0.30317212406213234,0.4796936762104228,0.21713419972744483,0.4796936762104228
+alg1_full_fusion,105714,Verification of Molecular Contamination Transport Model,Mid,High,0.02131239754870775,0.28523321341317537,0.6934543890381168,0.6934543890381168
+alg1_full_fusion,101881,Impact Resistant Composite Structures for Space Suit Applications,Mid,Mid,0.0933416952293468,0.8093816381020877,0.09727666666856553,0.8093816381020877
+alg1_full_fusion,93320,A 10 K Multistage Cryocooler with Very Low Vibration,Mid,High,0.0023906008861197675,0.4672643225024922,0.5303450766113881,0.5303450766113881
+alg1_full_fusion,90788,Precision Detector Positioner,Mid,Low,0.5946329201254482,0.3475272473192249,0.05783983255532692,0.5946329201254482
+alg1_full_fusion,112836,Passsive UV Imaging Polarimeter For Atmospheric Studies,Mid,Mid,0.018384471774114456,0.7136582020126062,0.2679573262132794,0.7136582020126062
+alg1_full_fusion,158248,Advanced Hybrid Photonic Based Fiber Optic Sensor for Lunar Habitats,Mid,Mid,0.30760574650559264,0.6281311273529496,0.06426312614145768,0.6281311273529496
+alg1_full_fusion,154558,Real-Time Hardware Configurable Coprocessors,Mid,Mid,0.24189929152523976,0.4376184369651909,0.3204822715095693,0.4376184369651909
+alg1_full_fusion,94108,Developing a Material Response Model of Biopolymer-Stabilized Regolith to Predict Micrometeoroid Damage of ISRU Habitat Systems,Low,Low,0.8854178366461023,0.11228608397220309,0.0022960793816946047,0.8854178366461023
+alg1_full_fusion,113380,Moving Discontinuous Galerkin Solver for Hypersonic Aerothermodynamics,Low,Low,0.6722465554170828,0.3204588504323903,0.007294594150526817,0.6722465554170828
+alg1_full_fusion,4297,Multi-Functional Stimuli-Responsive Materials,Low,Low,0.9304535889860404,0.04955177936956587,0.019994631644393714,0.9304535889860404
+alg1_full_fusion,102827,Light Weight Radiation Shielding Components,Mid,Mid,0.01634494925166049,0.7663227765353501,0.2173322742129894,0.7663227765353501
+alg1_full_fusion,94651,Less Iron and More Switches Increase Range,Mid,High,0.003605687470993658,0.4656907432770599,0.5307035692519465,0.5307035692519465
+alg1_full_fusion,10456,Nanowire Photovoltaic Devices,Mid,Mid,0.4277382947661241,0.530867386675543,0.04139431855833281,0.530867386675543
+alg1_full_fusion,34197,World-Class Visualizations in GMAT,Low,Mid,0.4611749890049017,0.4760413139452679,0.06278369704983047,0.4760413139452679
+alg1_full_fusion,94190,FY17 GRC: Tuna-Inspired Heat Pipe for High OPR Gas Turbines,Low,Low,0.7565101525292756,0.23916425901298216,0.004325588457742281,0.7565101525292756
+alg1_full_fusion,94830,Next Generation Tunable 353/530 nm Fiber Laser formaldehyde (HCHO) and nitrogen dioxide (NO2),Mid,Low,0.5237810196627168,0.415062933211169,0.061156047126114145,0.5237810196627168
+alg1_full_fusion,125664,Multiparameter Laser Absorption Tomography System for High-Speed Flows,Mid,Mid,0.13308755674151165,0.47087044060010563,0.3960420026583828,0.47087044060010563
+alg1_full_fusion,95566,Revolutionizing Orbit Insertion with Drag-Modulated Plasma Aerocapture,Low,Low,0.9513118925395418,0.046504821391438904,0.002183286069019306,0.9513118925395418
+alg1_full_fusion,118297,Remote Autonomous Plant Sensing for Space Exploration Enabled by Wearable Printed Electronics,Low,Low,0.7897270806340136,0.20869380166212198,0.0015791177038644109,0.7897270806340136
+alg1_full_fusion,103157,Variable Conductance Cold Plate for Spatial and Temporal Temperature Uniformity,Mid,Mid,0.0015489824404853272,0.5089989542677003,0.48945206329181445,0.5089989542677003
+alg1_full_fusion,8796,Miniature Intelligent Wireless Fire Detector System,Mid,Mid,0.024197228324529387,0.8285804499657681,0.1472223217097025,0.8285804499657681
+alg1_full_fusion,91543,Reconfiguring Worlds with Simple Actuation via Physics-Based Nonprehensile Actions,Low,Low,0.9169723414767598,0.0788429541383849,0.0041847043848554566,0.9169723414767598
+alg1_full_fusion,9011,Executable SysML Model Development Accelerator for the Constellation Program,Mid,Mid,0.0028412153958055617,0.5036779502092783,0.49348083439491625,0.5036779502092783
+alg1_full_fusion,116306,An Integrated Regenerative Fuel Cell System,Mid,Mid,0.015823039086597428,0.8012432931591722,0.18293366775423034,0.8012432931591722
+alg1_full_fusion,89975,"Shear Thickening Fluid Enhanced Textiles for Durable, Puncture- and Cut-Resistant Environmental Protection Garments",Mid,Mid,0.0141515533222705,0.5369330059379819,0.44891544073974765,0.5369330059379819
+alg1_full_fusion,158046,Missfit: Statistical Multi-Event Missed-Thrust Optimization for Low-Thrust Trajectories,Mid,Low,0.6023241036778976,0.3720887401959851,0.025587156126117363,0.6023241036778976
+alg1_full_fusion,9444,Functionally Graded Polyimide Nanocomposite Foams for Ablative and Inflatable/Flexible/Deplorable Structures,Low,Low,0.7831710091963103,0.2122818858352437,0.004547104968446075,0.7831710091963103
+alg1_full_fusion,125590,Integrated Brayton Cryocooler for LOx and LH2 Applications,Mid,Mid,0.11153643307328079,0.8052556937949938,0.0832078731317254,0.8052556937949938
+alg1_full_fusion,125826,Windspeed Sensor for Planetary Science Applications,Mid,Mid,0.06328847528949938,0.7914020204888295,0.1453095042216712,0.7914020204888295
+alg1_full_fusion,113432,"PERISCOPE - Probe for Exploring Regolith and Ice by Subsurface Classification of Organics, PAHs, and Elements",Mid,Mid,0.009796031496610805,0.580083499344671,0.41012046915871825,0.580083499344671
+alg1_full_fusion,9645,MEMS Skin Friction Sensor,Mid,Mid,0.07162110848500987,0.7874200236685719,0.14095886784641826,0.7874200236685719
+alg1_full_fusion,18380,3D Flash LIDAR EDL Resolution Improvement,High,Mid,0.00870370159946032,0.6704186890162805,0.32087760938425913,0.6704186890162805
+alg1_full_fusion,12094,"Location-Aware, Low-Power, Wearable Wireless Sensing for Environmental Monitoring",Mid,Mid,0.23289548392133474,0.5910535128085694,0.1760510032700958,0.5910535128085694
+alg1_full_fusion,113143,Compact Integrated Midwave Infrared Spectrometer,Low,Low,0.522415546352509,0.4690146927203649,0.008569760927126094,0.522415546352509
+alg1_full_fusion,23252,Monitoring and Regulating Teamwork,Mid,Mid,0.013141652758332248,0.7328220621372759,0.25403628510439186,0.7328220621372759
+alg1_full_fusion,95553,"Move to Talk, Talk to Move: Tightly Integrated Communication and Controls for Coordinated Swarms of Small Spacecraft",Mid,Mid,0.38424307860115875,0.43893023143516646,0.17682668996367473,0.43893023143516646
+alg1_full_fusion,95613,"CRATOS II: Modular ISRU Excavation Tools, Year 1",Low,Low,0.655437588707416,0.3272343353137013,0.017328075978882695,0.655437588707416
+alg1_full_fusion,14562,Development of Instrumentation for Direct Validation of Regional Carbon Flux Estimates,Mid,High,0.0003145428326387939,0.3893626053365925,0.6103228518307686,0.6103228518307686
+alg1_full_fusion,94650,"LACROSS: Life Analysis, Capture, and Retention on an Orbiting Saturn Spacecraft",Mid,Low,0.5052991467701549,0.4544496293713358,0.04025122385850925,0.5052991467701549
+alg1_full_fusion,93303,Adapting RNAseq sample preparation for ISS,Low,Low,0.5917135085595032,0.18218222233224926,0.22610426910824757,0.5917135085595032
+alg1_full_fusion,14192,Advanced Manufacturing Technologies (AMT): Additive Manufactured Hot Fire Planning and Testing in GRC Cell 32,Mid,Mid,0.061677625857974934,0.4913738991628372,0.4469484749791879,0.4913738991628372
+alg1_full_fusion,158518,Relative Position Sensing System for Precision Formation Flying Spacecraft,Mid,Mid,0.024561085896563306,0.5545569421256418,0.4208819719777949,0.5545569421256418
+alg1_full_fusion,145984,Boron Nitride Aid for High-Z X-ray Optics and Substrate Enhancements,Mid,Low,0.6641645137879331,0.32639228501407463,0.009443201197992333,0.6641645137879331
+alg1_full_fusion,125534,HARPOON - High Access Raman Probe with Onboard Optical Numerization,High,High,2.8224210951079934e-05,0.47998720746545875,0.5199845683235902,0.5199845683235902
+alg1_full_fusion,106738,ISRU Pilot Excavator Bucket Drum Flow,Mid,Mid,0.002119704104192699,0.659153556440734,0.3387267394550733,0.659153556440734
+alg1_full_fusion,10940,Materials on International Space Station Experiment – X,High,High,0.00017595781795658286,0.2672849742180761,0.7325390679639674,0.7325390679639674
+alg1_full_fusion,17737,Evaluation of ADS-B Surveillance Data to Identify Flight Operations with Reduced Safety Margin in the National Airspace System,Low,Low,0.8527636935988006,0.04162474871043813,0.10561155769076147,0.8527636935988006
+alg1_full_fusion,34212,Novel Ring-Configuration Double-Acting Free-Piston Stirling Convertor,Low,Mid,0.3758013595892583,0.5846624138599553,0.03953622655078651,0.5846624138599553
+alg1_full_fusion,116436,Polaris Project: Spaceflight Autonomous Multigenerational Microbial Sequencer,Mid,Low,0.7989740838044853,0.12734864708355162,0.07367726911196308,0.7989740838044853
+alg1_full_fusion,116435,Polaris Project: Radiation Tolerant and Reliable Electric Displays: a Preliminary Assessment Necessary for Deep-spaceflight ApplicationS (2REDPANDAS),Mid,High,0.14304498206864327,0.10265405329894864,0.7543009646324081,0.7543009646324081
+alg1_full_fusion,146559,Space Rated Plasma Generating Power Supply Development,Mid,Low,0.568855614864506,0.42373516179235743,0.007409223343136728,0.568855614864506
+alg1_full_fusion,18048,High Throughput Hall Thruster for Small Spacecraft,Mid,Mid,0.22215032463890289,0.6923451679596302,0.08550450740146691,0.6923451679596302
+alg1_full_fusion,92782,Framework for Mining and Analysis of Petabyte-size Time-series on the NASA Earth Exchange (NEX),Low,Mid,0.19835861001291197,0.4439221789012867,0.35771921108580135,0.4439221789012867
+alg1_full_fusion,102250,Less Iron and More Switches Increase Range,Mid,High,0.0036284476666043728,0.46523673888145867,0.5311348134519369,0.5311348134519369
+alg2_no_start_pseudo_start,112878,Three Band Thermal Infrared Detector for CubeSats and UAS,High,High,0.15879539049288133,0.4123559007812145,0.42884870872590414,0.42884870872590414
+alg2_no_start_pseudo_start,12089,Exploration Technology Development including Surface Acoustic Wave RFID chips,Mid,Low,0.5934664753183378,0.2528076910843531,0.15372583359730915,0.5934664753183378
+alg2_no_start_pseudo_start,158539,Improved Nucleation-Mode Aerosol Sizing Spectrometry through Pulse Height Analysis,Mid,Low,0.622776171603636,0.1855570245126047,0.19166680388375928,0.622776171603636
+alg2_no_start_pseudo_start,113165,Deep Space Navigation of Distributed Small Spacecraft using Variable Celestial Sources,Low,Low,0.4718238104870006,0.39571809719921086,0.13245809231378852,0.4718238104870006
+alg2_no_start_pseudo_start,94858,Parts Selection and Testing for Risk Tolerant Missions,Mid,Mid,0.37749791919423764,0.5515264697079855,0.07097561109777695,0.5515264697079855
+alg2_no_start_pseudo_start,33603,A Novel 3D Printer to Support Additive Manufacturing of Gradient Metal Alloy Structures,Mid,Mid,0.3866796352151181,0.4891552701727716,0.12416509461211031,0.4891552701727716
+alg2_no_start_pseudo_start,91729,Evaluation of Carbon Composite Vessels Fabrication using Ionic Liquid Epoxies for Cryogenic Liquid Containment,Mid,Low,0.4581135540473505,0.3737334839839153,0.16815296196873425,0.4581135540473505
+alg2_no_start_pseudo_start,92581,The World is Not Enough (WINE): Harvesting Local Resources for Eternal Exploration of Space,Mid,Mid,0.3216733213039423,0.39638432093831155,0.2819423577577461,0.39638432093831155
+alg2_no_start_pseudo_start,8982,Human Factors Analysis Support Tool (H-FAST),Mid,Low,0.4821989117706824,0.3043527833752194,0.21344830485409813,0.4821989117706824
+alg2_no_start_pseudo_start,95640,Myco-architecture off planet: growing surface structures at destination,Low,Low,0.9527035651694534,0.04504960510311991,0.0022468297274266,0.9527035651694534
+alg2_no_start_pseudo_start,9850,"Polymer-Reinforced, Nonbrittle, Lightweight Cryogenic Insulation for Reduced Life-Cycle Costs",Mid,Mid,0.2506029070712309,0.5579139695121681,0.1914831234166011,0.5579139695121681
+alg2_no_start_pseudo_start,33412,3D Imaging Cubesat Lidar for Asteroid and Planetary Sciences,Mid,Mid,0.23832075447821044,0.6715678442361905,0.09011140128559908,0.6715678442361905
+alg2_no_start_pseudo_start,125823,Weather Intelligence Support Environment,Mid,Low,0.5559635269619816,0.2557902338114909,0.1882462392265275,0.5559635269619816
+alg2_no_start_pseudo_start,158283,Quantification and Modulation of Trust in a Crew Health Integrated Medical Response Agent (CHIMERA),Low,Mid,0.3466703990913211,0.39110664527930084,0.26222295562937803,0.39110664527930084
+alg2_no_start_pseudo_start,16772,Incremental Evolution of a 10/250 NLV into a 20/450 NMSLV,High,Mid,0.10337691450866171,0.5048418120393647,0.3917812734519736,0.5048418120393647
+alg2_no_start_pseudo_start,154498,Coordinated Autonomous Debris Avoidance,Mid,Low,0.515265967626464,0.28747001926542604,0.19726401310810998,0.515265967626464
+alg2_no_start_pseudo_start,125728,"Radiation Hardened High Power ""GBID"" Ga2O3 Based Isolated DC-DC Converter",Mid,Mid,0.33933022332438734,0.5173442051920198,0.14332557148359282,0.5173442051920198
+alg2_no_start_pseudo_start,102444,A Compact and Automated Library Preparation Device for Nanopore Sequencing,Mid,Mid,0.11908930295347991,0.5862903399949693,0.29462035705155093,0.5862903399949693
+alg2_no_start_pseudo_start,101947,High-Resolution Source Characterization and Modeling for Efficient Prediction of Propulsion-Airframe Aeroacoustics,Low,Mid,0.18733501505813038,0.6419063870126678,0.1707585979292019,0.6419063870126678
+alg2_no_start_pseudo_start,106670,Propellant Mass Gauging in Gateway Architecture Vehicles,Mid,High,0.04799479513113024,0.4652805531489886,0.48672465171988116,0.48672465171988116
+alg2_no_start_pseudo_start,94565,Dynamically Leveraged Automated N-Multibody (DyLAN) Trajectory Optimization,Mid,Mid,0.09284362729915735,0.6027487653751209,0.3044076073257218,0.6027487653751209
+alg2_no_start_pseudo_start,113183,Dust Tolerant Joint for In-Space Assembly,Mid,Mid,0.24601300407388635,0.6354927828506589,0.11849421307545466,0.6354927828506589
+alg2_no_start_pseudo_start,125631,Magnetic Dust Filtration System,Mid,Mid,0.19058302173065328,0.6916692531448593,0.11774772512448742,0.6916692531448593
+alg2_no_start_pseudo_start,112917,Autonomous Environmental Monitoring and Management Platform for Remote Habitats,High,Mid,0.21312798267483032,0.4993411255421327,0.287530891783037,0.4993411255421327
+alg2_no_start_pseudo_start,15886,Using the Hottest Particles in the Universe to Probe Icy Solar System Worlds,Low,Low,0.9074293922811489,0.07017182480650298,0.02239878291234807,0.9074293922811489
+alg2_no_start_pseudo_start,93556,Injector-Integrated Fuel-Air Heat Exchanger Module,Mid,Low,0.47832380781049705,0.3577303917572227,0.1639458004322802,0.47832380781049705
+alg2_no_start_pseudo_start,105714,Verification of Molecular Contamination Transport Model,Mid,Low,0.6430888514163002,0.13895725563963965,0.21795389294406012,0.6430888514163002
+alg2_no_start_pseudo_start,101881,Impact Resistant Composite Structures for Space Suit Applications,Mid,Mid,0.25067588810768837,0.5674733311038219,0.18185078078848976,0.5674733311038219
+alg2_no_start_pseudo_start,93320,A 10 K Multistage Cryocooler with Very Low Vibration,Mid,Low,0.388139738162827,0.35063420137054746,0.2612260604666256,0.388139738162827
+alg2_no_start_pseudo_start,90788,Precision Detector Positioner,Mid,Low,0.38115409566723724,0.376212451668615,0.24263345266414776,0.38115409566723724
+alg2_no_start_pseudo_start,112836,Passsive UV Imaging Polarimeter For Atmospheric Studies,Mid,Mid,0.3779042620697473,0.4812023980810854,0.14089333984916738,0.4812023980810854
+alg2_no_start_pseudo_start,158248,Advanced Hybrid Photonic Based Fiber Optic Sensor for Lunar Habitats,Mid,Mid,0.10123695084853156,0.48349955710801407,0.41526349204345436,0.48349955710801407
+alg2_no_start_pseudo_start,154558,Real-Time Hardware Configurable Coprocessors,Mid,Low,0.5478087520135388,0.16978309263139021,0.2824081553550709,0.5478087520135388
+alg2_no_start_pseudo_start,94108,Developing a Material Response Model of Biopolymer-Stabilized Regolith to Predict Micrometeoroid Damage of ISRU Habitat Systems,Low,Low,0.8832534907377682,0.11398654848344582,0.002759960778786151,0.8832534907377682
+alg2_no_start_pseudo_start,113380,Moving Discontinuous Galerkin Solver for Hypersonic Aerothermodynamics,Low,Mid,0.37497821830192124,0.46603305835439107,0.15898872334368783,0.46603305835439107
+alg2_no_start_pseudo_start,4297,Multi-Functional Stimuli-Responsive Materials,Low,Low,0.93859684237245,0.045723483953856246,0.015679673673693644,0.93859684237245
+alg2_no_start_pseudo_start,102827,Light Weight Radiation Shielding Components,Mid,Mid,0.02698829653300833,0.6112838245018215,0.3617278789651702,0.6112838245018215
+alg2_no_start_pseudo_start,94651,Less Iron and More Switches Increase Range,Mid,Mid,0.2861054740860525,0.396533799108737,0.3173607268052105,0.396533799108737
+alg2_no_start_pseudo_start,10456,Nanowire Photovoltaic Devices,Mid,Mid,0.2559465836375006,0.5361889620810407,0.20786445428145867,0.5361889620810407
+alg2_no_start_pseudo_start,34197,World-Class Visualizations in GMAT,Low,High,0.14125279916779684,0.4181060164540671,0.44064118437813604,0.44064118437813604
+alg2_no_start_pseudo_start,94190,FY17 GRC: Tuna-Inspired Heat Pipe for High OPR Gas Turbines,Low,Low,0.6684195709358519,0.3039263512909705,0.027654077773177514,0.6684195709358519
+alg2_no_start_pseudo_start,94830,Next Generation Tunable 353/530 nm Fiber Laser formaldehyde (HCHO) and nitrogen dioxide (NO2),Mid,Mid,0.41286636427079954,0.42207718235372094,0.1650564533754795,0.42207718235372094
+alg2_no_start_pseudo_start,125664,Multiparameter Laser Absorption Tomography System for High-Speed Flows,Mid,High,0.3059305616659044,0.2561719162578357,0.4378975220762598,0.4378975220762598
+alg2_no_start_pseudo_start,95566,Revolutionizing Orbit Insertion with Drag-Modulated Plasma Aerocapture,Low,Low,0.9503534469464874,0.043519437001041474,0.00612711605247122,0.9503534469464874
+alg2_no_start_pseudo_start,118297,Remote Autonomous Plant Sensing for Space Exploration Enabled by Wearable Printed Electronics,Low,Low,0.8035651745098585,0.19472982786486687,0.001704997625274565,0.8035651745098585
+alg2_no_start_pseudo_start,103157,Variable Conductance Cold Plate for Spatial and Temporal Temperature Uniformity,Mid,Mid,0.07158277442549263,0.5016095916985354,0.4268076338759719,0.5016095916985354
+alg2_no_start_pseudo_start,8796,Miniature Intelligent Wireless Fire Detector System,Mid,Mid,0.18391531490683347,0.7171030818264686,0.09898160326669789,0.7171030818264686
+alg2_no_start_pseudo_start,91543,Reconfiguring Worlds with Simple Actuation via Physics-Based Nonprehensile Actions,Low,Low,0.9063278975743253,0.08304537676246608,0.0106267256632087,0.9063278975743253
+alg2_no_start_pseudo_start,9011,Executable SysML Model Development Accelerator for the Constellation Program,Mid,Mid,0.12342587211703576,0.4896312249480525,0.38694290293491174,0.4896312249480525
+alg2_no_start_pseudo_start,116306,An Integrated Regenerative Fuel Cell System,Mid,Mid,0.1832214305562348,0.734018952802944,0.08275961664082114,0.734018952802944
+alg2_no_start_pseudo_start,89975,"Shear Thickening Fluid Enhanced Textiles for Durable, Puncture- and Cut-Resistant Environmental Protection Garments",Mid,Low,0.34806951310295037,0.3231353101412908,0.3287951767557589,0.34806951310295037
+alg2_no_start_pseudo_start,158046,Missfit: Statistical Multi-Event Missed-Thrust Optimization for Low-Thrust Trajectories,Mid,Mid,0.36961987537331675,0.37319506402688446,0.2571850605997988,0.37319506402688446
+alg2_no_start_pseudo_start,9444,Functionally Graded Polyimide Nanocomposite Foams for Ablative and Inflatable/Flexible/Deplorable Structures,Low,Low,0.5050568992784331,0.2836381339043273,0.2113049668172396,0.5050568992784331
+alg2_no_start_pseudo_start,125590,Integrated Brayton Cryocooler for LOx and LH2 Applications,Mid,Mid,0.35262944898508713,0.5595190025687816,0.08785154844613126,0.5595190025687816
+alg2_no_start_pseudo_start,125826,Windspeed Sensor for Planetary Science Applications,Mid,Mid,0.10214412884399478,0.6076017173752917,0.2902541537807136,0.6076017173752917
+alg2_no_start_pseudo_start,113432,"PERISCOPE - Probe for Exploring Regolith and Ice by Subsurface Classification of Organics, PAHs, and Elements",Mid,Mid,0.24845035593158443,0.505642629651549,0.24590701441686655,0.505642629651549
+alg2_no_start_pseudo_start,9645,MEMS Skin Friction Sensor,Mid,Mid,0.10530181956110013,0.4895662765166655,0.40513190392223436,0.4895662765166655
+alg2_no_start_pseudo_start,18380,3D Flash LIDAR EDL Resolution Improvement,High,Mid,0.10414132367553296,0.5093166258754754,0.38654205044899165,0.5093166258754754
+alg2_no_start_pseudo_start,12094,"Location-Aware, Low-Power, Wearable Wireless Sensing for Environmental Monitoring",Mid,Low,0.5054665410079263,0.3469734224954094,0.14756003649666438,0.5054665410079263
+alg2_no_start_pseudo_start,113143,Compact Integrated Midwave Infrared Spectrometer,Low,Mid,0.4157580300022334,0.5461717249372914,0.03807024506047532,0.5461717249372914
+alg2_no_start_pseudo_start,23252,Monitoring and Regulating Teamwork,Mid,Mid,0.14178680337676597,0.6028246590181509,0.2553885376050832,0.6028246590181509
+alg2_no_start_pseudo_start,95553,"Move to Talk, Talk to Move: Tightly Integrated Communication and Controls for Coordinated Swarms of Small Spacecraft",Mid,High,0.15300886910707973,0.3797266741512971,0.4672644567416232,0.4672644567416232
+alg2_no_start_pseudo_start,95613,"CRATOS II: Modular ISRU Excavation Tools, Year 1",Low,Low,0.577275777162033,0.3465829402765907,0.07614128256137627,0.577275777162033
+alg2_no_start_pseudo_start,14562,Development of Instrumentation for Direct Validation of Regional Carbon Flux Estimates,Mid,High,0.2301529625271821,0.2865506815756467,0.4832963558971713,0.4832963558971713
+alg2_no_start_pseudo_start,94650,"LACROSS: Life Analysis, Capture, and Retention on an Orbiting Saturn Spacecraft",Mid,Mid,0.3778204223913761,0.41658972909846087,0.20558984851016304,0.41658972909846087
+alg2_no_start_pseudo_start,93303,Adapting RNAseq sample preparation for ISS,Low,Low,0.5874485324194799,0.14326821803726908,0.2692832495432511,0.5874485324194799
+alg2_no_start_pseudo_start,14192,Advanced Manufacturing Technologies (AMT): Additive Manufactured Hot Fire Planning and Testing in GRC Cell 32,Mid,High,0.07148276910619392,0.4308855829677871,0.49763164792601894,0.49763164792601894
+alg2_no_start_pseudo_start,158518,Relative Position Sensing System for Precision Formation Flying Spacecraft,Mid,Low,0.6182261899313366,0.2638550484179373,0.11791876165072622,0.6182261899313366
+alg2_no_start_pseudo_start,145984,Boron Nitride Aid for High-Z X-ray Optics and Substrate Enhancements,Mid,Low,0.6501056818835775,0.31814207644343556,0.031752241672986986,0.6501056818835775
+alg2_no_start_pseudo_start,125534,HARPOON - High Access Raman Probe with Onboard Optical Numerization,High,Mid,0.21827191847111246,0.5612456465485424,0.22048243498034523,0.5612456465485424
+alg2_no_start_pseudo_start,106738,ISRU Pilot Excavator Bucket Drum Flow,Mid,Mid,0.007248239748467137,0.5493362771725121,0.44341548307902073,0.5493362771725121
+alg2_no_start_pseudo_start,10940,Materials on International Space Station Experiment – X,High,High,0.030398334713244657,0.25194814038598823,0.7176535249007672,0.7176535249007672
+alg2_no_start_pseudo_start,17737,Evaluation of ADS-B Surveillance Data to Identify Flight Operations with Reduced Safety Margin in the National Airspace System,Low,High,0.4566619799593378,0.054974869918827406,0.4883631501218348,0.4883631501218348
+alg2_no_start_pseudo_start,34212,Novel Ring-Configuration Double-Acting Free-Piston Stirling Convertor,Low,Low,0.6227533526194788,0.3372500794008102,0.03999656797971092,0.6227533526194788
+alg2_no_start_pseudo_start,116436,Polaris Project: Spaceflight Autonomous Multigenerational Microbial Sequencer,Mid,High,0.1190035169370722,0.2479155674640548,0.633080915598873,0.633080915598873
+alg2_no_start_pseudo_start,116435,Polaris Project: Radiation Tolerant and Reliable Electric Displays: a Preliminary Assessment Necessary for Deep-spaceflight ApplicationS (2REDPANDAS),Mid,High,0.1830706164824391,0.11321090512916616,0.7037184783883947,0.7037184783883947
+alg2_no_start_pseudo_start,146559,Space Rated Plasma Generating Power Supply Development,Mid,Low,0.5789333728253622,0.3971107548340454,0.023955872340592356,0.5789333728253622
+alg2_no_start_pseudo_start,18048,High Throughput Hall Thruster for Small Spacecraft,Mid,Mid,0.39497688957651444,0.4926441697341419,0.11237894068934363,0.4926441697341419
+alg2_no_start_pseudo_start,92782,Framework for Mining and Analysis of Petabyte-size Time-series on the NASA Earth Exchange (NEX),Low,High,0.09058509113936311,0.42093891977028575,0.48847598909035117,0.48847598909035117
+alg2_no_start_pseudo_start,102250,Less Iron and More Switches Increase Range,Mid,Mid,0.28697381523990356,0.39573312113124637,0.3172930636288501,0.39573312113124637
+alg3_rubric_explainable,112878,Three Band Thermal Infrared Detector for CubeSats and UAS,High,High,0.3411661810928718,0.05976318601189942,0.5990706328952288,0.5990706328952288
+alg3_rubric_explainable,12089,Exploration Technology Development including Surface Acoustic Wave RFID chips,Mid,Low,0.6517518005102494,0.3466804938691942,0.001567705620556421,0.6517518005102494
+alg3_rubric_explainable,158539,Improved Nucleation-Mode Aerosol Sizing Spectrometry through Pulse Height Analysis,Mid,Mid,0.4299944612628863,0.5664419751938099,0.003563563543303795,0.5664419751938099
+alg3_rubric_explainable,113165,Deep Space Navigation of Distributed Small Spacecraft using Variable Celestial Sources,Low,Low,0.6683395924196976,0.330374607985172,0.0012857995951303404,0.6683395924196976
+alg3_rubric_explainable,94858,Parts Selection and Testing for Risk Tolerant Missions,Mid,Mid,0.08632650589382031,0.9118055603515766,0.0018679337546031831,0.9118055603515766
+alg3_rubric_explainable,33603,A Novel 3D Printer to Support Additive Manufacturing of Gradient Metal Alloy Structures,Mid,Low,0.704131363207584,0.28136508352157297,0.014503553270843062,0.704131363207584
+alg3_rubric_explainable,91729,Evaluation of Carbon Composite Vessels Fabrication using Ionic Liquid Epoxies for Cryogenic Liquid Containment,Mid,Mid,0.1892605949486219,0.7959896953830073,0.01474970966837072,0.7959896953830073
+alg3_rubric_explainable,92581,The World is Not Enough (WINE): Harvesting Local Resources for Eternal Exploration of Space,Mid,High,0.19150590205407736,0.1298504569695969,0.6786436409763258,0.6786436409763258
+alg3_rubric_explainable,8982,Human Factors Analysis Support Tool (H-FAST),Mid,Mid,0.18853594957686798,0.5343978212609362,0.277066229162196,0.5343978212609362
+alg3_rubric_explainable,95640,Myco-architecture off planet: growing surface structures at destination,Low,Low,0.8295316920541171,0.17036360521545338,0.00010470273042946855,0.8295316920541171
+alg3_rubric_explainable,9850,"Polymer-Reinforced, Nonbrittle, Lightweight Cryogenic Insulation for Reduced Life-Cycle Costs",Mid,Mid,0.017521915531415428,0.9583430030858525,0.02413508138273197,0.9583430030858525
+alg3_rubric_explainable,33412,3D Imaging Cubesat Lidar for Asteroid and Planetary Sciences,Mid,Mid,0.033275605354566994,0.9658566983206474,0.0008676963247856961,0.9658566983206474
+alg3_rubric_explainable,125823,Weather Intelligence Support Environment,Mid,Mid,0.06787914402056049,0.7826408525099374,0.14948000346950202,0.7826408525099374
+alg3_rubric_explainable,158283,Quantification and Modulation of Trust in a Crew Health Integrated Medical Response Agent (CHIMERA),Low,Mid,0.1743106461193089,0.7924869062910296,0.03320244758966152,0.7924869062910296
+alg3_rubric_explainable,16772,Incremental Evolution of a 10/250 NLV into a 20/450 NMSLV,High,Mid,0.032777985179000296,0.6620785975895426,0.30514341723145716,0.6620785975895426
+alg3_rubric_explainable,154498,Coordinated Autonomous Debris Avoidance,Mid,Low,0.7137795746255652,0.17919618806218593,0.10702423731224886,0.7137795746255652
+alg3_rubric_explainable,125728,"Radiation Hardened High Power ""GBID"" Ga2O3 Based Isolated DC-DC Converter",Mid,Mid,0.2310497418166135,0.7645505669973658,0.004399691186020702,0.7645505669973658
+alg3_rubric_explainable,102444,A Compact and Automated Library Preparation Device for Nanopore Sequencing,Mid,Mid,0.02076670768255973,0.573356430521758,0.4058768617956824,0.573356430521758
+alg3_rubric_explainable,101947,High-Resolution Source Characterization and Modeling for Efficient Prediction of Propulsion-Airframe Aeroacoustics,Low,Mid,0.11055717419192662,0.8857116728775148,0.003731152930558373,0.8857116728775148
+alg3_rubric_explainable,106670,Propellant Mass Gauging in Gateway Architecture Vehicles,Mid,Mid,0.008445364700670591,0.8209002480895616,0.17065438720976778,0.8209002480895616
+alg3_rubric_explainable,94565,Dynamically Leveraged Automated N-Multibody (DyLAN) Trajectory Optimization,Mid,Mid,0.0516791160370093,0.8929867045658806,0.05533417939711022,0.8929867045658806
+alg3_rubric_explainable,113183,Dust Tolerant Joint for In-Space Assembly,Mid,Mid,0.04281119996183843,0.9568198088136232,0.0003689912245384467,0.9568198088136232
+alg3_rubric_explainable,125631,Magnetic Dust Filtration System,Mid,Mid,0.11866304055919293,0.87844621020463,0.0028907492361771297,0.87844621020463
+alg3_rubric_explainable,112917,Autonomous Environmental Monitoring and Management Platform for Remote Habitats,High,Mid,0.047211649147243004,0.6116424004611531,0.3411459503916038,0.6116424004611531
+alg3_rubric_explainable,15886,Using the Hottest Particles in the Universe to Probe Icy Solar System Worlds,Low,Low,0.8399574912079497,0.15965814244698734,0.0003843663450630233,0.8399574912079497
+alg3_rubric_explainable,93556,Injector-Integrated Fuel-Air Heat Exchanger Module,Mid,Low,0.7938036310385305,0.20487200305185407,0.001324365909615532,0.7938036310385305
+alg3_rubric_explainable,105714,Verification of Molecular Contamination Transport Model,Mid,Low,0.8680417576925159,0.05923446659290673,0.07272377571457743,0.8680417576925159
+alg3_rubric_explainable,101881,Impact Resistant Composite Structures for Space Suit Applications,Mid,Mid,0.035590411653213055,0.963270600392188,0.0011389879545987756,0.963270600392188
+alg3_rubric_explainable,93320,A 10 K Multistage Cryocooler with Very Low Vibration,Mid,Mid,0.18755245890061054,0.7886243055186918,0.023823235580697624,0.7886243055186918
+alg3_rubric_explainable,90788,Precision Detector Positioner,Mid,Mid,0.09210473881276099,0.8808891571126362,0.027006104074602952,0.8808891571126362
+alg3_rubric_explainable,112836,Passsive UV Imaging Polarimeter For Atmospheric Studies,Mid,Low,0.5169285833710114,0.48247368030944965,0.000597736319538924,0.5169285833710114
+alg3_rubric_explainable,158248,Advanced Hybrid Photonic Based Fiber Optic Sensor for Lunar Habitats,Mid,Mid,0.02637973331425984,0.9332128816495371,0.04040738503620315,0.9332128816495371
+alg3_rubric_explainable,154558,Real-Time Hardware Configurable Coprocessors,Mid,Low,0.9738889540522134,0.01124372183174892,0.014867324116037611,0.9738889540522134
+alg3_rubric_explainable,94108,Developing a Material Response Model of Biopolymer-Stabilized Regolith to Predict Micrometeoroid Damage of ISRU Habitat Systems,Low,Low,0.9775861901351781,0.021978082991989025,0.0004357268728329933,0.9775861901351781
+alg3_rubric_explainable,113380,Moving Discontinuous Galerkin Solver for Hypersonic Aerothermodynamics,Low,Low,0.8387420040992027,0.1484276774434619,0.012830318457335222,0.8387420040992027
+alg3_rubric_explainable,4297,Multi-Functional Stimuli-Responsive Materials,Low,Low,0.9765439425492468,0.019410271911878243,0.004045785538874985,0.9765439425492468
+alg3_rubric_explainable,102827,Light Weight Radiation Shielding Components,Mid,Mid,0.01452022022143714,0.6820383946236274,0.30344138515493546,0.6820383946236274
+alg3_rubric_explainable,94651,Less Iron and More Switches Increase Range,Mid,Mid,0.35019939403582495,0.6454312500913648,0.004369355872810144,0.6454312500913648
+alg3_rubric_explainable,10456,Nanowire Photovoltaic Devices,Mid,Mid,0.32173855082737435,0.6240957130477968,0.054165736124828806,0.6240957130477968
+alg3_rubric_explainable,34197,World-Class Visualizations in GMAT,Low,Mid,0.21808445998588605,0.6389445339746967,0.14297100603941731,0.6389445339746967
+alg3_rubric_explainable,94190,FY17 GRC: Tuna-Inspired Heat Pipe for High OPR Gas Turbines,Low,Low,0.8216844308204412,0.17685981405579254,0.001455755123766275,0.8216844308204412
+alg3_rubric_explainable,94830,Next Generation Tunable 353/530 nm Fiber Laser formaldehyde (HCHO) and nitrogen dioxide (NO2),Mid,Mid,0.08763195994584436,0.8826111628208587,0.029756877233296907,0.8826111628208587
+alg3_rubric_explainable,125664,Multiparameter Laser Absorption Tomography System for High-Speed Flows,Mid,High,0.4618630572388789,0.007667281935384974,0.5304696608257361,0.5304696608257361
+alg3_rubric_explainable,95566,Revolutionizing Orbit Insertion with Drag-Modulated Plasma Aerocapture,Low,Low,0.9889731350018643,0.01062943331771974,0.0003974316804159639,0.9889731350018643
+alg3_rubric_explainable,118297,Remote Autonomous Plant Sensing for Space Exploration Enabled by Wearable Printed Electronics,Low,Mid,0.13979177016107555,0.860158679750951,4.955008797354077e-05,0.860158679750951
+alg3_rubric_explainable,103157,Variable Conductance Cold Plate for Spatial and Temporal Temperature Uniformity,Mid,Mid,0.025698663410879244,0.6545569428655358,0.31974439372358504,0.6545569428655358
+alg3_rubric_explainable,8796,Miniature Intelligent Wireless Fire Detector System,Mid,Mid,0.13511663834558382,0.834855556967955,0.030027804686461237,0.834855556967955
+alg3_rubric_explainable,91543,Reconfiguring Worlds with Simple Actuation via Physics-Based Nonprehensile Actions,Low,Low,0.9892951111481467,0.006160740126066744,0.004544148725786564,0.9892951111481467
+alg3_rubric_explainable,9011,Executable SysML Model Development Accelerator for the Constellation Program,Mid,Mid,0.038193138326281684,0.9316318711497137,0.030174990524004627,0.9316318711497137
+alg3_rubric_explainable,116306,An Integrated Regenerative Fuel Cell System,Mid,Mid,0.14427167637005092,0.8551422563156322,0.0005860673143168401,0.8551422563156322
+alg3_rubric_explainable,89975,"Shear Thickening Fluid Enhanced Textiles for Durable, Puncture- and Cut-Resistant Environmental Protection Garments",Mid,Mid,0.24223118713683522,0.553219346133865,0.2045494667292997,0.553219346133865
+alg3_rubric_explainable,158046,Missfit: Statistical Multi-Event Missed-Thrust Optimization for Low-Thrust Trajectories,Mid,Low,0.6538144079414099,0.23200579854309872,0.11417979351549139,0.6538144079414099
+alg3_rubric_explainable,9444,Functionally Graded Polyimide Nanocomposite Foams for Ablative and Inflatable/Flexible/Deplorable Structures,Low,Low,0.9678549108793228,0.017641884560538668,0.014503204560138568,0.9678549108793228
+alg3_rubric_explainable,125590,Integrated Brayton Cryocooler for LOx and LH2 Applications,Mid,Mid,0.06828904313771546,0.91953087850156,0.012180078360724567,0.91953087850156
+alg3_rubric_explainable,125826,Windspeed Sensor for Planetary Science Applications,Mid,Mid,0.057232492943113444,0.8930336317367115,0.04973387532017508,0.8930336317367115
+alg3_rubric_explainable,113432,"PERISCOPE - Probe for Exploring Regolith and Ice by Subsurface Classification of Organics, PAHs, and Elements",Mid,Mid,0.013036535960058283,0.982121290057005,0.004842173982936787,0.982121290057005
+alg3_rubric_explainable,9645,MEMS Skin Friction Sensor,Mid,Mid,0.057343807437415524,0.9008472174317347,0.04180897513084985,0.9008472174317347
+alg3_rubric_explainable,18380,3D Flash LIDAR EDL Resolution Improvement,High,High,0.1151703786692793,0.23668857508242414,0.6481410462482966,0.6481410462482966
+alg3_rubric_explainable,12094,"Location-Aware, Low-Power, Wearable Wireless Sensing for Environmental Monitoring",Mid,Low,0.9419610203945084,0.04285710972536029,0.015181869880131331,0.9419610203945084
+alg3_rubric_explainable,113143,Compact Integrated Midwave Infrared Spectrometer,Low,Mid,0.13540592565995646,0.8643564487832963,0.00023762555674723663,0.8643564487832963
+alg3_rubric_explainable,23252,Monitoring and Regulating Teamwork,Mid,Mid,0.16151628310669594,0.7521220320134459,0.08636168487985825,0.7521220320134459
+alg3_rubric_explainable,95553,"Move to Talk, Talk to Move: Tightly Integrated Communication and Controls for Coordinated Swarms of Small Spacecraft",Mid,Low,0.6503500913322507,0.34470945419029403,0.004940454477455174,0.6503500913322507
+alg3_rubric_explainable,95613,"CRATOS II: Modular ISRU Excavation Tools, Year 1",Low,Mid,0.31434020676590085,0.6846499977326446,0.001009795501454522,0.6846499977326446
+alg3_rubric_explainable,14562,Development of Instrumentation for Direct Validation of Regional Carbon Flux Estimates,Mid,High,0.0307151051666752,0.3534973884612353,0.6157875063720895,0.6157875063720895
+alg3_rubric_explainable,94650,"LACROSS: Life Analysis, Capture, and Retention on an Orbiting Saturn Spacecraft",Mid,Low,0.8137705043177978,0.15862705247365405,0.027602443208548145,0.8137705043177978
+alg3_rubric_explainable,93303,Adapting RNAseq sample preparation for ISS,Low,High,0.36867872637560345,0.010969005612507016,0.6203522680118896,0.6203522680118896
+alg3_rubric_explainable,14192,Advanced Manufacturing Technologies (AMT): Additive Manufactured Hot Fire Planning and Testing in GRC Cell 32,Mid,Mid,0.0058889724006896465,0.6582580324514236,0.3358529951478868,0.6582580324514236
+alg3_rubric_explainable,158518,Relative Position Sensing System for Precision Formation Flying Spacecraft,Mid,Low,0.6642589130422576,0.33194366177794343,0.0037974251797990364,0.6642589130422576
+alg3_rubric_explainable,145984,Boron Nitride Aid for High-Z X-ray Optics and Substrate Enhancements,Mid,Low,0.5295763235513395,0.4682722072166465,0.002151469232014076,0.5295763235513395
+alg3_rubric_explainable,125534,HARPOON - High Access Raman Probe with Onboard Optical Numerization,High,Low,0.6481013961037465,0.34958111089404703,0.002317493002206504,0.6481013961037465
+alg3_rubric_explainable,106738,ISRU Pilot Excavator Bucket Drum Flow,Mid,Mid,0.0007298904526953152,0.6807853439410841,0.3184847656062206,0.6807853439410841
+alg3_rubric_explainable,10940,Materials on International Space Station Experiment – X,High,High,0.00669692557757116,0.3539251297504558,0.6393779446719731,0.6393779446719731
+alg3_rubric_explainable,17737,Evaluation of ADS-B Surveillance Data to Identify Flight Operations with Reduced Safety Margin in the National Airspace System,Low,Low,0.5186684819553756,0.003145666811958966,0.4781858512326655,0.5186684819553756
+alg3_rubric_explainable,34212,Novel Ring-Configuration Double-Acting Free-Piston Stirling Convertor,Low,Mid,0.4654374747376967,0.5318990326224164,0.002663492639886767,0.5318990326224164
+alg3_rubric_explainable,116436,Polaris Project: Spaceflight Autonomous Multigenerational Microbial Sequencer,Mid,High,0.05050596717397662,0.23806718046802522,0.7114268523579982,0.7114268523579982
+alg3_rubric_explainable,116435,Polaris Project: Radiation Tolerant and Reliable Electric Displays: a Preliminary Assessment Necessary for Deep-spaceflight ApplicationS (2REDPANDAS),Mid,High,0.4750875420861109,0.008540330327251811,0.5163721275866373,0.5163721275866373
+alg3_rubric_explainable,146559,Space Rated Plasma Generating Power Supply Development,Mid,Mid,0.04874528778142327,0.9502662094945741,0.0009885027240027306,0.9502662094945741
+alg3_rubric_explainable,18048,High Throughput Hall Thruster for Small Spacecraft,Mid,Mid,0.488263235152932,0.5097880002377008,0.0019487646093672918,0.5097880002377008
+alg3_rubric_explainable,92782,Framework for Mining and Analysis of Petabyte-size Time-series on the NASA Earth Exchange (NEX),Low,Mid,0.28366147055565444,0.41129732666044283,0.30504120278390273,0.41129732666044283
+alg3_rubric_explainable,102250,Less Iron and More Switches Increase Range,Mid,Mid,0.3548398393667652,0.6407679595683906,0.004392201064844247,0.6407679595683906
+alg4_gridsearched_svc_retrieval,112878,Three Band Thermal Infrared Detector for CubeSats and UAS,High,Mid,0.16097042902658706,0.7054387884603163,0.1335907825130967,0.7054387884603163
+alg4_gridsearched_svc_retrieval,12089,Exploration Technology Development including Surface Acoustic Wave RFID chips,Mid,Low,0.48945346217982916,0.4675951601518065,0.0429513776683644,0.48945346217982916
+alg4_gridsearched_svc_retrieval,158539,Improved Nucleation-Mode Aerosol Sizing Spectrometry through Pulse Height Analysis,Mid,Low,0.5929333959423412,0.35404732829910196,0.053019275758556896,0.5929333959423412
+alg4_gridsearched_svc_retrieval,113165,Deep Space Navigation of Distributed Small Spacecraft using Variable Celestial Sources,Low,Mid,0.3179606868197828,0.6396400115616393,0.04239930161857793,0.6396400115616393
+alg4_gridsearched_svc_retrieval,94858,Parts Selection and Testing for Risk Tolerant Missions,Mid,Mid,0.25540896006933056,0.7293211206295843,0.015269919301085066,0.7293211206295843
+alg4_gridsearched_svc_retrieval,33603,A Novel 3D Printer to Support Additive Manufacturing of Gradient Metal Alloy Structures,Mid,Mid,0.23071280157571103,0.7102489955151113,0.05903820290917755,0.7102489955151113
+alg4_gridsearched_svc_retrieval,91729,Evaluation of Carbon Composite Vessels Fabrication using Ionic Liquid Epoxies for Cryogenic Liquid Containment,Mid,Mid,0.40503987116596346,0.5477856936475426,0.04717443518649405,0.5477856936475426
+alg4_gridsearched_svc_retrieval,92581,The World is Not Enough (WINE): Harvesting Local Resources for Eternal Exploration of Space,Mid,Mid,0.19342378872692656,0.6704125308754708,0.13616368039760263,0.6704125308754708
+alg4_gridsearched_svc_retrieval,8982,Human Factors Analysis Support Tool (H-FAST),Mid,Mid,0.4148351956466298,0.5183626238729271,0.06680218048044295,0.5183626238729271
+alg4_gridsearched_svc_retrieval,95640,Myco-architecture off planet: growing surface structures at destination,Low,Low,0.8368007675022434,0.16185524555171155,0.0013439869460450458,0.8368007675022434
+alg4_gridsearched_svc_retrieval,9850,"Polymer-Reinforced, Nonbrittle, Lightweight Cryogenic Insulation for Reduced Life-Cycle Costs",Mid,Mid,0.18187481022704527,0.7802784299181421,0.03784675985481249,0.7802784299181421
+alg4_gridsearched_svc_retrieval,33412,3D Imaging Cubesat Lidar for Asteroid and Planetary Sciences,Mid,Mid,0.1541566594891893,0.8052495218863928,0.04059381862441788,0.8052495218863928
+alg4_gridsearched_svc_retrieval,125823,Weather Intelligence Support Environment,Mid,Low,0.522058900704159,0.4164111621853048,0.061529937110536316,0.522058900704159
+alg4_gridsearched_svc_retrieval,158283,Quantification and Modulation of Trust in a Crew Health Integrated Medical Response Agent (CHIMERA),Low,Mid,0.2754498869696056,0.6174715720525514,0.10707854097784311,0.6174715720525514
+alg4_gridsearched_svc_retrieval,16772,Incremental Evolution of a 10/250 NLV into a 20/450 NMSLV,High,Mid,0.11415525981053595,0.7348512342913678,0.15099350589809624,0.7348512342913678
+alg4_gridsearched_svc_retrieval,154498,Coordinated Autonomous Debris Avoidance,Mid,Low,0.48054754035301867,0.4614476664703899,0.05800479317659146,0.48054754035301867
+alg4_gridsearched_svc_retrieval,125728,"Radiation Hardened High Power ""GBID"" Ga2O3 Based Isolated DC-DC Converter",Mid,Mid,0.2806003088680667,0.6941184910592525,0.025281200072680744,0.6941184910592525
+alg4_gridsearched_svc_retrieval,102444,A Compact and Automated Library Preparation Device for Nanopore Sequencing,Mid,Mid,0.09957814918975777,0.7959159343710465,0.10450591643919584,0.7959159343710465
+alg4_gridsearched_svc_retrieval,101947,High-Resolution Source Characterization and Modeling for Efficient Prediction of Propulsion-Airframe Aeroacoustics,Low,Mid,0.11103881701858309,0.8323973586812293,0.05656382430018769,0.8323973586812293
+alg4_gridsearched_svc_retrieval,106670,Propellant Mass Gauging in Gateway Architecture Vehicles,Mid,Mid,0.10173489422764997,0.7304520649265263,0.16781304084582385,0.7304520649265263
+alg4_gridsearched_svc_retrieval,94565,Dynamically Leveraged Automated N-Multibody (DyLAN) Trajectory Optimization,Mid,Mid,0.11031535894314173,0.8274695362306133,0.06221510482624509,0.8274695362306133
+alg4_gridsearched_svc_retrieval,113183,Dust Tolerant Joint for In-Space Assembly,Mid,Mid,0.13159900815334022,0.8110661985238288,0.057334793322830944,0.8110661985238288
+alg4_gridsearched_svc_retrieval,125631,Magnetic Dust Filtration System,Mid,Mid,0.12322102063544427,0.8257725608490517,0.05100641851550409,0.8257725608490517
+alg4_gridsearched_svc_retrieval,112917,Autonomous Environmental Monitoring and Management Platform for Remote Habitats,High,Mid,0.12066731521930181,0.7692374301444589,0.11009525463623943,0.7692374301444589
+alg4_gridsearched_svc_retrieval,15886,Using the Hottest Particles in the Universe to Probe Icy Solar System Worlds,Low,Low,0.8094217626699614,0.17656737223256383,0.014010865097474809,0.8094217626699614
+alg4_gridsearched_svc_retrieval,93556,Injector-Integrated Fuel-Air Heat Exchanger Module,Mid,Mid,0.3275376985191348,0.6092137724369654,0.06324852904389978,0.6092137724369654
+alg4_gridsearched_svc_retrieval,105714,Verification of Molecular Contamination Transport Model,Mid,Low,0.6952699808653696,0.22171682338102702,0.08301319575360343,0.6952699808653696
+alg4_gridsearched_svc_retrieval,101881,Impact Resistant Composite Structures for Space Suit Applications,Mid,Mid,0.18937038866353317,0.7461402712345354,0.0644893401019314,0.7461402712345354
+alg4_gridsearched_svc_retrieval,93320,A 10 K Multistage Cryocooler with Very Low Vibration,Mid,Mid,0.25024713229324413,0.6505799284663377,0.09917293924041831,0.6505799284663377
+alg4_gridsearched_svc_retrieval,90788,Precision Detector Positioner,Mid,Mid,0.26686892935284995,0.6559438203881609,0.07718725025898926,0.6559438203881609
+alg4_gridsearched_svc_retrieval,112836,Passsive UV Imaging Polarimeter For Atmospheric Studies,Mid,Mid,0.29303788455491653,0.6832875773629605,0.023674538082122984,0.6832875773629605
+alg4_gridsearched_svc_retrieval,158248,Advanced Hybrid Photonic Based Fiber Optic Sensor for Lunar Habitats,Mid,Mid,0.061834748906462046,0.7104904242044058,0.2276748268891322,0.7104904242044058
+alg4_gridsearched_svc_retrieval,154558,Real-Time Hardware Configurable Coprocessors,Mid,Low,0.570087914346566,0.3417359964903531,0.088176089163081,0.570087914346566
+alg4_gridsearched_svc_retrieval,94108,Developing a Material Response Model of Biopolymer-Stabilized Regolith to Predict Micrometeoroid Damage of ISRU Habitat Systems,Low,Low,0.7470902151984293,0.25033793222346645,0.0025718525781043356,0.7470902151984293
+alg4_gridsearched_svc_retrieval,113380,Moving Discontinuous Galerkin Solver for Hypersonic Aerothermodynamics,Low,Mid,0.2449286061966116,0.6901980944621565,0.06487329934123182,0.6901980944621565
+alg4_gridsearched_svc_retrieval,4297,Multi-Functional Stimuli-Responsive Materials,Low,Low,0.8540200813049512,0.13411761690678145,0.01186230178826743,0.8540200813049512
+alg4_gridsearched_svc_retrieval,102827,Light Weight Radiation Shielding Components,Mid,Mid,0.04818217802224428,0.8545203774008024,0.09729744457695323,0.8545203774008024
+alg4_gridsearched_svc_retrieval,94651,Less Iron and More Switches Increase Range,Mid,Mid,0.2164196794750665,0.6785583507170697,0.1050219698078639,0.6785583507170697
+alg4_gridsearched_svc_retrieval,10456,Nanowire Photovoltaic Devices,Mid,Mid,0.13972676515073412,0.7861117074845808,0.07416152736468508,0.7861117074845808
+alg4_gridsearched_svc_retrieval,34197,World-Class Visualizations in GMAT,Low,Mid,0.11004111240107972,0.6875554130664714,0.20240347453244897,0.6875554130664714
+alg4_gridsearched_svc_retrieval,94190,FY17 GRC: Tuna-Inspired Heat Pipe for High OPR Gas Turbines,Low,Low,0.5761852047719355,0.4097095365970218,0.014105258631042832,0.5761852047719355
+alg4_gridsearched_svc_retrieval,94830,Next Generation Tunable 353/530 nm Fiber Laser formaldehyde (HCHO) and nitrogen dioxide (NO2),Mid,Mid,0.3165537212229166,0.630897782817498,0.05254849595958556,0.630897782817498
+alg4_gridsearched_svc_retrieval,125664,Multiparameter Laser Absorption Tomography System for High-Speed Flows,Mid,Mid,0.2726316938071836,0.507837957433095,0.21953034875972133,0.507837957433095
+alg4_gridsearched_svc_retrieval,95566,Revolutionizing Orbit Insertion with Drag-Modulated Plasma Aerocapture,Low,Low,0.8566873607247074,0.1398592991232308,0.003453340152061807,0.8566873607247074
+alg4_gridsearched_svc_retrieval,118297,Remote Autonomous Plant Sensing for Space Exploration Enabled by Wearable Printed Electronics,Low,Low,0.67318210705348,0.32499472240113364,0.0018231705453864014,0.67318210705348
+alg4_gridsearched_svc_retrieval,103157,Variable Conductance Cold Plate for Spatial and Temporal Temperature Uniformity,Mid,Mid,0.08003120952309122,0.7362048207292379,0.18376396974767092,0.7362048207292379
+alg4_gridsearched_svc_retrieval,8796,Miniature Intelligent Wireless Fire Detector System,Mid,Mid,0.11984678244435083,0.8410866228816793,0.039066594673969814,0.8410866228816793
+alg4_gridsearched_svc_retrieval,91543,Reconfiguring Worlds with Simple Actuation via Physics-Based Nonprehensile Actions,Low,Low,0.759116140651102,0.23084686733066648,0.010036992018231482,0.759116140651102
+alg4_gridsearched_svc_retrieval,9011,Executable SysML Model Development Accelerator for the Constellation Program,Mid,Mid,0.1076264388538587,0.7142052388765512,0.1781683222695902,0.7142052388765512
+alg4_gridsearched_svc_retrieval,116306,An Integrated Regenerative Fuel Cell System,Mid,Mid,0.16610481714160993,0.8140514904079139,0.019843692450476205,0.8140514904079139
+alg4_gridsearched_svc_retrieval,89975,"Shear Thickening Fluid Enhanced Textiles for Durable, Puncture- and Cut-Resistant Environmental Protection Garments",Mid,Mid,0.2713118423233005,0.6073731876365491,0.12131497004015043,0.6073731876365491
+alg4_gridsearched_svc_retrieval,158046,Missfit: Statistical Multi-Event Missed-Thrust Optimization for Low-Thrust Trajectories,Mid,Mid,0.2754606588415347,0.6409434707564649,0.08359587040200049,0.6409434707564649
+alg4_gridsearched_svc_retrieval,9444,Functionally Graded Polyimide Nanocomposite Foams for Ablative and Inflatable/Flexible/Deplorable Structures,Low,Mid,0.4176820285626938,0.5274165907609412,0.054901380676364894,0.5274165907609412
+alg4_gridsearched_svc_retrieval,125590,Integrated Brayton Cryocooler for LOx and LH2 Applications,Mid,Mid,0.21938038532588136,0.7448760473964046,0.03574356727771413,0.7448760473964046
+alg4_gridsearched_svc_retrieval,125826,Windspeed Sensor for Planetary Science Applications,Mid,Mid,0.08519127455066916,0.8099354628282317,0.10487326262109915,0.8099354628282317
+alg4_gridsearched_svc_retrieval,113432,"PERISCOPE - Probe for Exploring Regolith and Ice by Subsurface Classification of Organics, PAHs, and Elements",Mid,Mid,0.20536610655931106,0.7075434850751628,0.08709040836552613,0.7075434850751628
+alg4_gridsearched_svc_retrieval,9645,MEMS Skin Friction Sensor,Mid,Mid,0.15536426983281773,0.7352740448677849,0.10936168529939745,0.7352740448677849
+alg4_gridsearched_svc_retrieval,18380,3D Flash LIDAR EDL Resolution Improvement,High,Mid,0.11915982577697011,0.7852162650330187,0.09562390919001124,0.7852162650330187
+alg4_gridsearched_svc_retrieval,12094,"Location-Aware, Low-Power, Wearable Wireless Sensing for Environmental Monitoring",Mid,Mid,0.410698908409735,0.5664724144368979,0.022828677153367154,0.5664724144368979
+alg4_gridsearched_svc_retrieval,113143,Compact Integrated Midwave Infrared Spectrometer,Low,Mid,0.2865548981551252,0.6862683552493086,0.02717674659556618,0.6862683552493086
+alg4_gridsearched_svc_retrieval,23252,Monitoring and Regulating Teamwork,Mid,Mid,0.11649408802491086,0.8016567212475912,0.08184919072749795,0.8016567212475912
+alg4_gridsearched_svc_retrieval,95553,"Move to Talk, Talk to Move: Tightly Integrated Communication and Controls for Coordinated Swarms of Small Spacecraft",Mid,Mid,0.1291294292238386,0.7297294366549492,0.14114113412121226,0.7297294366549492
+alg4_gridsearched_svc_retrieval,95613,"CRATOS II: Modular ISRU Excavation Tools, Year 1",Low,Mid,0.4505331764683458,0.5260309978714925,0.023435825660161655,0.5260309978714925
+alg4_gridsearched_svc_retrieval,14562,Development of Instrumentation for Direct Validation of Regional Carbon Flux Estimates,Mid,Mid,0.2504288834122852,0.5713199649046652,0.17825115168304956,0.5713199649046652
+alg4_gridsearched_svc_retrieval,94650,"LACROSS: Life Analysis, Capture, and Retention on an Orbiting Saturn Spacecraft",Mid,Mid,0.29650203881774817,0.622806201611041,0.08069175957121073,0.622806201611041
+alg4_gridsearched_svc_retrieval,93303,Adapting RNAseq sample preparation for ISS,Low,Low,0.6096974643041341,0.25908405885577895,0.13121847684008703,0.6096974643041341
+alg4_gridsearched_svc_retrieval,14192,Advanced Manufacturing Technologies (AMT): Additive Manufactured Hot Fire Planning and Testing in GRC Cell 32,Mid,Mid,0.05806637900183392,0.6903645046418677,0.25156911635629836,0.6903645046418677
+alg4_gridsearched_svc_retrieval,158518,Relative Position Sensing System for Precision Formation Flying Spacecraft,Mid,Low,0.5273818604827437,0.4340268342159539,0.038591305301302455,0.5273818604827437
+alg4_gridsearched_svc_retrieval,145984,Boron Nitride Aid for High-Z X-ray Optics and Substrate Enhancements,Mid,Low,0.5352438298713335,0.4532033202780628,0.011552849850603633,0.5352438298713335
+alg4_gridsearched_svc_retrieval,125534,HARPOON - High Access Raman Probe with Onboard Optical Numerization,High,Mid,0.12105891874033442,0.8085253441565633,0.07041573710310234,0.8085253441565633
+alg4_gridsearched_svc_retrieval,106738,ISRU Pilot Excavator Bucket Drum Flow,Mid,Mid,0.01856901377953969,0.8577195508106641,0.12371143540979622,0.8577195508106641
+alg4_gridsearched_svc_retrieval,10940,Materials on International Space Station Experiment – X,High,Mid,0.034475977858509296,0.49417057893097893,0.4713534432105118,0.49417057893097893
+alg4_gridsearched_svc_retrieval,17737,Evaluation of ADS-B Surveillance Data to Identify Flight Operations with Reduced Safety Margin in the National Airspace System,Low,Low,0.4913371588971113,0.18380274458147738,0.3248600965214113,0.4913371588971113
+alg4_gridsearched_svc_retrieval,34212,Novel Ring-Configuration Double-Acting Free-Piston Stirling Convertor,Low,Mid,0.48115588825403455,0.4983255723543641,0.020518539391601393,0.4983255723543641
+alg4_gridsearched_svc_retrieval,116436,Polaris Project: Spaceflight Autonomous Multigenerational Microbial Sequencer,Mid,Mid,0.13414807915825902,0.5326298265777527,0.3332220942639883,0.5326298265777527
+alg4_gridsearched_svc_retrieval,116435,Polaris Project: Radiation Tolerant and Reliable Electric Displays: a Preliminary Assessment Necessary for Deep-spaceflight ApplicationS (2REDPANDAS),Mid,High,0.17940378108971186,0.2924646419541282,0.52813157695616,0.52813157695616
+alg4_gridsearched_svc_retrieval,146559,Space Rated Plasma Generating Power Supply Development,Mid,Mid,0.44570017378303806,0.5391027737756938,0.015197052441268077,0.5391027737756938
+alg4_gridsearched_svc_retrieval,18048,High Throughput Hall Thruster for Small Spacecraft,Mid,Mid,0.2818921479987993,0.6803099621644421,0.037797889836758546,0.6803099621644421
+alg4_gridsearched_svc_retrieval,92782,Framework for Mining and Analysis of Petabyte-size Time-series on the NASA Earth Exchange (NEX),Low,Mid,0.13819363792297729,0.6488087255130024,0.2129976365640204,0.6488087255130024
+alg4_gridsearched_svc_retrieval,102250,Less Iron and More Switches Increase Range,Mid,Mid,0.21811191017355522,0.6759109118587844,0.10597717796766044,0.6759109118587844

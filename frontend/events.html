@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Events</title><link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>event log search</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>Event Lookup</h1><p>NVA-style event list with filters and side detail panel.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <section class="grid two-col">
+        <div class="panel">
+          <div class="filters">
+            <input id="keyword" placeholder="keyword search">
+            <select id="classFilter"><option value="">All classes</option><option>Low</option><option>Mid</option><option>High</option></select>
+            <input id="minConfidence" type="number" min="0" max="1" step="0.01" value="0" title="min confidence">
+            <input id="maxConfidence" type="number" min="0" max="1" step="0.01" value="1" title="max confidence">
+            <select id="agentType"><option value="">All logs</option><option value="retrieval_log">Retrieval</option><option value="pseudo_start_log">Pseudo</option><option value="rubric_log">Rubric</option><option value="fusion_log">Fusion</option></select>
+          </div>
+          <table><thead><tr><th>event_id</th><th>created_at</th><th>project_title</th><th>class</th><th>confidence</th><th></th></tr></thead><tbody id="eventRows"></tbody></table>
+        </div>
+        <div class="panel"><div class="section-title"><h2 id="eventDetailTitle">Event Detail</h2></div><pre id="eventDetail" class="json-view"></pre></div>
+      </section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>Raw Excel Analysis Event Rows</h2><p class="muted">One row per held-out project with all four algorithm outputs.</p></div></div>
+        <table><thead><tr><th>event_id</th><th>project_id</th><th>target</th><th>safe macro-F1 model</th><th>safe accuracy model</th><th>upper-bound</th></tr></thead><tbody id="staticEventRows"></tbody></table>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/events.js"></script>
+</body>
+</html>

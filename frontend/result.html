@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TRL Result</title><link rel="stylesheet" href="assets/css/style.css"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>fusion decision result</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <main class="main" id="resultRoot">
+      <header class="topbar"><div><h1>Final TRL Result</h1><p>Fusion output with evidence, risk factors, and recommended actions.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <section class="grid three-col">
+        <div class="kpi"><span>Final TRL Class</span><strong data-final-class>-</strong></div>
+        <div class="kpi"><span>Predicted range</span><strong data-range>-</strong></div>
+        <div class="kpi"><span>Confidence</span><strong data-confidence>-</strong></div>
+      </section>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel"><div class="section-title"><h2>Fusion Probabilities</h2><a id="agentLink" class="button" href="agents.html">Agent Logs</a></div><canvas id="probChart"></canvas></div>
+        <div class="panel"><div class="section-title"><h2>Explanation</h2></div><p data-reason></p><h3>Key Evidence</h3><ul id="evidenceList"></ul><h3>Missing Evidence / Risk</h3><ul id="riskList"></ul><h3>Recommended Next Action</h3><ul id="actionList"></ul></div>
+      </section>
+      <section class="panel" style="margin-top:16px"><div class="section-title"><h2>Raw Event JSON</h2></div><pre id="rawResult" class="json-view"></pre></section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>Raw Excel Batch Prediction Rows</h2><p class="muted">Alg1~Alg4 predictions joined to raw Excel fields.</p></div></div>
+        <table><thead><tr><th>Project</th><th>Target</th><th>Alg1</th><th>Alg2</th><th>Alg3</th><th>Alg4</th><th>Description</th></tr></thead><tbody id="batchPredictionRows"></tbody></table>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/result.js"></script>
+</body>
+</html>

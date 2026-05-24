@@ -1,0 +1,27 @@
+{
+  "principle": {
+    "keywords": ["concept", "principle", "theory", "basic research"],
+    "weight": 0.15,
+    "mapped_trl": "TRL 1-2"
+  },
+  "lab_validation": {
+    "keywords": ["laboratory", "lab", "bench test", "validated in lab"],
+    "weight": 0.25,
+    "mapped_trl": "TRL 3-4"
+  },
+  "prototype": {
+    "keywords": ["prototype", "breadboard", "pilot module"],
+    "weight": 0.25,
+    "mapped_trl": "TRL 4-5"
+  },
+  "field_demo": {
+    "keywords": ["field test", "relevant environment", "testbed", "pilot deployment"],
+    "weight": 0.2,
+    "mapped_trl": "TRL 5-7"
+  },
+  "operation": {
+    "keywords": ["operational environment", "real-world deployment", "commercial use", "production"],
+    "weight": 0.15,
+    "mapped_trl": "TRL 7-9"
+  }
+}
