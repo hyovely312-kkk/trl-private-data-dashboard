@@ -82,16 +82,21 @@ flowchart TD
           <div class="section-title"><h2>Reasoning Trace 구조도</h2></div>
           <pre class="mermaid">
 flowchart LR
-  A["project_id"] --> B["embedding_agent"]
-  A --> C["rubric_agent"]
-  A --> D["retrieval_agent"]
-  A --> E["pseudo_start_agent"]
+  A["Description<br/>Primary TRL Evidence Text"] --> B["embedding_agent<br/>TF-IDF word/char"]
+  A --> C["rubric_agent<br/>한글 evidence score"]
+  A --> D["retrieval_agent<br/>Description similarity"]
+  A --> E["pseudo_start_agent<br/>maturity keyword 추정"]
+  X["Benefits<br/>상용화·운영 보조 근거"] -. "auxiliary" .-> C
+  Y["Project Title<br/>기술명 보조"] -. "auxiliary" .-> D
   B --> F["fusion_agent"]
   C --> F
   D --> F
   E --> F
   F --> G["judge_agent"]
   G --> H["report_agent"]
+  I["project_id"] -. "로그 식별자 / trace lookup key" .-> B
+  I -. "로그 식별자 / trace lookup key" .-> C
+  I -. "로그 식별자 / trace lookup key" .-> H
           </pre>
         </div>
       </section>
