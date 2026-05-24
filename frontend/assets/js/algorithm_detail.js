@@ -29,6 +29,10 @@ const algorithmInfo = {
   },
 };
 
+let algorithmPredictions = [];
+let algorithmInfoCurrent = null;
+let visiblePredictionCount = 500;
+
 function pct(value) {
   return `${(Number(value || 0) * 100).toFixed(2)}%`;
 }
@@ -71,6 +75,8 @@ async function renderAlgorithmDetail() {
   ]);
   const model = summary.models[key] || {};
   const config = logs.algorithms?.[key] || {};
+  algorithmInfoCurrent = info;
+  algorithmPredictions = predictions;
   document.getElementById("algorithmTitle").textContent = info.title;
   document.getElementById("algorithmSubtitle").textContent = info.subtitle;
   document.getElementById("algorithmKpis").innerHTML = [
@@ -92,8 +98,30 @@ async function renderAlgorithmDetail() {
     <h3>Test metrics</h3>${metricRows(model.test || {})}
   `;
 
-  const rows = predictions.slice(0, 80);
   document.getElementById("sampleHead").innerHTML = `<tr><th>Project</th><th>Target<br><span class="muted">evaluation only</span></th><th>Prediction</th><th>Confidence</th><th>왜 그렇게 나왔나</th><th>Description primary input</th></tr>`;
+  bindLoadMoreRows();
+  drawAlgorithmRows();
+  document.getElementById("rawAlgorithmJson").textContent = formatJson({ config, metrics: model, field_policy: logs.field_policy });
+}
+
+function bindLoadMoreRows() {
+  const button = document.getElementById("loadMoreAlgorithmRows");
+  if (!button || button.dataset.bound) return;
+  button.dataset.bound = "1";
+  button.addEventListener("click", () => {
+    visiblePredictionCount = Math.min(visiblePredictionCount + 500, algorithmPredictions.length);
+    drawAlgorithmRows();
+  });
+}
+
+function drawAlgorithmRows() {
+  const rows = algorithmPredictions.slice(0, visiblePredictionCount);
+  const info = algorithmInfoCurrent;
+  const button = document.getElementById("loadMoreAlgorithmRows");
+  if (button) {
+    button.disabled = visiblePredictionCount >= algorithmPredictions.length;
+    button.textContent = visiblePredictionCount >= algorithmPredictions.length ? "All rows loaded" : "Load more";
+  }
   document.getElementById("sampleRows").innerHTML = rows.map((row) => `
     <tr>
       <td>${row.project_id}<br><span class="muted">${row.project_title}</span></td>
@@ -103,8 +131,7 @@ async function renderAlgorithmDetail() {
       <td>${predictionReason(row, info)}</td>
       <td>${row.description_excerpt}</td>
     </tr>
-  `).join("") + `<tr><td colspan="6" class="muted">Showing 80 of ${predictions.length.toLocaleString()} test rows. Target is End TRL label for evaluation only; Description is the primary input field.</td></tr>`;
-  document.getElementById("rawAlgorithmJson").textContent = formatJson({ config, metrics: model, field_policy: logs.field_policy });
+  `).join("") + `<tr><td colspan="6" class="muted">Showing ${rows.length.toLocaleString()} of ${algorithmPredictions.length.toLocaleString()} test rows. Target is End TRL label for evaluation only; Description is the primary input field.</td></tr>`;
 }
 
 document.addEventListener("DOMContentLoaded", () => renderAlgorithmDetail().catch((error) => {
