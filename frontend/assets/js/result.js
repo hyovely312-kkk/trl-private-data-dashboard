@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => renderResult().catch((error)
   document.getElementById("rawResult").textContent = "Static mode: backend event API is not connected.";
 }).finally(() => {
   renderStaticKoreanReasoning().catch(() => {});
+  renderResultAlgorithmLinks().catch(() => {});
   renderBatchPredictionRows().catch(() => {
   const tbody = document.getElementById("batchPredictionRows");
   if (tbody) {
@@ -37,6 +38,29 @@ document.addEventListener("DOMContentLoaded", () => renderResult().catch((error)
   }
   });
 }));
+
+async function renderResultAlgorithmLinks() {
+  const summary = await fetchStaticJson("assets/data/dashboard_summary.json");
+  const target = document.getElementById("resultAlgorithmLinks");
+  if (!target) return;
+  const cards = [
+    ["alg1.html", "Alg1 Full Fusion", "Upper-bound", "Start TRL 포함. 성능 상한선 비교용이며 deployment-safe 모델과 분리합니다.", "alg1_full_fusion"],
+    ["alg2.html", "Alg2 No-Start / Pseudo", "Deployment-safe", "Start TRL 없이 Description 기반 pseudo-start와 retrieval을 결합합니다.", "alg2_no_start_pseudo_start"],
+    ["alg3.html", "Alg3 Rubric Explainable", "Explainable", "Rubric evidence와 reasoning summary를 중심으로 설명가능성을 확보합니다.", "alg3_rubric_explainable"],
+    ["alg4.html", "Alg4 Grid-Searched SVC", "Accuracy-safe", "Start TRL 없이 grid search로 선택한 성능 중심 deployment-safe 모델입니다.", "alg4_gridsearched_svc_retrieval"],
+  ];
+  target.innerHTML = cards.map(([href, title, badge, body, key]) => {
+    const model = summary.models?.[key]?.test || {};
+    return `
+      <a class="lineup-card" href="algorithms/${href}">
+        <h3>${title}</h3>
+        <span class="status ${key === "alg1_full_fusion" ? "High" : "Mid"}">${badge}</span>
+        <p>${body}</p>
+        <p>Acc ${((model.accuracy || 0) * 100).toFixed(1)}% · Macro-F1 ${(model.macro_f1 || 0).toFixed(3)}</p>
+      </a>
+    `;
+  }).join("");
+}
 
 async function renderStaticKoreanReasoning() {
   const traces = await fetchJsonl("assets/data/kotrl_x_reasoning_traces.jsonl", 1);

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alg2 No-Start Detail</title><link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-algorithm-key="alg2_no_start_pseudo_start">
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>algorithm detail</span></div><nav class="nav"><a href="../index.html">Dashboard</a><a href="../input.html">Project Input</a><a href="../result.html">Result</a><a href="../agents.html">Agent Logs</a><a href="../events.html">Events</a><a href="../architecture.html">Architecture</a><a href="../rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1 id="algorithmTitle">Algorithm Detail</h1><p id="algorithmSubtitle">No-Start pseudo-start fusion detail.</p></div><a class="button" href="../result.html">Back to Result</a></header>
+      <section class="notice"><strong>Deployment-safe</strong><p>이 실험은 Start TRL을 사용하지 않습니다. Description 중심 retrieval과 pseudo-start 추정값을 사용해 신규 과제 평가에 적용 가능한 main 후보입니다.</p></section>
+      <section class="grid three-col" id="algorithmKpis" style="margin-top:16px"></section>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel"><div class="section-title"><h2>입력 Feature / 모델 설정</h2></div><div id="featurePolicy"></div></div>
+        <div class="panel"><div class="section-title"><h2>왜 이런 결과가 나왔나</h2></div><div id="reasoningSummary"></div></div>
+      </section>
+      <section class="panel" style="margin-top:16px"><div class="section-title"><h2>Sample Prediction Rows</h2></div><div class="table-wrap"><table class="wide-table compact-table"><thead id="sampleHead"></thead><tbody id="sampleRows"></tbody></table></div></section>
+      <section class="panel" style="margin-top:16px"><div class="section-title"><h2>Raw Config / Metrics</h2></div><pre id="rawAlgorithmJson" class="json-view"></pre></section>
+    </main>
+  </div>
+  <script src="../assets/js/config.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/algorithm_detail.js"></script>
+</body>
+</html>

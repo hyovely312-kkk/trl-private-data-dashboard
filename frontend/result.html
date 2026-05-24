@@ -18,6 +18,14 @@
         <div class="panel"><div class="section-title"><h2>Fusion Probabilities</h2><a id="agentLink" class="button" href="agents.html">Agent Logs</a></div><canvas id="probChart"></canvas></div>
         <div class="panel"><div class="section-title"><h2>Explanation</h2></div><p data-reason></p><h3>Key Evidence</h3><ul id="evidenceList"></ul><h3>Missing Evidence / Risk</h3><ul id="riskList"></ul><h3>Recommended Next Action</h3><ul id="actionList"></ul></div>
       </section>
+      <section class="notice" style="margin-top:16px">
+        <strong>Result 화면의 Target / Description 표시 기준</strong>
+        <p><code>Description</code>은 실제 TRL reasoning과 text feature가 읽은 primary input입니다. <code>Target</code>은 모델 입력이 아니라 <code>End TRL</code>에서 변환한 정답 라벨로, test split 평가와 오분류 분석을 위해서만 표시됩니다. 신규 과제 추론 화면에서는 Target이 존재하지 않습니다.</p>
+      </section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>알고리즘별 상세 분석</h2><p class="muted">각 알고리즘이 어떤 데이터를 사용했고 왜 해당 결과가 나왔는지 하위 페이지에서 확인합니다.</p></div></div>
+        <div class="lineup-grid" id="resultAlgorithmLinks"></div>
+      </section>
       <section class="panel" style="margin-top:16px">
         <div class="section-title"><div><h2>최종 TRL 판정 Reasoning</h2><p class="muted">KoTRL-X Report Agent가 생성한 한글 설명입니다.</p></div></div>
         <div id="koreanReasoningBlock" class="reasoning-block"></div>
@@ -28,8 +36,8 @@
       </section>
       <section class="panel" style="margin-top:16px"><div class="section-title"><h2>Raw Event JSON</h2></div><pre id="rawResult" class="json-view"></pre></section>
       <section class="panel" style="margin-top:16px">
-        <div class="section-title"><div><h2>Raw Excel Batch Prediction Rows</h2><p class="muted">Alg1~Alg4 predictions joined to raw Excel fields.</p></div></div>
-        <table><thead><tr><th>Project</th><th>Target</th><th>Alg1</th><th>Alg2</th><th>Alg3</th><th>Alg4</th><th>Description</th></tr></thead><tbody id="batchPredictionRows"></tbody></table>
+        <div class="section-title"><div><h2>Raw Excel Batch Prediction Rows</h2><p class="muted">Alg1~Alg4 predictions joined to raw Excel fields. Target is End TRL label for evaluation only.</p></div></div>
+        <div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>Project</th><th>Target<br><span class="muted">End TRL 정답 라벨</span></th><th>Alg1<br><span class="muted">upper-bound</span></th><th>Alg2<br><span class="muted">no-start</span></th><th>Alg3<br><span class="muted">explainable</span></th><th>Alg4<br><span class="muted">safe accuracy</span></th><th>Description<br><span class="muted">primary input</span></th></tr></thead><tbody id="batchPredictionRows"></tbody></table></div>
       </section>
     </main>
   </div>
