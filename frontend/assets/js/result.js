@@ -28,12 +28,41 @@ document.addEventListener("DOMContentLoaded", () => renderResult().catch((error)
   document.querySelector("[data-confidence]").textContent = "-";
   document.querySelector("[data-reason]").textContent = `${error.message}. Showing raw Excel batch predictions below.`;
   document.getElementById("rawResult").textContent = "Static mode: backend event API is not connected.";
-}).finally(() => renderBatchPredictionRows().catch(() => {
+}).finally(() => {
+  renderStaticKoreanReasoning().catch(() => {});
+  renderBatchPredictionRows().catch(() => {
   const tbody = document.getElementById("batchPredictionRows");
   if (tbody) {
     tbody.innerHTML = `<tr><td colspan="7" class="muted">Batch prediction rows are local/private artifacts and are not published in the public GitHub demo.</td></tr>`;
   }
-})));
+  });
+}));
+
+async function renderStaticKoreanReasoning() {
+  const traces = await fetchJsonl("assets/data/kotrl_x_reasoning_traces.jsonl", 1);
+  const trace = traces[0];
+  if (!trace) return;
+  const block = document.getElementById("koreanReasoningBlock");
+  const evidence = document.getElementById("evidenceSentences");
+  const judge = document.getElementById("judgeAnalysis");
+  if (!block || !evidence || !judge) return;
+  const report = trace.report_agent || {};
+  const fusion = trace.fusion_agent || {};
+  const retrieval = trace.retrieval_agent || {};
+  block.innerHTML = `
+    <div class="metric-row"><div class="muted">예측 결과</div><div>${renderCellStatus(trace.predicted_label)} ${fusion.예측TRL범위 || ""}</div></div>
+    <div class="metric-row"><div class="muted">신뢰도</div><div>${trace.confidence}</div></div>
+    <div class="metric-row"><div class="muted">판정 근거</div><div>${(report.판정근거 || []).join("<br>")}</div></div>
+    <div class="metric-row"><div class="muted">유사 과제 분석</div><div>Low ${Math.round((retrieval.Low비율 || 0) * 100)}% · Mid ${Math.round((retrieval.Mid비율 || 0) * 100)}% · High ${Math.round((retrieval.High비율 || 0) * 100)}%</div></div>
+    <div class="metric-row"><div class="muted">판정 보류 요소</div><div>${(report.판정보류요소 || []).join("<br>")}</div></div>
+    <div class="metric-row"><div class="muted">추가 필요 단계</div><div>${(report.추가필요사항 || []).join("<br>")}</div></div>
+    <p style="margin-top:14px">${report.최종설명 || ""}</p>
+  `;
+  evidence.innerHTML = (trace.rubric_agent?.근거문장 || []).map((sentence) => `<p class="evidence-highlight">${sentence}</p>`).join("") || `<p class="muted">근거 문장이 탐지되지 않았습니다.</p>`;
+  judge.innerHTML = Object.entries(trace.judge_agent || {}).map(([key, value]) => `
+    <div class="metric-row"><div class="muted">${key}</div><div>${String(value)}</div></div>
+  `).join("");
+}
 
 async function renderBatchPredictionRows() {
   const allRows = await fetchCsv("assets/data/project_analysis_rows.csv");

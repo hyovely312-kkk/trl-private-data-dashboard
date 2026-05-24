@@ -1,0 +1,143 @@
+{
+  "system_name": "KoTRL-X",
+  "description": "Explainable Multi-Agent TRL Reasoning System을 위한 한글 기반 evidence dictionary",
+  "label_mapping": {
+    "Low": "낮은 성숙도: TRL 1-3",
+    "Mid": "중간 성숙도: TRL 4-6",
+    "High": "높은 성숙도: TRL 7-9"
+  },
+  "field_policy": {
+    "Description": "TRL 판단의 primary text field",
+    "Benefits": "상용화, 적용 가능성, 운영 효과 관련 보조 근거",
+    "Project Title": "기술명 및 기술영역 식별 보조",
+    "Program": "metadata-safe prior 보정",
+    "Primary TX": "metadata-safe 기술분야 prior 보정",
+    "Start TRL": "메인 모델에서 제외하며 upper-bound 비교용으로만 사용"
+  },
+  "term_mapping": {
+    "concept": "개념 검증",
+    "principle": "원리 검증",
+    "theory": "이론 검토",
+    "basic research": "기초 연구",
+    "feasibility": "타당성 검토",
+    "proof of concept": "개념 증명",
+    "laboratory": "실험실 검증",
+    "lab": "실험실",
+    "bench test": "벤치 테스트",
+    "validated in lab": "실험실 검증 완료",
+    "component validation": "구성품 검증",
+    "prototype": "시제품",
+    "breadboard": "브레드보드",
+    "engineering model": "공학 모델",
+    "pilot module": "파일럿 모듈",
+    "tested": "시험 수행",
+    "validation": "검증",
+    "relevant environment": "유사환경 실증",
+    "demonstration": "실증",
+    "testbed": "테스트베드",
+    "pilot deployment": "파일럿 적용",
+    "field test": "현장 실증",
+    "operational environment": "실제 운영환경 검증",
+    "flight test": "비행 시험",
+    "real-world": "실환경",
+    "deployed": "배치 완료",
+    "commercial": "상용 적용",
+    "commercial deployment": "상용 배포",
+    "production": "양산",
+    "operational use": "운영 활용",
+    "market": "시장 적용"
+  },
+  "evidence_categories": {
+    "개념 검증": {
+      "english_key": "concept_score",
+      "keywords": [
+        "concept",
+        "feasibility",
+        "proof of concept",
+        "analytical",
+        "formulation"
+      ],
+      "mapped_trl": "TRL 1-3",
+      "reasoning_role": "기술 아이디어와 가능성이 제시되었는지 확인"
+    },
+    "원리 검증": {
+      "english_key": "principle_score",
+      "keywords": [
+        "principle",
+        "theory",
+        "basic research",
+        "scientific basis"
+      ],
+      "mapped_trl": "TRL 1-2",
+      "reasoning_role": "기초 원리 또는 이론 수준의 근거 확인"
+    },
+    "실험실 검증": {
+      "english_key": "lab_validation_score",
+      "keywords": [
+        "laboratory",
+        "lab",
+        "bench test",
+        "validated in lab",
+        "component validation"
+      ],
+      "mapped_trl": "TRL 3-4",
+      "reasoning_role": "통제된 실험실 환경에서 검증되었는지 확인"
+    },
+    "시제품 개발": {
+      "english_key": "prototype_score",
+      "keywords": [
+        "prototype",
+        "breadboard",
+        "engineering model",
+        "pilot module"
+      ],
+      "mapped_trl": "TRL 4-5",
+      "reasoning_role": "시제품 또는 공학 모델이 존재하는지 확인"
+    },
+    "유사환경 실증": {
+      "english_key": "relevant_environment_score",
+      "keywords": [
+        "relevant environment",
+        "testbed",
+        "demonstration",
+        "pilot deployment"
+      ],
+      "mapped_trl": "TRL 5-7",
+      "reasoning_role": "실제 환경과 유사한 조건에서 실증되었는지 확인"
+    },
+    "실제환경 검증": {
+      "english_key": "operational_environment_score",
+      "keywords": [
+        "operational environment",
+        "field test",
+        "flight test",
+        "real-world",
+        "deployed"
+      ],
+      "mapped_trl": "TRL 6-8",
+      "reasoning_role": "현장 또는 실제 운영환경에서 검증되었는지 확인"
+    },
+    "상용 적용": {
+      "english_key": "commercialization_score",
+      "keywords": [
+        "commercial",
+        "commercial deployment",
+        "production",
+        "operational use",
+        "market"
+      ],
+      "mapped_trl": "TRL 8-9",
+      "reasoning_role": "상용화, 양산, 운영 활용 근거 확인"
+    }
+  },
+  "agent_roles": {
+    "data_cleaning_agent": "raw Excel 로딩, 컬럼 검증, 결측 처리, End TRL 기반 label 생성",
+    "text_embedding_agent": "Description 중심 TF-IDF word/char embedding 생성 및 주요 키워드 추출",
+    "rubric_evidence_agent": "문장 단위 TRL evidence 탐지 및 한글 category별 점수화",
+    "retrieval_agent": "train corpus와 cosine similarity를 계산하고 top-k 유사 과제 및 label 분포 산출",
+    "pseudo_start_agent": "Start TRL 없이 텍스트 maturity 표현으로 pseudo-start TRL 추정",
+    "fusion_prediction_agent": "text probability, retrieval, rubric, pseudo-start, metadata-safe feature를 결합해 최종 class 예측",
+    "judge_verifier_agent": "agent 간 충돌 여부와 판정 일관성 검증",
+    "report_agent": "최종 판단 근거, 판정 보류 요소, 추가 필요 단계를 한글 설명으로 생성"
+  }
+}

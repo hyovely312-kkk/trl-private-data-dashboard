@@ -360,6 +360,20 @@ textarea {
   border-bottom: 1px solid rgba(143, 167, 194, 0.12);
 }
 
+.reasoning-block {
+  display: grid;
+  gap: 4px;
+}
+
+.evidence-highlight {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--blue);
+  border-radius: 8px;
+  background: rgba(34, 211, 238, 0.08);
+  color: var(--text);
+}
+
 .mermaid {
   padding: 18px;
   background: #081525;

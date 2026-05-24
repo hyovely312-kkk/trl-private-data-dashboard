@@ -36,14 +36,65 @@ async function renderAgents() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => renderAgents().catch((error) => {
+document.addEventListener("DOMContentLoaded", () => {
+  renderKoTrlReasoningTrace().catch(() => {});
+  renderAgents().catch((error) => {
   document.getElementById("agentJson").textContent = `${error.message}. Loading raw Excel experiment logs instead.`;
-}).finally(() => renderStaticAgentRows().catch(() => {
+  }).finally(() => renderStaticAgentRows().catch(() => {
   const body = document.getElementById("agentSampleRows");
   if (body) {
     body.innerHTML = `<tr><td class="muted">Agent intermediate row logs are local/private artifacts and are not published in the public GitHub demo.</td></tr>`;
   }
-})));
+  }));
+});
+
+async function renderKoTrlReasoningTrace() {
+  const traces = await fetchJsonl("assets/data/kotrl_x_reasoning_traces.jsonl");
+  const cards = document.getElementById("traceSummaryCards");
+  const rowsEl = document.getElementById("traceRows");
+  const search = document.getElementById("traceSearch");
+  if (!cards || !rowsEl || !search) return;
+  const conflicts = traces.filter((trace) => trace.judge_agent?.충돌여부).length;
+  const avgConfidence = traces.reduce((sum, trace) => sum + Number(trace.confidence || 0), 0) / Math.max(traces.length, 1);
+  cards.innerHTML = [
+    ["Reasoning traces", traces.length.toLocaleString(), "각 sample별 8개 Agent log"],
+    ["Judge conflicts", conflicts.toLocaleString(), "retrieval/rubric/fusion 불일치 사례"],
+    ["Avg confidence", `${Math.round(avgConfidence * 100)}%`, "Alg4 deployment-safe fusion 기준"],
+  ].map(([label, value, note]) => `<div class="kpi"><span>${label}</span><strong>${value}</strong><span class="metric-note">${note}</span></div>`).join("");
+
+  const draw = () => {
+    const q = (search.value || "").toLowerCase();
+    const filteredAll = traces.filter((trace) => !q || JSON.stringify(trace).toLowerCase().includes(q));
+    const visible = filteredAll.slice(0, 80);
+    rowsEl.innerHTML = visible.map((trace) => `
+      <tr data-trace-id="${trace.project_id}">
+        <td>${trace.project_id}<br><span class="muted">${trace.project_title || ""}</span></td>
+        <td>${renderCellStatus(trace.target_label)}</td>
+        <td>${renderCellStatus(trace.predicted_label)}<br><span class="muted">${trace.confidence}</span></td>
+        <td>${trace.judge_agent?.충돌여부 ? "충돌 있음" : "일관"}<br><span class="muted">${trace.judge_agent?.충돌사유 || ""}</span></td>
+        <td>${trace.report_agent?.최종설명 || ""}</td>
+      </tr>
+    `).join("") + `<tr><td colspan="5" class="muted">Showing ${visible.length.toLocaleString()} of ${filteredAll.length.toLocaleString()} KoTRL-X reasoning traces.</td></tr>`;
+  };
+  search.addEventListener("input", draw);
+  rowsEl.addEventListener("click", (event) => {
+    const row = event.target.closest("[data-trace-id]");
+    if (!row) return;
+    const trace = traces.find((item) => item.project_id === row.dataset.traceId);
+    if (!trace) return;
+    document.getElementById("agentTitle").textContent = `KoTRL-X Trace · ${trace.project_id}`;
+    document.getElementById("agentSubtitle").textContent = trace.report_agent?.최종설명 || "";
+    document.getElementById("agentMetrics").innerHTML = [
+      ["Prediction", trace.predicted_label],
+      ["Confidence", trace.confidence],
+      ["Retrieval judgment", trace.judge_agent?.retrieval기반판단],
+      ["Rubric judgment", trace.judge_agent?.rubric기반판단],
+      ["Conflict", trace.judge_agent?.충돌여부 ? "Yes" : "No"],
+    ].map(([name, value]) => `<div class="metric-row"><div class="muted">${name}</div><div>${value}</div></div>`).join("");
+    document.getElementById("agentJson").textContent = formatJson(trace);
+  });
+  draw();
+}
 
 async function renderStaticAgentRows() {
   const data = await fetchStaticJson("assets/data/agent_algorithm_logs.json");

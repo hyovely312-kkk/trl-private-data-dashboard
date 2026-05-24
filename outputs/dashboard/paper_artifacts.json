@@ -1,0 +1,622 @@
+{
+  "system_name": "KoTRL-X",
+  "agent_input_output_table": {
+    "data_cleaning_agent": "raw Excel 로딩, 컬럼 검증, 결측 처리, End TRL 기반 label 생성",
+    "text_embedding_agent": "Description 중심 TF-IDF word/char embedding 생성 및 주요 키워드 추출",
+    "rubric_evidence_agent": "문장 단위 TRL evidence 탐지 및 한글 category별 점수화",
+    "retrieval_agent": "train corpus와 cosine similarity를 계산하고 top-k 유사 과제 및 label 분포 산출",
+    "pseudo_start_agent": "Start TRL 없이 텍스트 maturity 표현으로 pseudo-start TRL 추정",
+    "fusion_prediction_agent": "text probability, retrieval, rubric, pseudo-start, metadata-safe feature를 결합해 최종 class 예측",
+    "judge_verifier_agent": "agent 간 충돌 여부와 판정 일관성 검증",
+    "report_agent": "최종 판단 근거, 판정 보류 요소, 추가 필요 단계를 한글 설명으로 생성"
+  },
+  "agent_calculation_table": {
+    "텍스트 임베딩 에이전트": "Description 중심 TF-IDF word/char sparse vector 생성",
+    "TRL 근거 분석 에이전트": "한글 evidence dictionary keyword match 기반 category score",
+    "유사 과제 검색 에이전트": "cosine similarity top-k 및 Low/Mid/High neighbor distribution",
+    "Pseudo-Start 추정 에이전트": "Start TRL 없이 maturity keyword 최고 score를 pseudo TRL로 mapping",
+    "Fusion 예측 에이전트": "validation grid search로 선택된 deployment-safe classifier 확률 출력",
+    "Judge Agent": "retrieval/rubric/fusion label 간 불일치 여부와 조정 사유 산출",
+    "Report Agent": "최종 판정 근거, 보류 요소, 추가 필요 단계를 한글 자연어로 생성"
+  },
+  "reasoning_trace_examples": [
+    {
+      "project_id": 112878,
+      "target_label": "High",
+      "predicted_label": "Mid",
+      "confidence": 0.7054,
+      "judge_conflict": false,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Mid입니다. 개념검증점수, 시제품점수, 상용화점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 0%, Mid 60%, High 40%입니다."
+    },
+    {
+      "project_id": 12089,
+      "target_label": "Mid",
+      "predicted_label": "Low",
+      "confidence": 0.4895,
+      "judge_conflict": true,
+      "retrieval_judgment": "Low",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, 유사 과제 분포는 Low 60%, Mid 40%, High 0%입니다. 모델 신뢰도는 0.49입니다."
+    },
+    {
+      "project_id": 158539,
+      "target_label": "Mid",
+      "predicted_label": "Low",
+      "confidence": 0.5929,
+      "judge_conflict": true,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, 유사 과제 분포는 Low 20%, Mid 40%, High 40%입니다. 모델 신뢰도는 0.59입니다."
+    },
+    {
+      "project_id": 113165,
+      "target_label": "Low",
+      "predicted_label": "Mid",
+      "confidence": 0.6396,
+      "judge_conflict": false,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Mid입니다. 개념검증점수, 시제품점수, 실험실검증점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 40%, Mid 60%, High 0%입니다."
+    },
+    {
+      "project_id": 94858,
+      "target_label": "Mid",
+      "predicted_label": "Mid",
+      "confidence": 0.7293,
+      "judge_conflict": false,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Mid입니다. 상용화점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 20%, Mid 60%, High 20%입니다."
+    },
+    {
+      "project_id": 33603,
+      "target_label": "Mid",
+      "predicted_label": "Mid",
+      "confidence": 0.7102,
+      "judge_conflict": true,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "High",
+      "final_reason": "최종 판정은 Mid입니다. 상용화점수, 시제품점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 20%, Mid 80%, High 0%입니다."
+    },
+    {
+      "project_id": 91729,
+      "target_label": "Mid",
+      "predicted_label": "Mid",
+      "confidence": 0.5478,
+      "judge_conflict": false,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Mid입니다. 상용화점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 20%, Mid 80%, High 0%입니다."
+    },
+    {
+      "project_id": 92581,
+      "target_label": "Mid",
+      "predicted_label": "Mid",
+      "confidence": 0.6704,
+      "judge_conflict": true,
+      "retrieval_judgment": "Low",
+      "rubric_judgment": "High",
+      "final_reason": "최종 판정은 Mid입니다. 유사환경실증점수, 상용화점수, 실험실검증점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 60%, Mid 40%, High 0%입니다."
+    },
+    {
+      "project_id": 8982,
+      "target_label": "Mid",
+      "predicted_label": "Mid",
+      "confidence": 0.5184,
+      "judge_conflict": false,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Mid입니다. 실험실검증점수, 상용화점수, 원리검증점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 40%, Mid 60%, High 0%입니다."
+    },
+    {
+      "project_id": 95640,
+      "target_label": "Low",
+      "predicted_label": "Low",
+      "confidence": 0.8368,
+      "judge_conflict": true,
+      "retrieval_judgment": "Low",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, 유사 과제 분포는 Low 100%, Mid 0%, High 0%입니다. 모델 신뢰도는 0.84입니다."
+    }
+  ],
+  "confusion_case_examples": [
+    {
+      "project_id": 12089,
+      "target_label": "Mid",
+      "predicted_label": "Low",
+      "confidence": 0.4895,
+      "judge_conflict": true,
+      "retrieval_judgment": "Low",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, 유사 과제 분포는 Low 60%, Mid 40%, High 0%입니다. 모델 신뢰도는 0.49입니다."
+    },
+    {
+      "project_id": 158539,
+      "target_label": "Mid",
+      "predicted_label": "Low",
+      "confidence": 0.5929,
+      "judge_conflict": true,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, 유사 과제 분포는 Low 20%, Mid 40%, High 40%입니다. 모델 신뢰도는 0.59입니다."
+    },
+    {
+      "project_id": 33603,
+      "target_label": "Mid",
+      "predicted_label": "Mid",
+      "confidence": 0.7102,
+      "judge_conflict": true,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "High",
+      "final_reason": "최종 판정은 Mid입니다. 상용화점수, 시제품점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 20%, Mid 80%, High 0%입니다."
+    },
+    {
+      "project_id": 92581,
+      "target_label": "Mid",
+      "predicted_label": "Mid",
+      "confidence": 0.6704,
+      "judge_conflict": true,
+      "retrieval_judgment": "Low",
+      "rubric_judgment": "High",
+      "final_reason": "최종 판정은 Mid입니다. 유사환경실증점수, 상용화점수, 실험실검증점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 60%, Mid 40%, High 0%입니다."
+    },
+    {
+      "project_id": 95640,
+      "target_label": "Low",
+      "predicted_label": "Low",
+      "confidence": 0.8368,
+      "judge_conflict": true,
+      "retrieval_judgment": "Low",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, 유사 과제 분포는 Low 100%, Mid 0%, High 0%입니다. 모델 신뢰도는 0.84입니다."
+    },
+    {
+      "project_id": 125823,
+      "target_label": "Mid",
+      "predicted_label": "Low",
+      "confidence": 0.5221,
+      "judge_conflict": true,
+      "retrieval_judgment": "Low",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, 유사 과제 분포는 Low 60%, Mid 40%, High 0%입니다. 모델 신뢰도는 0.52입니다."
+    },
+    {
+      "project_id": 16772,
+      "target_label": "High",
+      "predicted_label": "Mid",
+      "confidence": 0.7349,
+      "judge_conflict": true,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "High",
+      "final_reason": "최종 판정은 Mid입니다. 상용화점수, 개념검증점수, 유사환경실증점수가 확인되었으나 상위 TRL 근거가 상대적으로 제한적으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 0%, Mid 80%, High 20%입니다."
+    },
+    {
+      "project_id": 154498,
+      "target_label": "Mid",
+      "predicted_label": "Low",
+      "confidence": 0.4805,
+      "judge_conflict": true,
+      "retrieval_judgment": "Low",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, 유사 과제 분포는 Low 60%, Mid 40%, High 0%입니다. 모델 신뢰도는 0.48입니다."
+    },
+    {
+      "project_id": 15886,
+      "target_label": "Low",
+      "predicted_label": "Low",
+      "confidence": 0.8094,
+      "judge_conflict": true,
+      "retrieval_judgment": "Mid",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, 유사 과제 분포는 Low 40%, Mid 60%, High 0%입니다. 모델 신뢰도는 0.81입니다."
+    },
+    {
+      "project_id": 93556,
+      "target_label": "Mid",
+      "predicted_label": "Mid",
+      "confidence": 0.6092,
+      "judge_conflict": true,
+      "retrieval_judgment": "Low",
+      "rubric_judgment": "Mid",
+      "final_reason": "최종 판정은 Mid입니다. 상용화점수, 개념검증점수, 시제품점수가 확인되었으나 실제 운영환경 검증 evidence 부족으로 인해 TRL 4~6 수준으로 판단됩니다. 유사 과제 분포는 Low 60%, Mid 40%, High 0%입니다."
+    }
+  ],
+  "feature_ablation_table": [
+    {
+      "model": "alg1_full_fusion",
+      "uses_start_trl": true,
+      "validation_macro_f1": 0.6840911002967913,
+      "test_accuracy": 0.7568590350047304,
+      "test_macro_f1": 0.6764852106679492,
+      "test_weighted_f1": 0.7624248535038054,
+      "test_mae": 0.2473982970671712
+    },
+    {
+      "model": "alg2_no_start_pseudo_start",
+      "uses_start_trl": false,
+      "validation_macro_f1": 0.548847279975739,
+      "test_accuracy": 0.6579943235572374,
+      "test_macro_f1": 0.5547328990274214,
+      "test_weighted_f1": 0.6668407763533619,
+      "test_mae": 0.3628192999053926
+    },
+    {
+      "model": "alg3_rubric_explainable",
+      "uses_start_trl": false,
+      "validation_macro_f1": 0.5133633548074198,
+      "test_accuracy": 0.6466414380321666,
+      "test_macro_f1": 0.5379283080570348,
+      "test_weighted_f1": 0.6500542254083098,
+      "test_mae": 0.3732261116367076
+    },
+    {
+      "model": "alg4_gridsearched_svc_retrieval",
+      "uses_start_trl": false,
+      "validation_macro_f1": 0.4863656975323562,
+      "test_accuracy": 0.7086092715231788,
+      "test_macro_f1": 0.4834375816452458,
+      "test_weighted_f1": 0.6710550798236834,
+      "test_mae": 0.2937559129612109
+    }
+  ],
+  "retrieval_case_table": [
+    {
+      "project_id": 112878,
+      "target_label": "High",
+      "top_k_project_ids": "16788|9409|154329|125463|94341",
+      "top_k_similarity_scores": "0.420198|0.418653|0.414321|0.167260|0.158722",
+      "top_k_labels": "High|Mid|High|Mid|Mid",
+      "neighbor_low_ratio": 0.0,
+      "neighbor_mid_ratio": 0.6,
+      "neighbor_high_ratio": 0.4,
+      "mean_similarity": 0.315830698740763,
+      "max_similarity": 0.420197566030878,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 12089,
+      "target_label": "Mid",
+      "top_k_project_ids": "17982|11007|146111|95678|9840",
+      "top_k_similarity_scores": "0.144184|0.138286|0.131884|0.130013|0.122049",
+      "top_k_labels": "Low|Low|Low|Mid|Mid",
+      "neighbor_low_ratio": 0.6,
+      "neighbor_mid_ratio": 0.4,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.1332833901670312,
+      "max_similarity": 0.1441843368346604,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 158539,
+      "target_label": "Mid",
+      "top_k_project_ids": "9692|112920|125794|90989|125792",
+      "top_k_similarity_scores": "0.150886|0.149008|0.147391|0.138066|0.135386",
+      "top_k_labels": "High|Mid|High|Low|Mid",
+      "neighbor_low_ratio": 0.2,
+      "neighbor_mid_ratio": 0.4,
+      "neighbor_high_ratio": 0.4,
+      "mean_similarity": 0.1441473724504759,
+      "max_similarity": 0.1508856774164504,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 113165,
+      "target_label": "Low",
+      "top_k_project_ids": "154464|17771|8865|18410|9140",
+      "top_k_similarity_scores": "0.753560|0.232518|0.231885|0.186528|0.173426",
+      "top_k_labels": "Low|Mid|Mid|Mid|Low",
+      "neighbor_low_ratio": 0.4,
+      "neighbor_mid_ratio": 0.6,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.3155834305835586,
+      "max_similarity": 0.753560273651346,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 94858,
+      "target_label": "Mid",
+      "top_k_project_ids": "17380|14640|94832|117118|93261",
+      "top_k_similarity_scores": "0.138585|0.130898|0.129206|0.126342|0.118602",
+      "top_k_labels": "Mid|High|Low|Mid|Mid",
+      "neighbor_low_ratio": 0.2,
+      "neighbor_mid_ratio": 0.6,
+      "neighbor_high_ratio": 0.2,
+      "mean_similarity": 0.1287265140739814,
+      "max_similarity": 0.1385845446314895,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 33603,
+      "target_label": "Mid",
+      "top_k_project_ids": "87659|34026|10567|9023|102185",
+      "top_k_similarity_scores": "0.191657|0.179996|0.166673|0.163720|0.148807",
+      "top_k_labels": "Mid|Mid|Low|Mid|Mid",
+      "neighbor_low_ratio": 0.2,
+      "neighbor_mid_ratio": 0.8,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.1701705037713043,
+      "max_similarity": 0.1916568330970381,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 91729,
+      "target_label": "Mid",
+      "top_k_project_ids": "18619|9203|8268|9898|96560",
+      "top_k_similarity_scores": "0.284857|0.217362|0.186854|0.167979|0.152828",
+      "top_k_labels": "Mid|Mid|Mid|Mid|Low",
+      "neighbor_low_ratio": 0.2,
+      "neighbor_mid_ratio": 0.8,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.2019758539316414,
+      "max_similarity": 0.2848570812187769,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 92581,
+      "target_label": "Mid",
+      "top_k_project_ids": "89850|33172|33358|106049|93472",
+      "top_k_similarity_scores": "0.295663|0.289674|0.176276|0.160373|0.156814",
+      "top_k_labels": "Mid|Low|Low|Low|Mid",
+      "neighbor_low_ratio": 0.6,
+      "neighbor_mid_ratio": 0.4,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.2157599851365066,
+      "max_similarity": 0.2956629575096566,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 8982,
+      "target_label": "Mid",
+      "top_k_project_ids": "9837|8549|23597|33432|8700",
+      "top_k_similarity_scores": "0.320228|0.176951|0.169880|0.167312|0.150094",
+      "top_k_labels": "Low|Mid|Mid|Low|Mid",
+      "neighbor_low_ratio": 0.4,
+      "neighbor_mid_ratio": 0.6,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.1968930365059829,
+      "max_similarity": 0.3202279149964325,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 95640,
+      "target_label": "Low",
+      "top_k_project_ids": "106031|106055|146330|95040|13755",
+      "top_k_similarity_scores": "0.183136|0.147201|0.137307|0.133851|0.128818",
+      "top_k_labels": "Low|Low|Low|Low|Low",
+      "neighbor_low_ratio": 1.0,
+      "neighbor_mid_ratio": 0.0,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.1460625319010293,
+      "max_similarity": 0.1831356387923376,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 9850,
+      "target_label": "Mid",
+      "top_k_project_ids": "9088|9512|93647|8826|18104",
+      "top_k_similarity_scores": "0.247562|0.198574|0.187551|0.171684|0.167652",
+      "top_k_labels": "Low|Mid|Mid|Mid|High",
+      "neighbor_low_ratio": 0.2,
+      "neighbor_mid_ratio": 0.6,
+      "neighbor_high_ratio": 0.2,
+      "mean_similarity": 0.1946046800048079,
+      "max_similarity": 0.2475618352784508,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 33412,
+      "target_label": "Mid",
+      "top_k_project_ids": "34155|90203|33417|157706|33553",
+      "top_k_similarity_scores": "0.186816|0.169495|0.169238|0.168064|0.165842",
+      "top_k_labels": "Mid|Mid|Mid|Mid|Mid",
+      "neighbor_low_ratio": 0.0,
+      "neighbor_mid_ratio": 1.0,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.1718911145684136,
+      "max_similarity": 0.1868159589805976,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 125823,
+      "target_label": "Mid",
+      "top_k_project_ids": "113236|18041|125322|93435|16584",
+      "top_k_similarity_scores": "0.217585|0.211896|0.211885|0.208937|0.208265",
+      "top_k_labels": "Low|Low|Mid|Mid|Low",
+      "neighbor_low_ratio": 0.6,
+      "neighbor_mid_ratio": 0.4,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.2117134963975864,
+      "max_similarity": 0.217585002119812,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 158283,
+      "target_label": "Low",
+      "top_k_project_ids": "102546|113111|154812|158317|113381",
+      "top_k_similarity_scores": "0.208053|0.156784|0.153166|0.146780|0.146485",
+      "top_k_labels": "Low|Mid|Mid|Mid|Mid",
+      "neighbor_low_ratio": 0.2,
+      "neighbor_mid_ratio": 0.8,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.1622536827917734,
+      "max_similarity": 0.2080532346798501,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 16772,
+      "target_label": "High",
+      "top_k_project_ids": "33706|18155|93492|90078|18365",
+      "top_k_similarity_scores": "0.254606|0.217585|0.207510|0.185869|0.178657",
+      "top_k_labels": "Mid|Mid|Mid|Mid|High",
+      "neighbor_low_ratio": 0.0,
+      "neighbor_mid_ratio": 0.8,
+      "neighbor_high_ratio": 0.2,
+      "mean_similarity": 0.2088456376171877,
+      "max_similarity": 0.2546063561374262,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 154498,
+      "target_label": "Mid",
+      "top_k_project_ids": "89876|89992|94544|93450|112960",
+      "top_k_similarity_scores": "0.206061|0.173318|0.164442|0.150232|0.142799",
+      "top_k_labels": "Mid|Low|Low|Low|Mid",
+      "neighbor_low_ratio": 0.6,
+      "neighbor_mid_ratio": 0.4,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.1673702834811334,
+      "max_similarity": 0.2060606014768507,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 125728,
+      "target_label": "Mid",
+      "top_k_project_ids": "102860|154373|125563|103045|18296",
+      "top_k_similarity_scores": "0.230889|0.208903|0.201790|0.201743|0.200444",
+      "top_k_labels": "Mid|Low|Mid|Mid|Low",
+      "neighbor_low_ratio": 0.4,
+      "neighbor_mid_ratio": 0.6,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.208753820778366,
+      "max_similarity": 0.2308886488324076,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 102444,
+      "target_label": "Mid",
+      "top_k_project_ids": "93321|158147|125413|154577|8817",
+      "top_k_similarity_scores": "0.356921|0.349813|0.225523|0.181478|0.166275",
+      "top_k_labels": "Mid|Mid|Mid|Low|Mid",
+      "neighbor_low_ratio": 0.2,
+      "neighbor_mid_ratio": 0.8,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.2560020792337549,
+      "max_similarity": 0.3569214286464616,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 101947,
+      "target_label": "Low",
+      "top_k_project_ids": "102745|154775|90335|94567|102244",
+      "top_k_similarity_scores": "0.438652|0.203434|0.198553|0.183990|0.182298",
+      "top_k_labels": "Mid|Mid|Mid|Mid|Mid",
+      "neighbor_low_ratio": 0.0,
+      "neighbor_mid_ratio": 1.0,
+      "neighbor_high_ratio": 0.0,
+      "mean_similarity": 0.2413851745771752,
+      "max_similarity": 0.4386517617368655,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    },
+    {
+      "project_id": 106670,
+      "target_label": "Mid",
+      "top_k_project_ids": "106620|91347|97058|91413|106622",
+      "top_k_similarity_scores": "0.277106|0.257422|0.214496|0.195854|0.186720",
+      "top_k_labels": "High|Mid|High|Mid|Mid",
+      "neighbor_low_ratio": 0.0,
+      "neighbor_mid_ratio": 0.6,
+      "neighbor_high_ratio": 0.4,
+      "mean_similarity": 0.2263196879575376,
+      "max_similarity": 0.2771063294952924,
+      "retrieval_text_policy": "Description-centered TF-IDF; title/benefits are auxiliary context."
+    }
+  ],
+  "rubric_evidence_case_table": [
+    {
+      "Unnamed: 0": "count",
+      "principle_score": 2114.0,
+      "concept_score": 2114.0,
+      "lab_validation_score": 2114.0,
+      "prototype_score": 2114.0,
+      "relevant_environment_score": 2114.0,
+      "operational_environment_score": 2114.0,
+      "commercialization_score": 2114.0
+    },
+    {
+      "Unnamed: 0": "mean",
+      "principle_score": 0.0111163670766319,
+      "concept_score": 0.09720908230842,
+      "lab_validation_score": 0.1056764427625354,
+      "prototype_score": 0.0491958372753074,
+      "relevant_environment_score": 0.0482497634815515,
+      "operational_environment_score": 0.0258278145695364,
+      "commercialization_score": 0.2581835383159886
+    },
+    {
+      "Unnamed: 0": "std",
+      "principle_score": 0.053237652955762,
+      "concept_score": 0.1548223621963929,
+      "lab_validation_score": 0.132026834540317,
+      "prototype_score": 0.1043507702780761,
+      "relevant_environment_score": 0.1097549741110257,
+      "operational_environment_score": 0.0695799081477082,
+      "commercialization_score": 0.1007389282008487
+    },
+    {
+      "Unnamed: 0": "min",
+      "principle_score": 0.0,
+      "concept_score": 0.0,
+      "lab_validation_score": 0.0,
+      "prototype_score": 0.0,
+      "relevant_environment_score": 0.0,
+      "operational_environment_score": 0.0,
+      "commercialization_score": 0.2
+    },
+    {
+      "Unnamed: 0": "25%",
+      "principle_score": 0.0,
+      "concept_score": 0.0,
+      "lab_validation_score": 0.0,
+      "prototype_score": 0.0,
+      "relevant_environment_score": 0.0,
+      "operational_environment_score": 0.0,
+      "commercialization_score": 0.2
+    },
+    {
+      "Unnamed: 0": "50%",
+      "principle_score": 0.0,
+      "concept_score": 0.0,
+      "lab_validation_score": 0.0,
+      "prototype_score": 0.0,
+      "relevant_environment_score": 0.0,
+      "operational_environment_score": 0.0,
+      "commercialization_score": 0.2
+    },
+    {
+      "Unnamed: 0": "75%",
+      "principle_score": 0.0,
+      "concept_score": 0.25,
+      "lab_validation_score": 0.2,
+      "prototype_score": 0.0,
+      "relevant_environment_score": 0.0,
+      "operational_environment_score": 0.0,
+      "commercialization_score": 0.4
+    },
+    {
+      "Unnamed: 0": "max",
+      "principle_score": 0.5,
+      "concept_score": 1.0,
+      "lab_validation_score": 0.4,
+      "prototype_score": 0.5,
+      "relevant_environment_score": 0.75,
+      "operational_environment_score": 0.4,
+      "commercialization_score": 0.8
+    }
+  ],
+  "pseudo_start_case_table": [
+    {
+      "bucket": "Low",
+      "count": 780
+    },
+    {
+      "bucket": "Mid",
+      "count": 771
+    },
+    {
+      "bucket": "High",
+      "count": 563
+    }
+  ]
+}

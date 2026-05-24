@@ -6,7 +6,7 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>fusion decision result</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>explainable TRL result</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
     <main class="main" id="resultRoot">
       <header class="topbar"><div><h1>Final TRL Result</h1><p>Fusion output with evidence, risk factors, and recommended actions.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
       <section class="grid three-col">
@@ -17,6 +17,14 @@
       <section class="grid two-col" style="margin-top:16px">
         <div class="panel"><div class="section-title"><h2>Fusion Probabilities</h2><a id="agentLink" class="button" href="agents.html">Agent Logs</a></div><canvas id="probChart"></canvas></div>
         <div class="panel"><div class="section-title"><h2>Explanation</h2></div><p data-reason></p><h3>Key Evidence</h3><ul id="evidenceList"></ul><h3>Missing Evidence / Risk</h3><ul id="riskList"></ul><h3>Recommended Next Action</h3><ul id="actionList"></ul></div>
+      </section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>최종 TRL 판정 Reasoning</h2><p class="muted">KoTRL-X Report Agent가 생성한 한글 설명입니다.</p></div></div>
+        <div id="koreanReasoningBlock" class="reasoning-block"></div>
+      </section>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel"><div class="section-title"><h2>근거 문장</h2></div><div id="evidenceSentences"></div></div>
+        <div class="panel"><div class="section-title"><h2>판정 충돌 분석</h2></div><div id="judgeAnalysis"></div></div>
       </section>
       <section class="panel" style="margin-top:16px"><div class="section-title"><h2>Raw Event JSON</h2></div><pre id="rawResult" class="json-view"></pre></section>
       <section class="panel" style="margin-top:16px">

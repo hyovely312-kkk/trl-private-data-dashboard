@@ -6,7 +6,7 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>event log search</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>reasoning event log</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
     <main class="main">
       <header class="topbar"><div><h1>Event Lookup</h1><p>NVA-style event list with filters and side detail panel.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
       <section class="grid two-col">
@@ -16,7 +16,7 @@
             <select id="classFilter"><option value="">All classes</option><option>Low</option><option>Mid</option><option>High</option></select>
             <input id="minConfidence" type="number" min="0" max="1" step="0.01" value="0" title="min confidence">
             <input id="maxConfidence" type="number" min="0" max="1" step="0.01" value="1" title="max confidence">
-            <select id="agentType"><option value="">All logs</option><option value="retrieval_log">Retrieval</option><option value="pseudo_start_log">Pseudo</option><option value="rubric_log">Rubric</option><option value="fusion_log">Fusion</option></select>
+            <select id="agentType"><option value="">All logs</option><option value="retrieval_agent">Retrieval</option><option value="pseudo_start_agent">Pseudo</option><option value="rubric_agent">Rubric</option><option value="fusion_agent">Fusion</option><option value="judge_agent">Judge</option><option value="report_agent">Report</option></select>
           </div>
           <table><thead><tr><th>event_id</th><th>created_at</th><th>project_title</th><th>class</th><th>confidence</th><th></th></tr></thead><tbody id="eventRows"></tbody></table>
         </div>

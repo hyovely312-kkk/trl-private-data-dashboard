@@ -6,9 +6,9 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>system architecture</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>Explainable Multi-Agent TRL Reasoning</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
     <main class="main">
-      <header class="topbar"><div><h1>System Architecture</h1><p>Raw data to intermediate vectors, scores, distributions, Fusion decision, and event log.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <header class="topbar"><div><h1>KoTRL-X System Architecture</h1><p>Role-based Multi-Agent Explainable TRL Reasoning System.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
       <section class="notice">
         <strong>GitHub Pages public view</strong>
         <p>Raw Description/Title row-level CSV files are intentionally excluded from the public repository. Public pages show aggregate experiment metrics, algorithm architecture, and rule dictionaries. Local/private exports can still render raw Excel rows, event rows, and intermediate row logs.</p>
@@ -19,19 +19,81 @@
         <table style="margin-top:14px"><thead><tr><th>Stage</th><th>Rows / shape</th><th>What happened</th></tr></thead><tbody id="architectureFlowRows"></tbody></table>
       </section>
       <section class="panel">
+        <div class="section-title"><div><h2>전체 시스템 아키텍처</h2><p class="muted">한글 기반 role-based agent flow.</p></div></div>
         <pre class="mermaid">
 flowchart TD
-  A["Raw R&D Project Data"] --> B["Preprocessing Layer"]
-  B --> C["Agent 1. Retrieval Similarity Agent<br/>TF-IDF vector + cosine similarity"]
-  B --> D["Agent 2. Pseudo-Start TRL Agent<br/>rule score + pseudo TRL"]
-  B --> E["Agent 3. Rubric Evidence Agent<br/>sentence evidence score"]
-  C --> F["Fusion Decision Agent<br/>weighted probability"]
+  A["Raw 데이터<br/>NASA TechPort Excel"] --> B["데이터 정제 에이전트<br/>컬럼 검증·결측 처리·label 생성"]
+  B --> C["텍스트 임베딩 에이전트<br/>Description 중심 TF-IDF word/char"]
+  B --> D["TRL 근거 분석 에이전트<br/>한글 evidence score"]
+  C --> E["유사 과제 검색 에이전트<br/>cosine similarity top-k"]
+  D --> F["Pseudo-Start 추정 에이전트<br/>Start TRL 없이 maturity 추정"]
+  C --> G["Fusion 예측 에이전트<br/>No-Start deployment-safe prediction"]
+  D --> G
+  E --> G
+  F --> G
+  G --> H["판정 검증 에이전트<br/>충돌·일관성 검증"]
+  H --> I["설명 생성 에이전트<br/>한글 reasoning summary"]
+  I --> J["대시보드 시각화<br/>trace·evidence·event log"]
+        </pre>
+      </section>
+      <section class="grid two-col" style="margin-top:16px">
+        <div class="panel">
+          <div class="section-title"><h2>Multi-Agent Flow</h2></div>
+          <pre class="mermaid">
+flowchart LR
+  A["데이터 정제"] --> B["임베딩 생성"]
+  B --> C["근거 분석"]
+  B --> D["유사 과제 검색"]
+  C --> E["Pseudo-Start 추정"]
+  C --> F["Fusion 예측"]
   D --> F
   E --> F
-  F --> G["Explanation Agent<br/>reason, risk, next action"]
-  G --> H["Dashboard / Event Log"]
-  F --> H
-        </pre>
+  F --> G["Judge 검증"]
+  G --> H["Report 생성"]
+          </pre>
+        </div>
+        <div class="panel">
+          <div class="section-title"><h2>TRL Reasoning Pipeline</h2></div>
+          <pre class="mermaid">
+flowchart TD
+  A["Description 문장"] --> B["한글 evidence dictionary 매핑"]
+  B --> C["개념·실험실·시제품·실증·운영 점수"]
+  C --> D["유사 과제 TRL 분포"]
+  D --> E["Pseudo-start maturity"]
+  E --> F["Low/Mid/High 확률"]
+  F --> G["충돌 분석"]
+  G --> H["최종 한글 설명"]
+          </pre>
+        </div>
+        <div class="panel">
+          <div class="section-title"><h2>Dashboard 구조도</h2></div>
+          <pre class="mermaid">
+flowchart TD
+  A["Dashboard"] --> B["모델 성능·분포"]
+  A --> C["Project Input·Excel connector"]
+  A --> D["Result·한글 판정 근거"]
+  A --> E["Agent Logs·중간 산출물"]
+  A --> F["Events·행 단위 로그"]
+  A --> G["Architecture·시스템 flowchart"]
+  A --> H["Rules·한글 evidence dictionary"]
+          </pre>
+        </div>
+        <div class="panel">
+          <div class="section-title"><h2>Reasoning Trace 구조도</h2></div>
+          <pre class="mermaid">
+flowchart LR
+  A["project_id"] --> B["embedding_agent"]
+  A --> C["rubric_agent"]
+  A --> D["retrieval_agent"]
+  A --> E["pseudo_start_agent"]
+  B --> F["fusion_agent"]
+  C --> F
+  D --> F
+  E --> F
+  F --> G["judge_agent"]
+  G --> H["report_agent"]
+          </pre>
+        </div>
       </section>
       <section class="panel" style="margin-top:16px"><div class="section-title"><h2>Agent Definitions</h2></div><pre id="agentDefinitions" class="json-view"></pre></section>
       <section class="panel" style="margin-top:16px">

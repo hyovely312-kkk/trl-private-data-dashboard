@@ -1,4 +1,19 @@
 {
+  "kotrl_x_multi_agent_reasoning": {
+    "purpose": "KoTRL-X main architecture. Start TRL 없이 Description 중심 evidence, retrieval, pseudo-start, fusion, judge, report trace를 생성한다.",
+    "uses_start_trl": false,
+    "flow": [
+      "Raw Excel 데이터",
+      "데이터 정제 에이전트: 컬럼 검증, 결측 처리, End TRL label 생성",
+      "텍스트 임베딩 에이전트: Description 중심 TF-IDF word/char embedding",
+      "TRL 근거 분석 에이전트: 한글 evidence dictionary 기반 점수화",
+      "유사 과제 검색 에이전트: cosine similarity와 top-k label 분포",
+      "Pseudo-Start 추정 에이전트: Start TRL 없이 maturity 표현 추정",
+      "Fusion 예측 에이전트: deployment-safe Alg4 확률 결합",
+      "판정 검증 에이전트: retrieval/rubric/fusion 충돌 분석",
+      "설명 생성 에이전트: 한글 최종 판정 근거와 추가 필요 단계 생성"
+    ]
+  },
   "alg1_full_fusion": {
     "purpose": "Upper-bound performance check. Uses Start TRL, so it is not deployment-safe.",
     "uses_start_trl": true,

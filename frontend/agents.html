@@ -6,9 +6,14 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>algorithm reasoning logs</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>agent reasoning traces</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
     <main class="main">
-      <header class="topbar"><div><h1>Agent Calculation Logs</h1><p>Input fields, processing methods, intermediate values, and raw JSON per Agent.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <header class="topbar"><div><h1>KoTRL-X Multi-Agent Trace</h1><p>데이터 정제부터 판정 검증, 설명 생성까지 각 Agent의 intermediate output을 추적합니다.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <section class="panel" style="margin-bottom:16px">
+        <div class="section-title"><div><h2>TRL Reasoning Trace</h2><p class="muted">전체 test sample 2,114개에 대해 생성된 한글 기반 agent trace입니다.</p></div><input id="traceSearch" placeholder="project id / label / reason search" style="max-width:320px"></div>
+        <div class="grid three-col" id="traceSummaryCards"></div>
+        <table style="margin-top:14px"><thead><tr><th>Project</th><th>Target</th><th>Prediction</th><th>Judge</th><th>Final reason</th></tr></thead><tbody id="traceRows"></tbody></table>
+      </section>
       <section class="split-layout">
         <div class="list-panel" id="agentList"></div>
         <div class="panel"><div class="section-title"><div><h2 id="agentTitle">Agent</h2><p id="agentSubtitle" class="muted"></p></div></div><div id="agentMetrics"></div><h3>JSON Raw Log</h3><pre id="agentJson" class="json-view"></pre></div>

@@ -86,6 +86,17 @@ async function fetchCsv(path) {
   return parseCsvRows(await fetchStaticText(path));
 }
 
+async function fetchJsonl(path, limit = Infinity) {
+  const text = await fetchStaticText(path);
+  const rows = [];
+  for (const line of text.split(/\r?\n/)) {
+    if (!line.trim()) continue;
+    rows.push(JSON.parse(line));
+    if (rows.length >= limit) break;
+  }
+  return rows;
+}
+
 function renderCellStatus(value) {
   return ["Low", "Mid", "High"].includes(value) ? `<span class="status ${value}">${value}</span>` : value;
 }

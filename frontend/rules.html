@@ -6,7 +6,7 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar"><div class="brand"><strong>TRL Agentic Reasoning Dashboard</strong><span>rubric configuration</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>한글 evidence dictionary</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
     <main class="main">
       <header class="topbar"><div><h1>TRL Rules / Rubric</h1><p>Editable UI mock for v0.2 persistence. Current v0.1 reads sample_rules.json.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
       <div class="notice">Rule edits are UI-only in v0.1. Backend persistence is reserved for SQLite/PostgreSQL in v0.2.</div>
@@ -17,6 +17,10 @@
       <section class="panel" style="margin-top:16px">
         <div class="section-title"><div><h2>Raw Excel Evidence Rule Rows</h2><p class="muted">Rubric categories used to convert Description/Benefits text into evidence scores.</p></div></div>
         <table><thead><tr><th>Category</th><th>Keywords</th><th>Purpose</th><th>Mapped TRL</th></tr></thead><tbody id="ruleAnalysisRows"></tbody></table>
+      </section>
+      <section class="panel" style="margin-top:16px">
+        <div class="section-title"><div><h2>KoTRL-X Korean Reasoning Dictionary</h2><p class="muted">영문 raw 표현을 한글 TRL reasoning 의미로 매핑합니다.</p></div></div>
+        <pre id="koreanDictionaryJson" class="json-view"></pre>
       </section>
     </main>
   </div>

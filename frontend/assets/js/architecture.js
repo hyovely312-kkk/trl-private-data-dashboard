@@ -36,7 +36,7 @@ async function renderArchitectureRunSummary() {
     ["Test rows", fmtNumber(dataset.n_test), "Final one-time evaluation set"],
     ["Algorithms", "4", "Alg1 upper-bound + Alg2/3/4 deployment-safe"],
     ["Class labels", `L ${labels.Low} · M ${labels.Mid} · H ${labels.High}`, "End TRL <=3, 4-6, >=7"],
-    ["Public row data", "Hidden", "Raw Description/Title rows stay local/private"],
+    ["KoTRL-X traces", fmtNumber(dataset.n_test), "각 test sample마다 8개 Agent reasoning trace 생성"],
   ].map(([label, value, note]) => `<div class="kpi"><span>${label}</span><strong>${value}</strong><span class="metric-note">${note}</span></div>`).join("");
   document.getElementById("architectureFlowRows").innerHTML = [
     ["Load Excel", `${fmtNumber(dataset.n_total)} rows`, `${dataset.sheet || "Main_Data"} sheet loaded; required columns validated.`],
@@ -44,6 +44,6 @@ async function renderArchitectureRunSummary() {
     ["Split", `${fmtNumber(dataset.n_train)} / ${fmtNumber(dataset.n_valid)} / ${fmtNumber(dataset.n_test)}`, "Stratified train/valid/test split with random_state=42."],
     ["Primary text", "Description-centered", "Description drives retrieval, pseudo-start, rubric evidence, and text classification."],
     ["Algorithm runs", `${fmtNumber((dataset.n_test || 0) * 4)} test predictions`, "All four algorithms evaluated on the same held-out test set."],
-    ["Public export", "Aggregate only", "Metrics, distributions, rules, and architecture are published; row-level project text is not."],
+    ["KoTRL-X log export", `${fmtNumber(dataset.n_test)} JSONL traces`, "embedding, rubric, retrieval, pseudo-start, fusion, judge, report agent log 연결."],
   ].map(([stage, rows, action]) => `<tr><td>${stage}</td><td>${rows}</td><td>${action}</td></tr>`).join("");
 }

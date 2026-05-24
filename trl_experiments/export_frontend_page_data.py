@@ -7,6 +7,8 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "frontend" / "assets" / "data"
 OUTPUTS = ROOT / "outputs"
+AGENT_OUTPUTS = OUTPUTS / "agents"
+CONFIGS = ROOT / "configs"
 RAW_PATH = Path("/Users/kimhyojin/Downloads/TRL_NASA_정제데이터.xlsx")
 
 
@@ -34,6 +36,124 @@ def short_text(value, length=240):
     if len(text) <= length:
         return text
     return text[: length - 3] + "..."
+
+
+def read_dictionary():
+    return json.loads((CONFIGS / "korean_reasoning_dictionary.json").read_text(encoding="utf-8"))
+
+
+def korean_label(label):
+    return {"Low": "Low (TRL 1-3)", "Mid": "Mid (TRL 4-6)", "High": "High (TRL 7-9)"}.get(str(label), str(label))
+
+
+def safe_float(value, default=0.0):
+    try:
+        if pd.isna(value):
+            return default
+        return float(value)
+    except Exception:
+        return default
+
+
+def clean_json(value):
+    if isinstance(value, dict):
+        return {key: clean_json(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [clean_json(item) for item in value]
+    if pd.isna(value) if not isinstance(value, (list, dict, tuple, set)) else False:
+        return None
+    return value
+
+
+def split_terms(value, limit=8):
+    terms = []
+    for chunk in str(value or "").replace("|", ";").split(";"):
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+        if ":" in chunk:
+            chunk = chunk.split(":", 1)[-1].strip()
+        terms.append(chunk)
+    return terms[:limit]
+
+
+def top_keywords_from_text(text, dictionary, limit=8):
+    lower = str(text or "").lower()
+    mapped = []
+    for eng, kor in dictionary.get("term_mapping", {}).items():
+      if eng.lower() in lower and kor not in mapped:
+          mapped.append(kor)
+    if mapped:
+        return mapped[:limit]
+    tokens = [token.strip(".,;:()[]{}").lower() for token in lower.split()]
+    stop = {"the", "and", "for", "with", "from", "that", "this", "will", "are", "was", "were", "into", "using", "their", "have", "has"}
+    freq = {}
+    for token in tokens:
+        if len(token) < 5 or token in stop:
+            continue
+        freq[token] = freq.get(token, 0) + 1
+    return [key for key, _ in sorted(freq.items(), key=lambda item: item[1], reverse=True)[:limit]]
+
+
+def rubric_korean_scores(row):
+    return {
+        "원리검증점수": round(safe_float(row.get("principle_score")), 4),
+        "개념검증점수": round(safe_float(row.get("concept_score")), 4),
+        "실험실검증점수": round(safe_float(row.get("lab_validation_score")), 4),
+        "시제품점수": round(safe_float(row.get("prototype_score")), 4),
+        "유사환경실증점수": round(safe_float(row.get("relevant_environment_score")), 4),
+        "실제환경검증점수": round(safe_float(row.get("operational_environment_score")), 4),
+        "상용화점수": round(safe_float(row.get("commercialization_score")), 4),
+    }
+
+
+def strongest_rubric(scores):
+    return sorted(scores.items(), key=lambda item: item[1], reverse=True)[:3]
+
+
+def reason_from_trace(predicted, confidence, rubric_scores, retrieval, pseudo):
+    strong = [name for name, score in strongest_rubric(rubric_scores) if score > 0]
+    weak_high = []
+    if rubric_scores.get("실제환경검증점수", 0) < 0.15:
+        weak_high.append("실제 운영환경 검증 evidence 부족")
+    if rubric_scores.get("상용화점수", 0) < 0.15:
+        weak_high.append("상용 적용 evidence 부족")
+    mid_ratio = safe_float(retrieval.get("neighbor_mid_ratio", retrieval.get("Mid비율")))
+    high_ratio = safe_float(retrieval.get("neighbor_high_ratio", retrieval.get("High비율")))
+    low_ratio = safe_float(retrieval.get("neighbor_low_ratio", retrieval.get("Low비율")))
+    retrieval_note = f"유사 과제 분포는 Low {low_ratio:.0%}, Mid {mid_ratio:.0%}, High {high_ratio:.0%}입니다."
+    if predicted == "High":
+        return f"최종 판정은 High입니다. {', '.join(strong) or '상위 TRL 근거'}가 확인되었고, {retrieval_note} 모델 신뢰도는 {confidence:.2f}입니다."
+    if predicted == "Low":
+        return f"최종 판정은 Low입니다. 시제품, 실험실 검증, 운영환경 근거가 충분히 강하지 않으며, {retrieval_note} 모델 신뢰도는 {confidence:.2f}입니다."
+    missing = "; ".join(weak_high) if weak_high else "상위 TRL 근거가 상대적으로 제한적"
+    return f"최종 판정은 Mid입니다. {', '.join(strong) or '중간 단계 근거'}가 확인되었으나 {missing}으로 인해 TRL 4~6 수준으로 판단됩니다. {retrieval_note}"
+
+
+def judge_conflict(predicted, retrieval, rubric_scores):
+    ratios = {
+        "Low": safe_float(retrieval.get("neighbor_low_ratio", retrieval.get("Low비율"))),
+        "Mid": safe_float(retrieval.get("neighbor_mid_ratio", retrieval.get("Mid비율"))),
+        "High": safe_float(retrieval.get("neighbor_high_ratio", retrieval.get("High비율"))),
+    }
+    retrieval_label = max(ratios, key=ratios.get)
+    high_evidence = max(rubric_scores.get("실제환경검증점수", 0), rubric_scores.get("상용화점수", 0), rubric_scores.get("유사환경실증점수", 0))
+    rubric_label = "High" if high_evidence >= 0.45 else "Mid" if max(rubric_scores.values()) >= 0.2 else "Low"
+    conflict = len({retrieval_label, rubric_label, predicted}) > 1
+    if conflict and retrieval_label == "High" and rubric_label != "High":
+        reason = "유사 과제는 High 비율이 높으나 실제환경 검증 또는 상용 적용 evidence가 부족함"
+    elif conflict:
+        reason = f"retrieval 기반 판단({retrieval_label})과 rubric 기반 판단({rubric_label})이 서로 다름"
+    else:
+        reason = "retrieval, rubric, fusion 판단이 큰 충돌 없이 일관됨"
+    return {
+        "충돌여부": conflict,
+        "retrieval기반판단": retrieval_label,
+        "rubric기반판단": rubric_label,
+        "fusion예측": predicted,
+        "충돌사유": reason,
+        "최종판정": predicted,
+    }
 
 
 def read_predictions():
@@ -174,8 +294,174 @@ def export_agent_logs():
     (DATA_DIR / "agent_algorithm_logs.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
 
 
+def build_reasoning_traces(raw):
+    AGENT_OUTPUTS.mkdir(parents=True, exist_ok=True)
+    dictionary = read_dictionary()
+    retrieval = pd.read_csv(OUTPUTS / "retrieval" / "retrieval_features_test.csv")
+    pseudo = pd.read_csv(OUTPUTS / "pseudo_start" / "pseudo_start_test.csv")
+    rubric = pd.read_csv(OUTPUTS / "rubric" / "rubric_features_test.csv")
+    alg4 = pd.read_csv(ALG_DIRS["alg4_gridsearched_svc_retrieval"] / "test_predictions.csv")
+    alg4["project_id"] = alg4["project_id"].astype(str)
+    retrieval["project_id"] = retrieval["project_id"].astype(str)
+    pseudo["project_id"] = pseudo["project_id"].astype(str)
+    rubric["project_id"] = rubric["project_id"].astype(str)
+    raw_keep = raw.copy()
+    raw_keep["project_id"] = raw_keep["project_id"].astype(str)
+    df = (
+        alg4.merge(raw_keep, on="project_id", how="left", suffixes=("", "_raw"))
+        .merge(retrieval, on=["project_id", "target_label"], how="left")
+        .merge(pseudo, on=["project_id", "target_label"], how="left")
+        .merge(rubric, on=["project_id", "target_label"], how="left")
+    )
+
+    traces = []
+    embedding_rows = []
+    rubric_rows = []
+    retrieval_rows = []
+    pseudo_rows = []
+    fusion_rows = []
+    judge_rows = []
+    report_rows = []
+
+    for _, row in df.iterrows():
+        project_id = str(row["project_id"])
+        description = row.get("Description", "")
+        benefits = row.get("Benefits", "")
+        predicted = str(row.get("predicted_label", ""))
+        confidence = safe_float(row.get("confidence"))
+        rubric_scores = rubric_korean_scores(row)
+        evidence_sentences = [sentence.strip() for sentence in str(row.get("top_evidence_sentences") or "").split("|") if sentence.strip()][:5]
+        retrieval_agent = {
+            "계산식": "sim(q,d)=q·d / ||q|| ||d||",
+            "기준텍스트": "Description 중심 TF-IDF; Title/Benefits는 보조 context",
+            "top_k_project_ids": split_terms(row.get("top_k_project_ids"), 10),
+            "유사도점수": [round(safe_float(x), 4) for x in split_terms(row.get("top_k_similarity_scores"), 10)],
+            "top_k_labels": split_terms(row.get("top_k_labels"), 10),
+            "Low비율": round(safe_float(row.get("neighbor_low_ratio")), 4),
+            "Mid비율": round(safe_float(row.get("neighbor_mid_ratio")), 4),
+            "High비율": round(safe_float(row.get("neighbor_high_ratio")), 4),
+            "평균유사도": round(safe_float(row.get("mean_similarity")), 4),
+            "최대유사도": round(safe_float(row.get("max_similarity")), 4),
+        }
+        pseudo_terms = [dictionary.get("term_mapping", {}).get(term, term) for term in split_terms(row.get("matched_keywords"))]
+        pseudo_agent = {
+            "추정StartTRL": int(safe_float(row.get("pseudo_start_trl"))),
+            "추정버킷": row.get("pseudo_start_bucket", ""),
+            "신뢰도": round(safe_float(row.get("pseudo_start_confidence")), 4),
+            "근거키워드": pseudo_terms,
+            "추정사유": f"Start TRL을 직접 사용하지 않고 Description maturity 표현을 근거로 {int(safe_float(row.get('pseudo_start_trl')))} 수준으로 추정함",
+        }
+        fusion_agent = {
+            "모델": "Algorithm 4. Grid-Searched TF-IDF Char/Word + LinearSVC Retrieval Fusion",
+            "StartTRL사용여부": False,
+            "Low확률": round(safe_float(row.get("probability_low")), 4),
+            "Mid확률": round(safe_float(row.get("probability_mid")), 4),
+            "High확률": round(safe_float(row.get("probability_high")), 4),
+            "신뢰도": round(confidence, 4),
+            "최종예측": predicted,
+            "예측TRL범위": korean_label(predicted),
+        }
+        judge_agent = judge_conflict(predicted, retrieval_agent, rubric_scores)
+        report_agent = {
+            "최종설명": reason_from_trace(predicted, confidence, rubric_scores, retrieval_agent, pseudo_agent),
+            "판정근거": [f"{name}: {score:.2f}" for name, score in strongest_rubric(rubric_scores) if score > 0],
+            "판정보류요소": [
+                text for text, score in [
+                    ("실제 운영환경 검증 evidence 부족", rubric_scores.get("실제환경검증점수", 0)),
+                    ("상용 적용 evidence 부족", rubric_scores.get("상용화점수", 0)),
+                    ("현장/유사환경 실증 evidence 부족", rubric_scores.get("유사환경실증점수", 0)),
+                ] if score < 0.15
+            ],
+            "추가필요사항": ["현장 실증 수행", "실제 운영환경 검증 데이터 확보", "상용 적용 또는 운영 활용 근거 보강"],
+        }
+        trace = {
+            "project_id": project_id,
+            "project_title": row.get("Project Title", ""),
+            "target_label": row.get("target_label", ""),
+            "predicted_label": predicted,
+            "confidence": round(confidence, 4),
+            "data_cleaning_agent": {
+                "입력컬럼": ["Project ID", "Project Title", "Program", "Primary TX", "Description", "Benefits", "Start TRL", "End TRL", "TRL Delta"],
+                "결측처리": "텍스트 결측은 빈 문자열로 처리하고 End TRL 기준 target_label 생성",
+                "target_label": row.get("target_label", ""),
+                "StartTRL정책": "메인 reasoning trace에서는 사용하지 않음",
+                "Description길이": len(str(description or "")),
+            },
+            "text_embedding_agent": {
+                "embedding_type": "tfidf_char_word",
+                "primary_text_field": "Description",
+                "auxiliary_fields": ["Project Title", "Benefits", "Program", "Primary TX"],
+                "top_keywords": top_keywords_from_text(f"{description} {benefits}", dictionary),
+                "text_vector_shape": "grid-selected TF-IDF sparse vector",
+            },
+            "rubric_agent": {
+                **rubric_scores,
+                "근거문장": evidence_sentences,
+                "부족근거": row.get("missing_high_trl_reason") or "상위 TRL evidence가 명시적으로 충분하지 않음",
+            },
+            "retrieval_agent": retrieval_agent,
+            "pseudo_start_agent": pseudo_agent,
+            "fusion_agent": fusion_agent,
+            "judge_agent": judge_agent,
+            "report_agent": report_agent,
+        }
+        traces.append(trace)
+        embedding_rows.append({"project_id": project_id, **trace["text_embedding_agent"]})
+        rubric_rows.append({"project_id": project_id, **trace["rubric_agent"]})
+        retrieval_rows.append({"project_id": project_id, **retrieval_agent})
+        pseudo_rows.append({"project_id": project_id, **pseudo_agent})
+        fusion_rows.append({"project_id": project_id, **fusion_agent})
+        judge_rows.append({"project_id": project_id, **judge_agent})
+        report_rows.append({"project_id": project_id, **report_agent})
+
+    def write_jsonl(path, rows):
+        with path.open("w", encoding="utf-8") as f:
+            for item in rows:
+                f.write(json.dumps(clean_json(item), ensure_ascii=False, allow_nan=False) + "\n")
+
+    write_jsonl(AGENT_OUTPUTS / "reasoning_traces.jsonl", traces)
+    write_jsonl(DATA_DIR / "kotrl_x_reasoning_traces.jsonl", traces)
+    write_jsonl(AGENT_OUTPUTS / "embedding_agent_outputs.jsonl", embedding_rows)
+    write_jsonl(AGENT_OUTPUTS / "rubric_agent_outputs.jsonl", rubric_rows)
+    write_jsonl(AGENT_OUTPUTS / "retrieval_agent_outputs.jsonl", retrieval_rows)
+    write_jsonl(AGENT_OUTPUTS / "pseudo_start_agent_outputs.jsonl", pseudo_rows)
+    write_jsonl(AGENT_OUTPUTS / "fusion_agent_outputs.jsonl", fusion_rows)
+    write_jsonl(AGENT_OUTPUTS / "judge_agent_outputs.jsonl", judge_rows)
+    write_jsonl(AGENT_OUTPUTS / "report_agent_outputs.jsonl", report_rows)
+
+    summary_rows = []
+    for trace in traces:
+        summary_rows.append({
+            "project_id": trace["project_id"],
+            "target_label": trace["target_label"],
+            "predicted_label": trace["predicted_label"],
+            "confidence": trace["confidence"],
+            "judge_conflict": trace["judge_agent"]["충돌여부"],
+            "retrieval_judgment": trace["judge_agent"]["retrieval기반판단"],
+            "rubric_judgment": trace["judge_agent"]["rubric기반판단"],
+            "final_reason": trace["report_agent"]["최종설명"],
+        })
+    pd.DataFrame(summary_rows).to_csv(DATA_DIR / "kotrl_x_reasoning_trace_index.csv", index=False)
+    pd.DataFrame(summary_rows).to_csv(AGENT_OUTPUTS / "reasoning_trace_index.csv", index=False)
+
+
 def export_architecture():
     architectures = {
+        "kotrl_x_multi_agent_reasoning": {
+            "purpose": "KoTRL-X main architecture. Start TRL 없이 Description 중심 evidence, retrieval, pseudo-start, fusion, judge, report trace를 생성한다.",
+            "uses_start_trl": False,
+            "flow": [
+                "Raw Excel 데이터",
+                "데이터 정제 에이전트: 컬럼 검증, 결측 처리, End TRL label 생성",
+                "텍스트 임베딩 에이전트: Description 중심 TF-IDF word/char embedding",
+                "TRL 근거 분석 에이전트: 한글 evidence dictionary 기반 점수화",
+                "유사 과제 검색 에이전트: cosine similarity와 top-k label 분포",
+                "Pseudo-Start 추정 에이전트: Start TRL 없이 maturity 표현 추정",
+                "Fusion 예측 에이전트: deployment-safe Alg4 확률 결합",
+                "판정 검증 에이전트: retrieval/rubric/fusion 충돌 분석",
+                "설명 생성 에이전트: 한글 최종 판정 근거와 추가 필요 단계 생성",
+            ],
+        },
         "alg1_full_fusion": {
             "purpose": "Upper-bound performance check. Uses Start TRL, so it is not deployment-safe.",
             "uses_start_trl": True,
@@ -232,16 +518,42 @@ def export_architecture():
 
 
 def export_rules_rows():
-    rows = [
-        ["principle_evidence", "principle; theory; basic research; scientific basis", "early TRL principle", "TRL 1-2"],
-        ["concept_evidence", "concept; feasibility; proof of concept; analytical", "concept maturity", "TRL 2-3"],
-        ["lab_validation_evidence", "laboratory; lab; bench test; component validation", "lab validation", "TRL 3-4"],
-        ["prototype_evidence", "prototype; breadboard; engineering model; pilot module", "prototype evidence", "TRL 4-5"],
-        ["relevant_environment_evidence", "relevant environment; testbed; demonstration", "relevant environment", "TRL 5-6"],
-        ["operational_environment_evidence", "operational environment; field test; flight test; real-world; deployed", "operational evidence", "TRL 6-8"],
-        ["commercialization_evidence", "commercial; production; operational use; commercial use; market", "commercial readiness", "TRL 8-9"],
-    ]
+    dictionary = read_dictionary()
+    rows = []
+    for category, info in dictionary["evidence_categories"].items():
+        rows.append([category, "; ".join(info["keywords"]), info["reasoning_role"], info["mapped_trl"]])
     pd.DataFrame(rows, columns=["category", "keywords", "purpose", "mapped_trl_range"]).to_csv(DATA_DIR / "rules_analysis_rows.csv", index=False)
+    (DATA_DIR / "korean_reasoning_dictionary.json").write_text(json.dumps(dictionary, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def export_paper_artifacts():
+    dictionary = read_dictionary()
+    leaderboard = pd.read_csv(OUTPUTS / "dashboard" / "model_leaderboard.csv")
+    retrieval = pd.read_csv(OUTPUTS / "dashboard" / "retrieval_examples.csv")
+    rubric = pd.read_csv(OUTPUTS / "dashboard" / "rubric_score_distribution.csv")
+    pseudo = pd.read_csv(OUTPUTS / "dashboard" / "pseudo_start_distribution.csv")
+    trace_index = pd.read_csv(DATA_DIR / "kotrl_x_reasoning_trace_index.csv")
+    artifacts = {
+        "system_name": "KoTRL-X",
+        "agent_input_output_table": dictionary["agent_roles"],
+        "agent_calculation_table": {
+            "텍스트 임베딩 에이전트": "Description 중심 TF-IDF word/char sparse vector 생성",
+            "TRL 근거 분석 에이전트": "한글 evidence dictionary keyword match 기반 category score",
+            "유사 과제 검색 에이전트": "cosine similarity top-k 및 Low/Mid/High neighbor distribution",
+            "Pseudo-Start 추정 에이전트": "Start TRL 없이 maturity keyword 최고 score를 pseudo TRL로 mapping",
+            "Fusion 예측 에이전트": "validation grid search로 선택된 deployment-safe classifier 확률 출력",
+            "Judge Agent": "retrieval/rubric/fusion label 간 불일치 여부와 조정 사유 산출",
+            "Report Agent": "최종 판정 근거, 보류 요소, 추가 필요 단계를 한글 자연어로 생성",
+        },
+        "reasoning_trace_examples": trace_index.head(10).to_dict(orient="records"),
+        "confusion_case_examples": trace_index[trace_index["judge_conflict"] == True].head(10).to_dict(orient="records"),
+        "feature_ablation_table": leaderboard.to_dict(orient="records"),
+        "retrieval_case_table": retrieval.head(20).to_dict(orient="records"),
+        "rubric_evidence_case_table": rubric.head(20).to_dict(orient="records"),
+        "pseudo_start_case_table": pseudo.head(20).to_dict(orient="records"),
+    }
+    for path in [OUTPUTS / "dashboard" / "paper_artifacts.json", DATA_DIR / "paper_artifacts.json"]:
+        path.write_text(json.dumps(clean_json(artifacts), ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
 
 
 def main():
@@ -250,8 +562,10 @@ def main():
     project_rows = export_project_rows(raw)
     export_event_rows(project_rows)
     export_agent_logs()
+    build_reasoning_traces(raw)
     export_architecture()
     export_rules_rows()
+    export_paper_artifacts()
     print(f"Exported page data files to {DATA_DIR}")
 
 

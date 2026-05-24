@@ -97,11 +97,38 @@ function rowToStaticEvent(row) {
   };
 }
 
+function traceToStaticEvent(trace, index) {
+  return {
+    event_id: `KOTRL-X-${String(index + 1).padStart(4, "0")}`,
+    created_at: "batch-test-split",
+    final_class: trace.predicted_label,
+    confidence: Number(trace.confidence || 0),
+    input: {
+      project_id: trace.project_id,
+      project_title: trace.project_title,
+      target_label: trace.target_label,
+      start_trl_policy: "main model excludes Start TRL",
+    },
+    retrieval_agent: trace.retrieval_agent,
+    pseudo_start_agent: trace.pseudo_start_agent,
+    rubric_agent: trace.rubric_agent,
+    fusion_agent: trace.fusion_agent,
+    judge_agent: trace.judge_agent,
+    report_agent: trace.report_agent,
+    full_reasoning_trace: trace,
+  };
+}
+
 async function renderStaticEvents(useAsMain = false) {
   const allRows = await fetchCsv("assets/data/event_analysis_rows.csv");
   const rows = allRows.slice(0, 100);
   if (useAsMain) {
-    allEvents = allRows.map(rowToStaticEvent);
+    try {
+      const traces = await fetchJsonl("assets/data/kotrl_x_reasoning_traces.jsonl");
+      allEvents = traces.map(traceToStaticEvent);
+    } catch (error) {
+      allEvents = allRows.map(rowToStaticEvent);
+    }
     bindEventInteractions();
     applyFilters();
     if (allEvents[0]) renderDetail(allEvents[0]);

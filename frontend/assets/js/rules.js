@@ -13,7 +13,10 @@ async function renderRules() {
 
 document.addEventListener("DOMContentLoaded", () => renderRules().catch((error) => {
   document.getElementById("rulesBody").innerHTML = `<tr><td colspan="4" class="muted">${error.message}. Start the backend.</td></tr>`;
-}).finally(() => renderRuleAnalysisRows()));
+}).finally(() => {
+  renderRuleAnalysisRows();
+  renderKoreanDictionary().catch(() => {});
+}));
 
 async function renderRuleAnalysisRows() {
   const rows = await fetchCsv("assets/data/rules_analysis_rows.csv");
@@ -25,4 +28,9 @@ async function renderRuleAnalysisRows() {
       <td>${row.mapped_trl_range}</td>
     </tr>
   `).join("");
+}
+
+async function renderKoreanDictionary() {
+  const dictionary = await fetchStaticJson("assets/data/korean_reasoning_dictionary.json");
+  document.getElementById("koreanDictionaryJson").textContent = formatJson(dictionary);
 }
