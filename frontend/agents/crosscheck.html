@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Description Agent Cross-check</title><link rel="stylesheet" href="../assets/css/style.css"></head>
+<body data-agent-page="crosscheck">
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>description x agent</span></div><nav class="nav"><a href="../index.html">Dashboard</a><a href="../input.html">Project Input</a><a href="../result.html">Result</a><a href="../agents.html">Agent Logs</a><a href="../events.html">Events</a><a href="../architecture.html">Architecture</a><a href="../rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>Description × Agent Cross-check</h1><p>Description별 알고리즘 예측과 Agent reasoning output을 2중 확인합니다.</p></div><a class="button" href="../agents.html">Back to Agent Hub</a></header>
+      <section class="panel"><div class="section-title"><div><h2>Cross-check Rows</h2><p class="muted">전체 2,114개 test rows가 연결되어 있고 500개씩 추가 표시합니다.</p></div><button type="button" class="secondary" id="loadMoreAgentCrosscheck">Load more</button></div><div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>Project / Description</th><th>Alg1~Alg4 Results</th><th>Retrieval Agent</th><th>Rubric Agent</th><th>Pseudo-Start Agent</th><th>Report / Judge</th></tr></thead><tbody id="agentCrosscheckRows"></tbody></table></div></section>
+    </main>
+  </div>
+  <script src="../assets/js/config.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/agents_pages.js"></script>
+</body>
+</html>

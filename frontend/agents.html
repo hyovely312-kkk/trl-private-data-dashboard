@@ -2,36 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Agent Logs</title><link rel="stylesheet" href="assets/css/style.css">
+  <title>KoTRL-X Agent Hub</title><link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body data-agent-page="hub">
   <div class="app-shell">
-    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>agent reasoning traces</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>agent drilldown hub</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
     <main class="main">
-      <header class="topbar"><div><h1>KoTRL-X Multi-Agent Trace</h1><p>데이터 정제부터 판정 검증, 설명 생성까지 각 Agent의 intermediate output을 추적합니다.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
-      <section class="panel" style="margin-bottom:16px">
-        <div class="section-title"><div><h2>TRL Reasoning Trace</h2><p class="muted">전체 test sample 2,114개에 대해 생성된 한글 기반 agent trace입니다.</p></div><input id="traceSearch" placeholder="project id / label / reason search" style="max-width:320px"></div>
-        <div class="grid three-col" id="traceSummaryCards"></div>
-        <div class="table-wrap"><table class="wide-table compact-table" style="margin-top:14px"><thead><tr><th>Project</th><th>Target</th><th>Prediction</th><th>Judge</th><th>Final reason</th></tr></thead><tbody id="traceRows"></tbody></table></div>
+      <header class="topbar"><div><h1>Agent Logs Hub</h1><p>각 Agent의 reasoning trace, 실험 라인업, Description cross-check, raw intermediate logs를 하위 화면으로 분리했습니다.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <section class="grid three-col">
+        <div class="kpi"><span>Reasoning traces</span><strong data-agent-traces>-</strong></div>
+        <div class="kpi"><span>Cross-check rows</span><strong data-agent-crosscheck>-</strong></div>
+        <div class="kpi"><span>Agent roles</span><strong>8</strong></div>
       </section>
-      <section class="panel" style="margin-bottom:16px">
-        <div class="section-title"><div><h2>실험별 Agent / Algorithm Lineup</h2><p class="muted">각 알고리즘이 어떤 agent output을 사용해 최종 결과를 만드는지 정리했습니다.</p></div></div>
-        <div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>Experiment</th><th>Start TRL</th><th>Primary inputs</th><th>Agent outputs used</th><th>Final output</th><th>Test result</th></tr></thead><tbody id="agentLineupRows"></tbody></table></div>
-      </section>
-      <section class="panel" style="margin-bottom:16px">
-        <div class="section-title"><div><h2>Description × Agent Cross-check</h2><p class="muted">Description별로 알고리즘 예측과 Agent reasoning output을 동시에 확인합니다.</p></div><button type="button" class="secondary" id="loadMoreAgentCrosscheck">Load more</button></div>
-        <div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>Project / Description</th><th>Alg1~Alg4 Results</th><th>Retrieval Agent</th><th>Rubric Agent</th><th>Pseudo-Start Agent</th><th>Report / Judge</th></tr></thead><tbody id="agentCrosscheckRows"></tbody></table></div>
-      </section>
-      <section class="split-layout">
-        <div class="list-panel" id="agentList"></div>
-        <div class="panel"><div class="section-title"><div><h2 id="agentTitle">Agent</h2><p id="agentSubtitle" class="muted"></p></div></div><div id="agentMetrics"></div><h3>JSON Raw Log</h3><pre id="agentJson" class="json-view"></pre></div>
-      </section>
-      <section class="panel" style="margin-top:16px">
-        <div class="section-title"><div><h2>Algorithm Sample Rows</h2><p class="muted">Retrieval, pseudo-start, rubric, and Alg4 grid-search intermediate rows.</p></div></div>
-        <div class="table-wrap"><table class="wide-table compact-table"><thead id="agentSampleHead"></thead><tbody id="agentSampleRows"></tbody></table></div>
-      </section>
+      <section class="notice" style="margin-top:16px"><strong>Description 중심 Agent 분석</strong><p>Agent log의 핵심 입력은 <code>Description</code>입니다. <code>Project ID</code>는 trace lookup key이고, <code>Start TRL</code>은 Alg1 upper-bound 외에는 사용하지 않습니다.</p></section>
+      <section class="panel" style="margin-top:16px"><div class="section-title"><div><h2>Agent 하위 화면</h2><p class="muted">확인하려는 로그 단위를 선택하세요.</p></div></div><div class="lineup-grid" id="agentSubpageCards"></div></section>
     </main>
   </div>
-  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/agents.js"></script>
+  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/agents_pages.js"></script>
 </body>
 </html>

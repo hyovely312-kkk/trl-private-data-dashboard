@@ -1,117 +1,16 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Architecture</title><link rel="stylesheet" href="assets/css/style.css"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-</head>
-<body>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>KoTRL-X Architecture Hub</title><link rel="stylesheet" href="assets/css/style.css"></head>
+<body data-architecture-page="hub">
   <div class="app-shell">
-    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>Explainable Multi-Agent TRL Reasoning</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>architecture drilldown hub</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
     <main class="main">
-      <header class="topbar"><div><h1>KoTRL-X System Architecture</h1><p>Role-based Multi-Agent Explainable TRL Reasoning System.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
-      <section class="notice">
-        <strong>GitHub Pages public view</strong>
-        <p>Raw Description/Title row-level CSV files are intentionally excluded from the public repository. Public pages show aggregate experiment metrics, algorithm architecture, and rule dictionaries. Local/private exports can still render raw Excel rows, event rows, and intermediate row logs.</p>
-      </section>
-      <section class="panel" style="margin-top:16px">
-        <div class="section-title"><div><h2>Experiment Data Flow Counts</h2><p class="muted">How the one Excel workbook moved through split, feature generation, and four algorithm runs.</p></div></div>
-        <div class="grid kpi-grid compact-kpi" id="architectureRunCards"></div>
-        <div class="table-wrap"><table class="wide-table compact-table" style="margin-top:14px"><thead><tr><th>Stage</th><th>Rows / shape</th><th>What happened</th></tr></thead><tbody id="architectureFlowRows"></tbody></table></div>
-      </section>
-      <section class="panel" style="margin-top:16px">
-        <div class="section-title"><div><h2>실험별 알고리즘 라인업</h2><p class="muted">각 실험이 어떤 데이터를 사용했고 어떤 결과를 냈는지 한눈에 비교합니다.</p></div></div>
-        <div class="lineup-grid" id="architectureModelCards"></div>
-        <div class="table-wrap" style="margin-top:14px"><table class="wide-table compact-table"><thead><tr><th>Model</th><th>Start TRL</th><th>Primary data</th><th>Agent / Algorithm role</th><th>Test Accuracy</th><th>Macro-F1</th><th>MAE</th></tr></thead><tbody id="architectureModelRows"></tbody></table></div>
-      </section>
-      <section class="panel">
-        <div class="section-title"><div><h2>전체 시스템 아키텍처</h2><p class="muted">한글 기반 role-based agent flow.</p></div></div>
-        <pre class="mermaid">
-flowchart TD
-  A["Raw 데이터<br/>NASA TechPort Excel"] --> B["데이터 정제 에이전트<br/>컬럼 검증·결측 처리·label 생성"]
-  B --> C["텍스트 임베딩 에이전트<br/>Description 중심 TF-IDF word/char"]
-  B --> D["TRL 근거 분석 에이전트<br/>한글 evidence score"]
-  C --> E["유사 과제 검색 에이전트<br/>cosine similarity top-k"]
-  D --> F["Pseudo-Start 추정 에이전트<br/>Start TRL 없이 maturity 추정"]
-  C --> G["Fusion 예측 에이전트<br/>No-Start deployment-safe prediction"]
-  D --> G
-  E --> G
-  F --> G
-  G --> H["판정 검증 에이전트<br/>충돌·일관성 검증"]
-  H --> I["설명 생성 에이전트<br/>한글 reasoning summary"]
-  I --> J["대시보드 시각화<br/>trace·evidence·event log"]
-        </pre>
-      </section>
-      <section class="grid two-col" style="margin-top:16px">
-        <div class="panel">
-          <div class="section-title"><h2>Multi-Agent Flow</h2></div>
-          <pre class="mermaid">
-flowchart LR
-  A["데이터 정제"] --> B["임베딩 생성"]
-  B --> C["근거 분석"]
-  B --> D["유사 과제 검색"]
-  C --> E["Pseudo-Start 추정"]
-  C --> F["Fusion 예측"]
-  D --> F
-  E --> F
-  F --> G["Judge 검증"]
-  G --> H["Report 생성"]
-          </pre>
-        </div>
-        <div class="panel">
-          <div class="section-title"><h2>TRL Reasoning Pipeline</h2></div>
-          <pre class="mermaid">
-flowchart TD
-  A["Description 문장"] --> B["한글 evidence dictionary 매핑"]
-  B --> C["개념·실험실·시제품·실증·운영 점수"]
-  C --> D["유사 과제 TRL 분포"]
-  D --> E["Pseudo-start maturity"]
-  E --> F["Low/Mid/High 확률"]
-  F --> G["충돌 분석"]
-  G --> H["최종 한글 설명"]
-          </pre>
-        </div>
-        <div class="panel">
-          <div class="section-title"><h2>Dashboard 구조도</h2></div>
-          <pre class="mermaid">
-flowchart TD
-  A["Dashboard"] --> B["모델 성능·분포"]
-  A --> C["Project Input·Excel connector"]
-  A --> D["Result·한글 판정 근거"]
-  A --> E["Agent Logs·중간 산출물"]
-  A --> F["Events·행 단위 로그"]
-  A --> G["Architecture·시스템 flowchart"]
-  A --> H["Rules·한글 evidence dictionary"]
-          </pre>
-        </div>
-        <div class="panel">
-          <div class="section-title"><h2>Reasoning Trace 구조도</h2></div>
-          <pre class="mermaid">
-flowchart LR
-  A["Description<br/>Primary TRL Evidence Text"] --> B["embedding_agent<br/>TF-IDF word/char"]
-  A --> C["rubric_agent<br/>한글 evidence score"]
-  A --> D["retrieval_agent<br/>Description similarity"]
-  A --> E["pseudo_start_agent<br/>maturity keyword 추정"]
-  X["Benefits<br/>상용화·운영 보조 근거"] -. "auxiliary" .-> C
-  Y["Project Title<br/>기술명 보조"] -. "auxiliary" .-> D
-  B --> F["fusion_agent"]
-  C --> F
-  D --> F
-  E --> F
-  F --> G["judge_agent"]
-  G --> H["report_agent"]
-  I["project_id"] -. "로그 식별자 / trace lookup key" .-> B
-  I -. "로그 식별자 / trace lookup key" .-> C
-  I -. "로그 식별자 / trace lookup key" .-> H
-          </pre>
-        </div>
-      </section>
-      <section class="panel" style="margin-top:16px"><div class="section-title"><h2>Agent Definitions</h2></div><pre id="agentDefinitions" class="json-view"></pre></section>
-      <section class="panel" style="margin-top:16px">
-        <div class="section-title"><h2>Algorithm Data Architectures</h2></div>
-        <div id="algorithmArchitectures" class="grid two-col"></div>
-      </section>
+      <header class="topbar"><div><h1>Architecture Hub</h1><p>시스템 플로우차트, 데이터 플로우, 모델 라인업, Agent 정의를 하위 화면으로 분리했습니다.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <section class="grid three-col"><div class="kpi"><span>Total rows</span><strong data-arch-total>-</strong></div><div class="kpi"><span>Test traces</span><strong data-arch-test>-</strong></div><div class="kpi"><span>Algorithms</span><strong>4</strong></div></section>
+      <section class="notice" style="margin-top:16px"><strong>Architecture 기준</strong><p>Reasoning trace는 <code>Description</code>에서 시작합니다. <code>Project ID</code>는 분석 입력이 아니라 로그 식별자입니다.</p></section>
+      <section class="panel" style="margin-top:16px"><div class="section-title"><div><h2>Architecture 하위 화면</h2><p class="muted">다이어그램 또는 데이터 흐름 단위로 확인합니다.</p></div></div><div class="lineup-grid" id="architectureSubpageCards"></div></section>
     </main>
   </div>
-  <script>mermaid.initialize({startOnLoad:true, theme:"dark"});</script><script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/architecture.js"></script>
+  <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/architecture_pages.js"></script>
 </body>
 </html>

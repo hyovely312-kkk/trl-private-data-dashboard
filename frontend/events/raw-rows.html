@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raw Event Rows</title><link rel="stylesheet" href="../assets/css/style.css"></head>
+<body data-events-page="raw-rows">
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>raw event rows</span></div><nav class="nav"><a href="../index.html">Dashboard</a><a href="../input.html">Project Input</a><a href="../result.html">Result</a><a href="../agents.html">Agent Logs</a><a href="../events.html">Events</a><a href="../architecture.html">Architecture</a><a href="../rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>Raw Excel Analysis Event Rows</h1><p>held-out project별 Alg1~Alg4 output을 이벤트 행으로 조회합니다.</p></div><a class="button" href="../events.html">Back to Events Hub</a></header>
+      <section class="panel"><div class="section-title"><div><h2>Batch Event Rows</h2><p class="muted">전체 2,114개 test event rows가 연결되어 있고 500개씩 추가 표시합니다.</p></div><button type="button" class="secondary" id="loadMoreStaticEvents">Load more</button></div><div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>event_id</th><th>project_id</th><th>target</th><th>safe macro-F1 model</th><th>safe accuracy model</th><th>upper-bound</th></tr></thead><tbody id="staticEventRows"></tbody></table></div></section>
+    </main>
+  </div>
+  <script src="../assets/js/config.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/events_pages.js"></script>
+</body>
+</html>

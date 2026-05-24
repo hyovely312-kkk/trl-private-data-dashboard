@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Agent Algorithm Lineup</title><link rel="stylesheet" href="../assets/css/style.css"></head>
+<body data-agent-page="lineup">
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>algorithm lineup</span></div><nav class="nav"><a href="../index.html">Dashboard</a><a href="../input.html">Project Input</a><a href="../result.html">Result</a><a href="../agents.html">Agent Logs</a><a href="../events.html">Events</a><a href="../architecture.html">Architecture</a><a href="../rules.html">Rules</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div><h1>실험별 Agent / Algorithm Lineup</h1><p>각 알고리즘이 어떤 Agent output을 사용해 최종 결과를 만드는지 정리합니다.</p></div><a class="button" href="../agents.html">Back to Agent Hub</a></header>
+      <section class="panel"><div class="section-title"><div><h2>Agent Output Usage</h2><p class="muted">Alg1은 upper-bound이며 Start TRL을 포함합니다. Alg2~Alg4는 deployment-safe입니다.</p></div></div><div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>Experiment</th><th>Start TRL</th><th>Primary inputs</th><th>Agent outputs used</th><th>Final output</th><th>Test result</th></tr></thead><tbody id="agentLineupRows"></tbody></table></div></section>
+    </main>
+  </div>
+  <script src="../assets/js/config.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/agents_pages.js"></script>
+</body>
+</html>
