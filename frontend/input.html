@@ -25,11 +25,27 @@
         <div style="display:flex;gap:10px;margin-top:16px;align-items:center"><button type="submit">Run TRL Analysis</button><button type="button" class="secondary" id="sampleBtn">Load Sample</button><span id="runStatus" class="muted"></span></div>
       </form>
       <section class="panel" style="margin-top:16px">
+        <div class="section-title">
+          <div>
+            <h2>Excel Raw Data Connector</h2>
+            <p class="muted">Load the NASA TRL Excel file directly in this browser. Description is treated as the primary TRL evidence field.</p>
+          </div>
+          <span class="status High">Local only</span>
+        </div>
+        <div class="excel-loader">
+          <label>Excel file<input id="excelFileInput" type="file" accept=".xlsx,.xls"></label>
+          <label>Sheet<select id="excelSheetSelect" disabled><option value="">Select an Excel file first</option></select></label>
+          <button type="button" class="secondary" id="excelLoadSheetBtn" disabled>Load Sheet Rows</button>
+          <span id="excelLoadStatus" class="muted">No Excel file loaded.</span>
+        </div>
+      </section>
+      <section class="panel" style="margin-top:16px">
         <div class="section-title"><div><h2>Raw Excel Project Rows</h2><p class="muted">Description-centered TRL analysis input samples from the test split.</p></div><input id="rawProjectSearch" placeholder="search project / program / description" style="max-width:320px"></div>
-        <table><thead><tr><th>Project ID</th><th>Title</th><th>Program</th><th>Primary TX</th><th>Description excerpt</th><th>End label</th></tr></thead><tbody id="rawProjectRows"></tbody></table>
+        <table><thead><tr><th>Project ID</th><th>Title</th><th>Program</th><th>Primary TX</th><th>Description excerpt</th><th>End label</th><th>Action</th></tr></thead><tbody id="rawProjectRows"></tbody></table>
       </section>
     </main>
   </div>
+  <script src="assets/vendor/xlsx.full.min.js"></script>
   <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script src="assets/js/input.js"></script>
 </body>
 </html>

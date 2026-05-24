@@ -288,6 +288,22 @@ textarea {
   gap: 14px;
 }
 
+.excel-loader {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.2fr) minmax(180px, 0.8fr) auto minmax(220px, 1fr);
+  gap: 12px;
+  align-items: end;
+}
+
+.row-action {
+  white-space: nowrap;
+}
+
+.row-action button {
+  padding: 7px 9px;
+  font-size: 12px;
+}
+
 .full {
   grid-column: 1 / -1;
 }
@@ -381,6 +397,7 @@ textarea {
   }
 
   .form-grid,
+  .excel-loader,
   .filters {
     grid-template-columns: 1fr;
   }
