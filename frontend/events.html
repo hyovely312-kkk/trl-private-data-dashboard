@@ -13,6 +13,10 @@
         <div class="section-title"><div><h2>실험 결과 라인업</h2><p class="muted">전체 test split 기준으로 각 알고리즘의 결과와 이벤트 로그 연결 상태를 정리합니다.</p></div></div>
         <div class="lineup-grid" id="eventModelCards"></div>
       </section>
+      <section class="notice" style="margin-bottom:16px">
+        <strong>Upper-bound 분리 원칙</strong>
+        <p>Alg1은 Start TRL을 입력 feature로 사용하는 성능 상한선 실험입니다. 따라서 deployment-safe 모델 선정에는 포함하지 않고, Alg2/Alg3/Alg4와 별도 열인 <code>upper-bound</code>로만 표시합니다. 실제 신규 과제 평가 기준은 Start TRL을 쓰지 않는 <code>safe macro-F1 model</code>과 <code>safe accuracy model</code>입니다.</p>
+      </section>
       <section class="grid two-col">
         <div class="panel">
           <div class="filters">
@@ -27,7 +31,7 @@
         <div class="panel"><div class="section-title"><h2 id="eventDetailTitle">Event Detail</h2></div><pre id="eventDetail" class="json-view"></pre></div>
       </section>
       <section class="panel" style="margin-top:16px">
-        <div class="section-title"><div><h2>Raw Excel Analysis Event Rows</h2><p class="muted">One row per held-out project with all four algorithm outputs.</p></div></div>
+        <div class="section-title"><div><h2>Raw Excel Analysis Event Rows</h2><p class="muted">One row per held-out project with all four algorithm outputs. The table is paged for browser performance; click Load more to inspect additional rows.</p></div><button type="button" class="secondary" id="loadMoreStaticEvents">Load more</button></div>
         <div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>event_id</th><th>project_id</th><th>target</th><th>safe macro-F1 model</th><th>safe accuracy model</th><th>upper-bound</th></tr></thead><tbody id="staticEventRows"></tbody></table></div>
       </section>
     </main>

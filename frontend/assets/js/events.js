@@ -1,5 +1,7 @@
 let allEvents = [];
 let filtersBound = false;
+let staticEventRowsCache = [];
+let staticEventVisibleCount = 100;
 
 function applyFilters() {
   const keyword = document.getElementById("keyword").value.toLowerCase();
@@ -57,6 +59,7 @@ async function renderEvents() {
 
 document.addEventListener("DOMContentLoaded", () => renderEvents().catch(() => renderStaticEvents(true)).then(() => {
   renderEventModelCards().catch(() => {});
+  bindStaticEventLoadMore();
   if (!allEvents.length) return renderStaticEvents(true);
   return renderStaticEvents(false);
 }).catch(() => {
@@ -68,12 +71,12 @@ async function renderEventModelCards() {
   const target = document.getElementById("eventModelCards");
   if (!target) return;
   const order = [
-    ["alg1_full_fusion", "Upper-bound"],
-    ["alg2_no_start_pseudo_start", "No-start main"],
-    ["alg3_rubric_explainable", "Explainable"],
-    ["alg4_gridsearched_svc_retrieval", "Accuracy-safe"],
+    ["alg1_full_fusion", "Upper-bound", "Start TRL 포함. 다른 deployment-safe 실험과 분리 해석."],
+    ["alg2_no_start_pseudo_start", "No-start main", "Start TRL 제외. validation macro-F1 기준 safe 후보."],
+    ["alg3_rubric_explainable", "Explainable", "Start TRL 제외. rubric evidence와 explanation 중심."],
+    ["alg4_gridsearched_svc_retrieval", "Accuracy-safe", "Start TRL 제외. validation grid search 기반 accuracy 중심."],
   ];
-  target.innerHTML = order.map(([key, badge]) => {
+  target.innerHTML = order.map(([key, badge, note]) => {
     const model = summary.models?.[key] || {};
     const test = model.test || {};
     return `
@@ -82,10 +85,21 @@ async function renderEventModelCards() {
         <span class="status ${model.uses_start_trl ? "High" : "Mid"}">${badge}</span>
         <p>Start TRL: ${model.uses_start_trl ? "사용함" : "사용 안 함"}</p>
         <p>Test Acc ${((test.accuracy || 0) * 100).toFixed(1)}% · Macro-F1 ${(test.macro_f1 || 0).toFixed(3)}</p>
+        <p>${note}</p>
         <p>이벤트 로그: ${Number(summary.dataset?.n_test || 0).toLocaleString()} rows</p>
       </div>
     `;
   }).join("");
+}
+
+function bindStaticEventLoadMore() {
+  const button = document.getElementById("loadMoreStaticEvents");
+  if (!button || button.dataset.bound) return;
+  button.dataset.bound = "1";
+  button.addEventListener("click", () => {
+    staticEventVisibleCount = Math.min(staticEventVisibleCount + 500, staticEventRowsCache.length || staticEventVisibleCount);
+    drawStaticEventRows();
+  });
 }
 
 function rowToStaticEvent(row) {
@@ -151,7 +165,7 @@ function traceToStaticEvent(trace, index) {
 
 async function renderStaticEvents(useAsMain = false) {
   const allRows = await fetchCsv("assets/data/event_analysis_rows.csv");
-  const rows = allRows.slice(0, 100);
+  staticEventRowsCache = allRows;
   if (useAsMain) {
     try {
       const traces = await fetchJsonl("assets/data/kotrl_x_reasoning_traces.jsonl");
@@ -163,6 +177,16 @@ async function renderStaticEvents(useAsMain = false) {
     applyFilters();
     if (allEvents[0]) renderDetail(allEvents[0]);
   }
+  drawStaticEventRows();
+}
+
+function drawStaticEventRows() {
+  const rows = staticEventRowsCache.slice(0, staticEventVisibleCount);
+  const button = document.getElementById("loadMoreStaticEvents");
+  if (button) {
+    button.disabled = staticEventVisibleCount >= staticEventRowsCache.length;
+    button.textContent = staticEventVisibleCount >= staticEventRowsCache.length ? "All rows loaded" : "Load more";
+  }
   document.getElementById("staticEventRows").innerHTML = rows.map((row) => `
     <tr>
       <td>${row.event_id}</td>
@@ -172,5 +196,5 @@ async function renderStaticEvents(useAsMain = false) {
       <td>${renderCellStatus(row.deployment_safe_best_by_accuracy)}</td>
       <td>${renderCellStatus(row.upper_bound_with_start_trl)}</td>
     </tr>
-  `).join("") + `<tr><td colspan="6" class="muted">Showing ${rows.length.toLocaleString()} of ${allRows.length.toLocaleString()} test event rows. All rows are loaded in assets/data/event_analysis_rows.csv.</td></tr>`;
+  `).join("") + `<tr><td colspan="6" class="muted">Showing ${rows.length.toLocaleString()} of ${staticEventRowsCache.length.toLocaleString()} test event rows. Alg1 is shown only as upper-bound; deployment-safe columns exclude Start TRL.</td></tr>`;
 }
