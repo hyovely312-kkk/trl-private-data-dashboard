@@ -9,6 +9,10 @@
     <aside class="sidebar"><div class="brand"><strong>KoTRL-X</strong><span>reasoning event log</span></div><nav class="nav"><a href="index.html">Dashboard</a><a href="input.html">Project Input</a><a href="result.html">Result</a><a href="agents.html">Agent Logs</a><a href="events.html">Events</a><a href="architecture.html">Architecture</a><a href="rules.html">Rules</a></nav></aside>
     <main class="main">
       <header class="topbar"><div><h1>Event Lookup</h1><p>NVA-style event list with filters and side detail panel.</p></div><div class="api-pill"><span class="muted">API</span><input data-api-base></div></header>
+      <section class="panel" style="margin-bottom:16px">
+        <div class="section-title"><div><h2>실험 결과 라인업</h2><p class="muted">전체 test split 기준으로 각 알고리즘의 결과와 이벤트 로그 연결 상태를 정리합니다.</p></div></div>
+        <div class="lineup-grid" id="eventModelCards"></div>
+      </section>
       <section class="grid two-col">
         <div class="panel">
           <div class="filters">
@@ -18,13 +22,13 @@
             <input id="maxConfidence" type="number" min="0" max="1" step="0.01" value="1" title="max confidence">
             <select id="agentType"><option value="">All logs</option><option value="retrieval_agent">Retrieval</option><option value="pseudo_start_agent">Pseudo</option><option value="rubric_agent">Rubric</option><option value="fusion_agent">Fusion</option><option value="judge_agent">Judge</option><option value="report_agent">Report</option></select>
           </div>
-          <table><thead><tr><th>event_id</th><th>created_at</th><th>project_title</th><th>class</th><th>confidence</th><th></th></tr></thead><tbody id="eventRows"></tbody></table>
+          <div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>event_id</th><th>created_at</th><th>project_title</th><th>class</th><th>confidence</th><th></th></tr></thead><tbody id="eventRows"></tbody></table></div>
         </div>
         <div class="panel"><div class="section-title"><h2 id="eventDetailTitle">Event Detail</h2></div><pre id="eventDetail" class="json-view"></pre></div>
       </section>
       <section class="panel" style="margin-top:16px">
         <div class="section-title"><div><h2>Raw Excel Analysis Event Rows</h2><p class="muted">One row per held-out project with all four algorithm outputs.</p></div></div>
-        <table><thead><tr><th>event_id</th><th>project_id</th><th>target</th><th>safe macro-F1 model</th><th>safe accuracy model</th><th>upper-bound</th></tr></thead><tbody id="staticEventRows"></tbody></table>
+        <div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>event_id</th><th>project_id</th><th>target</th><th>safe macro-F1 model</th><th>safe accuracy model</th><th>upper-bound</th></tr></thead><tbody id="staticEventRows"></tbody></table></div>
       </section>
     </main>
   </div>

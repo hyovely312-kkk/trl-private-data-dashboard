@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   renderArchitectureRunSummary();
   renderAlgorithmArchitectures();
+  renderArchitectureModelLineup();
 });
 
 async function renderAlgorithmArchitectures() {
@@ -46,4 +47,57 @@ async function renderArchitectureRunSummary() {
     ["Algorithm runs", `${fmtNumber((dataset.n_test || 0) * 4)} test predictions`, "All four algorithms evaluated on the same held-out test set."],
     ["KoTRL-X log export", `${fmtNumber(dataset.n_test)} JSONL traces`, "embedding, rubric, retrieval, pseudo-start, fusion, judge, report agent log 연결."],
   ].map(([stage, rows, action]) => `<tr><td>${stage}</td><td>${rows}</td><td>${action}</td></tr>`).join("");
+}
+
+function modelLabel(key) {
+  return {
+    alg1_full_fusion: "Alg1 Full Fusion",
+    alg2_no_start_pseudo_start: "Alg2 No-Start + Pseudo",
+    alg3_rubric_explainable: "Alg3 Rubric Explainable",
+    alg4_gridsearched_svc_retrieval: "Alg4 Grid-Searched SVC",
+  }[key] || key;
+}
+
+function modelRole(key) {
+  return {
+    alg1_full_fusion: "Upper-bound 비교용. Start TRL 포함.",
+    alg2_no_start_pseudo_start: "실제 신규 과제 평가용 No-Start main 후보.",
+    alg3_rubric_explainable: "근거 점수와 설명가능성 중심.",
+    alg4_gridsearched_svc_retrieval: "Start TRL 없이 accuracy 70%+ 목표 성능 모델.",
+  }[key] || "";
+}
+
+function primaryDataForModel(key) {
+  if (key === "alg1_full_fusion") return "Description + Benefits + Program + Primary TX + Start TRL";
+  if (key === "alg3_rubric_explainable") return "Description evidence + Benefits commercialization + retrieval + pseudo-start";
+  if (key === "alg4_gridsearched_svc_retrieval") return "Description TF-IDF word/char + metadata + retrieval + optional rubric/pseudo";
+  return "Description TF-IDF + metadata + retrieval + pseudo-start";
+}
+
+async function renderArchitectureModelLineup() {
+  const summary = await fetchStaticJson("assets/data/dashboard_summary.json");
+  const models = summary.models || {};
+  const entries = Object.entries(models);
+  const cardEl = document.getElementById("architectureModelCards");
+  const rowEl = document.getElementById("architectureModelRows");
+  if (!cardEl || !rowEl) return;
+  cardEl.innerHTML = entries.map(([key, model]) => `
+    <div class="lineup-card">
+      <h3>${modelLabel(key)}</h3>
+      <span class="status ${model.uses_start_trl ? "High" : "Mid"}">${model.uses_start_trl ? "Upper-bound" : "Deployment-safe"}</span>
+      <p>${modelRole(key)}</p>
+      <p>Accuracy ${(model.test.accuracy * 100).toFixed(1)}% · Macro-F1 ${model.test.macro_f1.toFixed(3)}</p>
+    </div>
+  `).join("");
+  rowEl.innerHTML = entries.map(([key, model]) => `
+    <tr>
+      <td>${modelLabel(key)}<br><span class="muted">${model.selected_model || ""}</span></td>
+      <td>${model.uses_start_trl ? "사용함 / upper-bound" : "사용 안 함"}</td>
+      <td>${primaryDataForModel(key)}</td>
+      <td>${modelRole(key)}</td>
+      <td>${(model.test.accuracy * 100).toFixed(2)}%</td>
+      <td>${model.test.macro_f1.toFixed(4)}</td>
+      <td>${model.test.mae.toFixed(4)}</td>
+    </tr>
+  `).join("");
 }

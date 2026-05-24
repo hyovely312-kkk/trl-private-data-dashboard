@@ -19,7 +19,21 @@ function setActiveNav() {
   });
 }
 
+function showFileModeNotice() {
+  if (location.protocol !== "file:") return;
+  const main = document.querySelector(".main");
+  const topbar = document.querySelector(".topbar");
+  if (!main || !topbar || document.getElementById("fileModeNotice")) return;
+  topbar.insertAdjacentHTML("afterend", `
+    <section id="fileModeNotice" class="notice" style="margin-bottom:16px">
+      <strong>Local file mode</strong>
+      <p>CSV/JSON 로그와 Mermaid 시각화는 브라우저 보안정책 때문에 file://에서 일부 깨질 수 있습니다. 정확한 대시보드는 frontend 폴더에서 <code>python3 -m http.server 5504</code> 실행 후 <code>http://localhost:5504/</code>로 확인하세요.</p>
+    </section>
+  `);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initApiInput();
   setActiveNav();
+  showFileModeNotice();
 });

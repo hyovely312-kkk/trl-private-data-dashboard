@@ -154,6 +154,7 @@ a {
 .card,
 .panel {
   padding: 16px;
+  min-width: 0;
 }
 
 .kpi {
@@ -194,6 +195,7 @@ label {
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .section-title h2 {
@@ -236,12 +238,33 @@ table {
   border-collapse: collapse;
 }
 
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.wide-table {
+  min-width: 900px;
+}
+
+.compact-table th,
+.compact-table td {
+  padding: 9px 8px;
+  vertical-align: top;
+}
+
 th,
 td {
   padding: 11px 10px;
   border-bottom: 1px solid rgba(143, 167, 194, 0.13);
   text-align: left;
   font-size: 13px;
+  vertical-align: top;
+}
+
+td {
+  overflow-wrap: anywhere;
 }
 
 th {
@@ -375,9 +398,35 @@ textarea {
 }
 
 .mermaid {
+  width: 100%;
+  overflow-x: auto;
   padding: 18px;
   background: #081525;
   border-radius: 8px;
+}
+
+.lineup-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.lineup-card {
+  border: 1px solid rgba(143, 167, 194, 0.18);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(5, 13, 25, 0.35);
+}
+
+.lineup-card h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.lineup-card p {
+  margin: 6px 0;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .notice {
@@ -397,7 +446,8 @@ textarea {
   .app-shell,
   .split-layout,
   .two-col,
-  .three-col {
+  .three-col,
+  .lineup-grid {
     grid-template-columns: 1fr;
   }
 

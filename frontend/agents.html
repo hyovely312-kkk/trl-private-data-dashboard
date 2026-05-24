@@ -12,7 +12,11 @@
       <section class="panel" style="margin-bottom:16px">
         <div class="section-title"><div><h2>TRL Reasoning Trace</h2><p class="muted">전체 test sample 2,114개에 대해 생성된 한글 기반 agent trace입니다.</p></div><input id="traceSearch" placeholder="project id / label / reason search" style="max-width:320px"></div>
         <div class="grid three-col" id="traceSummaryCards"></div>
-        <table style="margin-top:14px"><thead><tr><th>Project</th><th>Target</th><th>Prediction</th><th>Judge</th><th>Final reason</th></tr></thead><tbody id="traceRows"></tbody></table>
+        <div class="table-wrap"><table class="wide-table compact-table" style="margin-top:14px"><thead><tr><th>Project</th><th>Target</th><th>Prediction</th><th>Judge</th><th>Final reason</th></tr></thead><tbody id="traceRows"></tbody></table></div>
+      </section>
+      <section class="panel" style="margin-bottom:16px">
+        <div class="section-title"><div><h2>실험별 Agent / Algorithm Lineup</h2><p class="muted">각 알고리즘이 어떤 agent output을 사용해 최종 결과를 만드는지 정리했습니다.</p></div></div>
+        <div class="table-wrap"><table class="wide-table compact-table"><thead><tr><th>Experiment</th><th>Start TRL</th><th>Primary inputs</th><th>Agent outputs used</th><th>Final output</th><th>Test result</th></tr></thead><tbody id="agentLineupRows"></tbody></table></div>
       </section>
       <section class="split-layout">
         <div class="list-panel" id="agentList"></div>
@@ -20,7 +24,7 @@
       </section>
       <section class="panel" style="margin-top:16px">
         <div class="section-title"><div><h2>Algorithm Sample Rows</h2><p class="muted">Retrieval, pseudo-start, rubric, and Alg4 grid-search intermediate rows.</p></div></div>
-        <table><thead id="agentSampleHead"></thead><tbody id="agentSampleRows"></tbody></table>
+        <div class="table-wrap"><table class="wide-table compact-table"><thead id="agentSampleHead"></thead><tbody id="agentSampleRows"></tbody></table></div>
       </section>
     </main>
   </div>

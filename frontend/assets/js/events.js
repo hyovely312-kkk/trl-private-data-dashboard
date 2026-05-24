@@ -14,7 +14,8 @@ function applyFilters() {
       && (event.confidence || 0) <= maxConfidence
       && (!keyword || haystack.includes(keyword) || eventTitle(event).toLowerCase().includes(keyword));
   });
-  document.getElementById("eventRows").innerHTML = filtered.map((event) => `
+  const visible = filtered.slice(0, 100);
+  document.getElementById("eventRows").innerHTML = visible.map((event) => `
     <tr>
       <td>${event.event_id}</td>
       <td>${event.created_at}</td>
@@ -24,6 +25,9 @@ function applyFilters() {
       <td><button data-view="${event.event_id}">View</button></td>
     </tr>
   `).join("") || `<tr><td colspan="6" class="muted">No matching events.</td></tr>`;
+  if (filtered.length) {
+    document.getElementById("eventRows").insertAdjacentHTML("beforeend", `<tr><td colspan="6" class="muted">Showing ${visible.length.toLocaleString()} of ${filtered.length.toLocaleString()} matching reasoning events.</td></tr>`);
+  }
 }
 
 function renderDetail(event) {
@@ -52,11 +56,37 @@ async function renderEvents() {
 }
 
 document.addEventListener("DOMContentLoaded", () => renderEvents().catch(() => renderStaticEvents(true)).then(() => {
+  renderEventModelCards().catch(() => {});
   if (!allEvents.length) return renderStaticEvents(true);
   return renderStaticEvents(false);
 }).catch(() => {
   document.getElementById("eventRows").innerHTML = `<tr><td colspan="6" class="muted">No event data file found.</td></tr>`;
 }));
+
+async function renderEventModelCards() {
+  const summary = await fetchStaticJson("assets/data/dashboard_summary.json");
+  const target = document.getElementById("eventModelCards");
+  if (!target) return;
+  const order = [
+    ["alg1_full_fusion", "Upper-bound"],
+    ["alg2_no_start_pseudo_start", "No-start main"],
+    ["alg3_rubric_explainable", "Explainable"],
+    ["alg4_gridsearched_svc_retrieval", "Accuracy-safe"],
+  ];
+  target.innerHTML = order.map(([key, badge]) => {
+    const model = summary.models?.[key] || {};
+    const test = model.test || {};
+    return `
+      <div class="lineup-card">
+        <h3>${key}</h3>
+        <span class="status ${model.uses_start_trl ? "High" : "Mid"}">${badge}</span>
+        <p>Start TRL: ${model.uses_start_trl ? "사용함" : "사용 안 함"}</p>
+        <p>Test Acc ${((test.accuracy || 0) * 100).toFixed(1)}% · Macro-F1 ${(test.macro_f1 || 0).toFixed(3)}</p>
+        <p>이벤트 로그: ${Number(summary.dataset?.n_test || 0).toLocaleString()} rows</p>
+      </div>
+    `;
+  }).join("");
+}
 
 function rowToStaticEvent(row) {
   const confidence = Number(row.alg4_gridsearched_svc_retrieval_confidence || row.alg2_no_start_pseudo_start_confidence || row.alg1_full_fusion_confidence || 0);

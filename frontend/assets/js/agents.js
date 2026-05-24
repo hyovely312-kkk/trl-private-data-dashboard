@@ -38,6 +38,7 @@ async function renderAgents() {
 
 document.addEventListener("DOMContentLoaded", () => {
   renderKoTrlReasoningTrace().catch(() => {});
+  renderAgentExperimentLineup().catch(() => {});
   renderAgents().catch((error) => {
   document.getElementById("agentJson").textContent = `${error.message}. Loading raw Excel experiment logs instead.`;
   }).finally(() => renderStaticAgentRows().catch(() => {
@@ -94,6 +95,31 @@ async function renderKoTrlReasoningTrace() {
     document.getElementById("agentJson").textContent = formatJson(trace);
   });
   draw();
+}
+
+async function renderAgentExperimentLineup() {
+  const summary = await fetchStaticJson("assets/data/dashboard_summary.json");
+  const rows = document.getElementById("agentLineupRows");
+  if (!rows) return;
+  const lineup = [
+    ["Alg1 Full Retrieval-Metadata Fusion", "사용함 / upper-bound", "Description, Benefits, Program, Primary TX, Start TRL", "embedding + retrieval + metadata + Start TRL", "Low/Mid/High probability", "alg1_full_fusion"],
+    ["Alg2 No-Start / Pseudo-Start Fusion", "사용 안 함", "Description 중심 text, Program, Primary TX", "embedding + retrieval + pseudo-start", "Deployment-safe prediction", "alg2_no_start_pseudo_start"],
+    ["Alg3 Rubric-Guided Explainable Fusion", "사용 안 함", "Description evidence, Benefits 보조", "rubric + retrieval + pseudo-start + report", "Prediction + explanation", "alg3_rubric_explainable"],
+    ["Alg4 Grid-Searched TF-IDF SVC Retrieval Fusion", "사용 안 함", "Description TF-IDF word/char, metadata, retrieval", "embedding + retrieval + optional rubric/pseudo + calibrated classifier", "Accuracy-focused deployment-safe prediction", "alg4_gridsearched_svc_retrieval"],
+  ];
+  rows.innerHTML = lineup.map(([name, start, inputs, agents, output, key]) => {
+    const metric = summary.models?.[key]?.test || {};
+    return `
+      <tr>
+        <td>${name}</td>
+        <td>${start}</td>
+        <td>${inputs}</td>
+        <td>${agents}</td>
+        <td>${output}</td>
+        <td>Acc ${((metric.accuracy || 0) * 100).toFixed(1)}% · Macro-F1 ${(metric.macro_f1 || 0).toFixed(3)}</td>
+      </tr>
+    `;
+  }).join("");
 }
 
 async function renderStaticAgentRows() {
