@@ -429,6 +429,22 @@ textarea {
   font-size: 12px;
 }
 
+.tab-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tab-button {
+  background: rgba(143, 167, 194, 0.08);
+  border-color: var(--line);
+}
+
+.tab-button.active {
+  border-color: rgba(34, 211, 238, 0.8);
+  background: rgba(34, 211, 238, 0.14);
+}
+
 .notice {
   padding: 12px;
   border-radius: 8px;

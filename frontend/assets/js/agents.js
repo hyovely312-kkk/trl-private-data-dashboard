@@ -6,6 +6,9 @@ const agentTabs = [
   ["explanation", "Explanation Agent", "Natural-language reasoning, risks, and next actions."],
 ];
 
+let crosscheckVisibleRows = 200;
+let crosscheckRowsCache = [];
+
 function renderAgentDetail(event, key, label, subtitle) {
   const log = event[key] || {};
   document.getElementById("agentTitle").textContent = label;
@@ -39,6 +42,7 @@ async function renderAgents() {
 document.addEventListener("DOMContentLoaded", () => {
   renderKoTrlReasoningTrace().catch(() => {});
   renderAgentExperimentLineup().catch(() => {});
+  renderAgentCrosscheck().catch(() => {});
   renderAgents().catch((error) => {
   document.getElementById("agentJson").textContent = `${error.message}. Loading raw Excel experiment logs instead.`;
   }).finally(() => renderStaticAgentRows().catch(() => {
@@ -95,6 +99,56 @@ async function renderKoTrlReasoningTrace() {
     document.getElementById("agentJson").textContent = formatJson(trace);
   });
   draw();
+}
+
+async function renderAgentCrosscheck() {
+  const [traces, projects] = await Promise.all([
+    fetchJsonl("assets/data/kotrl_x_reasoning_traces.jsonl"),
+    fetchCsv("assets/data/project_analysis_rows.csv"),
+  ]);
+  const projectById = Object.fromEntries(projects.map((row) => [String(row.project_id), row]));
+  crosscheckRowsCache = traces.map((trace) => ({ trace, project: projectById[String(trace.project_id)] || {} }));
+  const loadMore = document.getElementById("loadMoreAgentCrosscheck");
+  if (loadMore && !loadMore.dataset.bound) {
+    loadMore.dataset.bound = "1";
+    loadMore.addEventListener("click", () => {
+      crosscheckVisibleRows = Math.min(crosscheckVisibleRows + 500, crosscheckRowsCache.length);
+      drawAgentCrosscheckRows();
+    });
+  }
+  drawAgentCrosscheckRows();
+}
+
+function drawAgentCrosscheckRows() {
+  const body = document.getElementById("agentCrosscheckRows");
+  const loadMore = document.getElementById("loadMoreAgentCrosscheck");
+  if (!body) return;
+  const rows = crosscheckRowsCache.slice(0, crosscheckVisibleRows);
+  if (loadMore) {
+    loadMore.disabled = crosscheckVisibleRows >= crosscheckRowsCache.length;
+    loadMore.textContent = crosscheckVisibleRows >= crosscheckRowsCache.length ? "All rows loaded" : "Load more";
+  }
+  body.innerHTML = rows.map(({ trace, project }) => {
+    const rubric = trace.rubric_agent || {};
+    const retrieval = trace.retrieval_agent || {};
+    const pseudo = trace.pseudo_start_agent || {};
+    const report = trace.report_agent || {};
+    return `
+      <tr>
+        <td>${trace.project_id}<br><span class="muted">${trace.project_title || project.project_title || ""}</span><br>${project.description_excerpt || ""}</td>
+        <td>
+          Alg1 ${renderCellStatus(project.alg1_full_fusion_pred || "")}<br>
+          Alg2 ${renderCellStatus(project.alg2_no_start_pseudo_start_pred || "")}<br>
+          Alg3 ${renderCellStatus(project.alg3_rubric_explainable_pred || "")}<br>
+          Alg4 ${renderCellStatus(project.alg4_gridsearched_svc_retrieval_pred || trace.predicted_label)}
+        </td>
+        <td>Mid ${Math.round((retrieval.Mid비율 || 0) * 100)}% · High ${Math.round((retrieval.High비율 || 0) * 100)}%<br><span class="muted">top-k ${((retrieval.top_k_project_ids || []).slice(0, 3)).join(", ")}</span></td>
+        <td>시제품 ${rubric.시제품점수 ?? 0}<br>실험실 ${rubric.실험실검증점수 ?? 0}<br>실제환경 ${rubric.실제환경검증점수 ?? 0}</td>
+        <td>추정 TRL ${pseudo.추정StartTRL ?? "-"}<br>신뢰도 ${pseudo.신뢰도 ?? "-"}<br><span class="muted">${(pseudo.근거키워드 || []).join(", ")}</span></td>
+        <td>${trace.judge_agent?.충돌여부 ? "충돌 있음" : "일관"}<br><span class="muted">${report.최종설명 || ""}</span></td>
+      </tr>
+    `;
+  }).join("") + `<tr><td colspan="6" class="muted">Showing ${rows.length.toLocaleString()} of ${crosscheckRowsCache.length.toLocaleString()} Description × Agent cross-check rows.</td></tr>`;
 }
 
 async function renderAgentExperimentLineup() {

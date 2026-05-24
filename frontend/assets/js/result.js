@@ -1,3 +1,8 @@
+let probabilityChart = null;
+let descriptionRowsCache = [];
+let activeDescriptionAlgorithm = "alg4_gridsearched_svc_retrieval";
+let visibleDescriptionRows = 200;
+
 async function renderResult() {
   const event = await getLastEvent();
   if (!event) {
@@ -14,8 +19,14 @@ async function renderResult() {
   document.getElementById("rawResult").textContent = formatJson(event);
   document.getElementById("agentLink").href = `agents.html?event_id=${event.event_id}`;
 
-  const probs = event.fusion_log.probabilities;
-  new Chart(document.getElementById("probChart"), {
+  renderProbabilityChart(event.fusion_log.probabilities);
+}
+
+function renderProbabilityChart(probs) {
+  const canvas = document.getElementById("probChart");
+  if (!canvas || !probs || !window.Chart) return;
+  if (probabilityChart) probabilityChart.destroy();
+  probabilityChart = new Chart(canvas, {
     type: "doughnut",
     data: { labels: Object.keys(probs), datasets: [{ data: Object.values(probs), backgroundColor: ["#ff687d", "#f5c84c", "#38d996"] }] },
     options: { responsive: true, plugins: { legend: { labels: { color: "#e7f2ff" } } } },
@@ -23,14 +34,12 @@ async function renderResult() {
 }
 
 document.addEventListener("DOMContentLoaded", () => renderResult().catch((error) => {
-  document.querySelector("[data-final-class]").innerHTML = `<span class="status Mid">Static</span>`;
-  document.querySelector("[data-range]").textContent = "Batch rows";
-  document.querySelector("[data-confidence]").textContent = "-";
-  document.querySelector("[data-reason]").textContent = `${error.message}. Showing raw Excel batch predictions below.`;
-  document.getElementById("rawResult").textContent = "Static mode: backend event API is not connected.";
+  document.getElementById("rawResult").textContent = `${error.message}. Static KoTRL-X trace mode is used.`;
+  return renderStaticResultSummary();
 }).finally(() => {
   renderStaticKoreanReasoning().catch(() => {});
   renderResultAlgorithmLinks().catch(() => {});
+  renderDescriptionResultTabs().catch(() => {});
   renderBatchPredictionRows().catch(() => {
   const tbody = document.getElementById("batchPredictionRows");
   if (tbody) {
@@ -38,6 +47,27 @@ document.addEventListener("DOMContentLoaded", () => renderResult().catch((error)
   }
   });
 }));
+
+async function renderStaticResultSummary() {
+  const [trace] = await fetchJsonl("assets/data/kotrl_x_reasoning_traces.jsonl", 1);
+  if (!trace) return;
+  const report = trace.report_agent || {};
+  const fusion = trace.fusion_agent || {};
+  document.querySelector("[data-final-class]").innerHTML = `<span class="status ${trace.predicted_label}">${trace.predicted_label}</span>`;
+  document.querySelector("[data-range]").textContent = fusion.예측TRL범위 || `${trace.predicted_label} range`;
+  document.querySelector("[data-confidence]").textContent = confidencePct(trace.confidence);
+  document.querySelector("[data-reason]").textContent = report.최종설명 || "";
+  document.getElementById("evidenceList").innerHTML = (trace.rubric_agent?.근거문장 || []).slice(0, 3).map((x) => `<li>${x}</li>`).join("") || "<li>근거 문장이 탐지되지 않았습니다.</li>";
+  document.getElementById("riskList").innerHTML = (report.판정보류요소 || []).map((x) => `<li>${x}</li>`).join("") || "<li>판정 보류 요소가 명시되지 않았습니다.</li>";
+  document.getElementById("actionList").innerHTML = (report.추가필요사항 || []).map((x) => `<li>${x}</li>`).join("") || "<li>추가 필요 단계가 명시되지 않았습니다.</li>";
+  renderProbabilityChart({
+    Low: fusion.Low확률 || 0,
+    Mid: fusion.Mid확률 || 0,
+    High: fusion.High확률 || 0,
+  });
+  document.getElementById("rawResult").textContent = formatJson(trace);
+  document.getElementById("agentLink").href = "agents.html";
+}
 
 async function renderResultAlgorithmLinks() {
   const summary = await fetchStaticJson("assets/data/dashboard_summary.json");
@@ -103,4 +133,69 @@ async function renderBatchPredictionRows() {
       <td>${row.description_excerpt}</td>
     </tr>
   `).join("") + `<tr><td colspan="7" class="muted">Showing ${rows.length.toLocaleString()} of ${allRows.length.toLocaleString()} test prediction rows. All rows are loaded in assets/data/project_analysis_rows.csv.</td></tr>`;
+}
+
+const resultAlgorithmLabels = {
+  alg1_full_fusion: ["Alg1 Upper-bound", "Start TRL 포함"],
+  alg2_no_start_pseudo_start: ["Alg2 No-start", "Pseudo-start fusion"],
+  alg3_rubric_explainable: ["Alg3 Rubric", "Explainable"],
+  alg4_gridsearched_svc_retrieval: ["Alg4 Grid SVC", "Safe accuracy"],
+};
+
+function resultReason(row, key) {
+  const pred = row[`${key}_pred`];
+  const target = row.target_label;
+  const confidence = row[`${key}_confidence`];
+  const match = pred === target ? "정답 라벨과 일치" : "정답 라벨과 불일치";
+  if (key === "alg1_full_fusion") return `Start TRL을 포함한 upper-bound 판단입니다. ${match}; prediction ${pred}, target ${target}, confidence ${confidence}.`;
+  if (key === "alg3_rubric_explainable") return `Description evidence와 rubric score를 결합한 설명가능 판단입니다. ${match}; prediction ${pred}, confidence ${confidence}.`;
+  if (key === "alg4_gridsearched_svc_retrieval") return `Start TRL 없이 grid search로 선택된 deployment-safe 판단입니다. ${match}; prediction ${pred}, confidence ${confidence}.`;
+  return `Start TRL 없이 retrieval과 pseudo-start를 결합한 판단입니다. ${match}; prediction ${pred}, confidence ${confidence}.`;
+}
+
+async function renderDescriptionResultTabs() {
+  descriptionRowsCache = await fetchCsv("assets/data/project_analysis_rows.csv");
+  const tabs = document.getElementById("descriptionResultTabs");
+  const loadMore = document.getElementById("loadMoreDescriptionResults");
+  if (!tabs) return;
+  tabs.innerHTML = Object.entries(resultAlgorithmLabels).map(([key, [label, note]]) => `
+    <button type="button" class="tab-button ${key === activeDescriptionAlgorithm ? "active" : ""}" data-result-algorithm="${key}">${label}<br><span class="muted">${note}</span></button>
+  `).join("");
+  tabs.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-result-algorithm]");
+    if (!button) return;
+    activeDescriptionAlgorithm = button.dataset.resultAlgorithm;
+    visibleDescriptionRows = 200;
+    tabs.querySelectorAll(".tab-button").forEach((el) => el.classList.toggle("active", el.dataset.resultAlgorithm === activeDescriptionAlgorithm));
+    drawDescriptionResultRows();
+  });
+  if (loadMore && !loadMore.dataset.bound) {
+    loadMore.dataset.bound = "1";
+    loadMore.addEventListener("click", () => {
+      visibleDescriptionRows = Math.min(visibleDescriptionRows + 500, descriptionRowsCache.length);
+      drawDescriptionResultRows();
+    });
+  }
+  drawDescriptionResultRows();
+}
+
+function drawDescriptionResultRows() {
+  const body = document.getElementById("descriptionResultRows");
+  const loadMore = document.getElementById("loadMoreDescriptionResults");
+  if (!body) return;
+  const rows = descriptionRowsCache.slice(0, visibleDescriptionRows);
+  if (loadMore) {
+    loadMore.disabled = visibleDescriptionRows >= descriptionRowsCache.length;
+    loadMore.textContent = visibleDescriptionRows >= descriptionRowsCache.length ? "All rows loaded" : "Load more";
+  }
+  body.innerHTML = rows.map((row) => `
+    <tr>
+      <td>${row.project_id}<br><span class="muted">${row.project_title}</span></td>
+      <td>${row.description_excerpt}</td>
+      <td>${renderCellStatus(row.target_label)}</td>
+      <td>${renderCellStatus(row[`${activeDescriptionAlgorithm}_pred`])}</td>
+      <td>${row[`${activeDescriptionAlgorithm}_confidence`]}</td>
+      <td>${resultReason(row, activeDescriptionAlgorithm)}</td>
+    </tr>
+  `).join("") + `<tr><td colspan="6" class="muted">Showing ${rows.length.toLocaleString()} of ${descriptionRowsCache.length.toLocaleString()} Description-level results for ${resultAlgorithmLabels[activeDescriptionAlgorithm][0]}.</td></tr>`;
 }
