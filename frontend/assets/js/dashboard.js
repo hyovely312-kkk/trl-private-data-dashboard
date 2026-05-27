@@ -27,12 +27,12 @@ async function renderDashboard() {
   document.querySelector("[data-missing]").textContent = missingEvidence;
 
   const monthLabels = Object.keys(monthCounts).sort();
-  new Chart(document.getElementById("monthlyChart"), {
+  drawChart("monthlyChart", {
     type: "line",
     data: { labels: monthLabels, datasets: [{ label: "Analyses", data: monthLabels.map((m) => monthCounts[m]), borderColor: "#22d3ee", backgroundColor: "rgba(34,211,238,.16)", tension: 0.35, fill: true }] },
     options: chartOptions(),
   });
-  new Chart(document.getElementById("classChart"), {
+  drawChart("classChart", {
     type: "bar",
     data: { labels: ["Low", "Mid", "High"], datasets: [{ label: "TRL Class", data: [counts.Low, counts.Mid, counts.High], backgroundColor: ["#ff687d", "#f5c84c", "#38d996"] }] },
     options: chartOptions(),
@@ -43,7 +43,7 @@ async function renderDashboard() {
     const values = agentConfidence[label];
     return values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
   });
-  new Chart(document.getElementById("agentChart"), {
+  drawChart("agentChart", {
     type: "radar",
     data: { labels: agentLabels, datasets: [{ label: "Average confidence", data: avgAgent, borderColor: "#2f80ff", backgroundColor: "rgba(47,128,255,.18)" }] },
     options: chartOptions(),
@@ -82,13 +82,7 @@ async function fetchOptionalText(path) {
 }
 
 function parseCsv(text) {
-  const lines = text.trim().split(/\r?\n/);
-  if (!lines.length) return [];
-  const headers = lines[0].split(",");
-  return lines.slice(1).filter(Boolean).map((line) => {
-    const values = line.match(/(\"[^\"]*(?:\"\"[^\"]*)*\"|[^,]*)/g).filter((_, i) => i % 2 === 0).map((value) => value.replace(/^"|"$/g, "").replace(/""/g, "\""));
-    return Object.fromEntries(headers.map((header, index) => [header, values[index] ?? ""]));
-  });
+  return parseCsvRows(text);
 }
 
 function pct(value) {
@@ -104,16 +98,18 @@ function modelRole(model) {
 
 function drawChart(canvasId, config) {
   const canvas = document.getElementById(canvasId);
+  if (!canvas) return null;
   if (!window.Chart) {
     drawCanvasFallback(canvas, config);
     return null;
   }
-  const existing = Chart.getChart(canvas);
+  const existing = Chart.getChart ? Chart.getChart(canvas) : null;
   if (existing) existing.destroy();
   return new Chart(canvas, config);
 }
 
 function drawCanvasFallback(canvas, config) {
+  if (!canvas?.getContext) return;
   const ctx = canvas.getContext("2d");
   const labels = config.data.labels || [];
   const dataset = config.data.datasets?.[0] || { label: "Data", data: [] };
@@ -242,7 +238,7 @@ async function renderExperimentDashboard() {
       </tr>
     `).join("");
 
-    new Chart(document.getElementById("modelCompareChart"), {
+    drawChart("modelCompareChart", {
       type: "bar",
       data: {
         labels: leaderboard.map((row) => row.model.replace("alg", "A")),
@@ -255,7 +251,7 @@ async function renderExperimentDashboard() {
     });
 
     const models = [...new Set(classwise.map((row) => row.model))];
-    new Chart(document.getElementById("classwiseChart"), {
+    drawChart("classwiseChart", {
       type: "bar",
       data: {
         labels: models.map((x) => x.replace("alg", "A")),
@@ -268,7 +264,7 @@ async function renderExperimentDashboard() {
       options: chartOptions(),
     });
 
-    new Chart(document.getElementById("pseudoDistChart"), {
+    drawChart("pseudoDistChart", {
       type: "doughnut",
       data: { labels: pseudo.map((row) => row.bucket), datasets: [{ data: pseudo.map((row) => Number(row.count)), backgroundColor: ["#ff687d", "#f5c84c", "#38d996"] }] },
       options: { responsive: true, plugins: { legend: { labels: { color: "#e7f2ff" } } } },
